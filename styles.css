@@ -1,30 +1,54 @@
-button {
-    background-color: transparent;
-    border: none;
+.pentacle {
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
-/* Container needed to position the button. Adjust the width as needed */
-.pentacle {
-    position: relative;
-    width: 50%;
-  }
-  
-  /* Make the image responsive */
-  .pantacle img {
-    width: 100%;
-    height: auto;
-  }
-  
-  /* Style the button and place it in the middle of the container/image */
-  .pantacle .button_atom {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    cursor: pointer;
-  }
-  
-  .pentacle .button_atom:hover {
-    background-color: black;
-  }
+.pentacle button {
+  background-color: transparent;
+  border: none;
+
+  position: absolute;
+  z-index: 2;
+}
+
+.pentacle button img {
+  height: 80%;
+  width: 80%;
+}
+
+.pentacle button img:hover {
+  background-color: black;
+}
+
+.pentacle img {
+  top: 0;
+  left: 0;
+
+  z-index: 1;
+}
+
+.pentacle .button_atom {
+  top: 65px;
+  left: 200px;
+}
+
+.pentacle .button_earth {
+  top: 190px;
+  left: 30px;
+}
+
+.pentacle .button_water {
+  top: 190px;
+  left: 370px;
+}
+
+.pentacle .button_fire {
+  top: 390px;
+  left: 95px;
+}
+
+.pentacle .button_wind {
+  top: 390px;
+  left: 310px;
+}
