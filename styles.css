@@ -1,0 +1,30 @@
+button {
+    background-color: transparent;
+    border: none;
+}
+
+/* Container needed to position the button. Adjust the width as needed */
+.pentacle {
+    position: relative;
+    width: 50%;
+  }
+  
+  /* Make the image responsive */
+  .pantacle img {
+    width: 100%;
+    height: auto;
+  }
+  
+  /* Style the button and place it in the middle of the container/image */
+  .pantacle .button_atom {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    cursor: pointer;
+  }
+  
+  .pentacle .button_atom:hover {
+    background-color: black;
+  }
