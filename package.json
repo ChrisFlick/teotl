@@ -1,37 +1,30 @@
 {
   "name": "teotl",
-  "version": "0.0.1",
-  "description": "Turn based RPG fighting game.",
+  "version": "0.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "nodemon --exec babel-node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ChrisFlick/teotl2.0.git"
   },
-  "keywords": [
-    "RPG",
-    "Turn",
-    "Based",
-    "Fighting",
-    "Game"
-  ],
-  "author": "Games.toArt",
-  "license": "ISC",
+  "keywords": [],
+  "author": "Chris Flick",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/ChrisFlick/teotl2.0/issues"
   },
   "homepage": "https://github.com/ChrisFlick/teotl2.0#readme",
   "devDependencies": {
-    "@babel/cli": "^7.4.4",
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-register": "^6.26.0"
+    "@babel/preset-env": "^7.4.5",
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "dotenv": "^8.0.0"
   }
 }
