@@ -1,14 +1,12 @@
-import { Elemental } from '../elemental.js';
+import { Atomic } from './atomic.js';
 
-export class Atomic extends Elemental {
+export class AtomicA2 extends Atomic {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
 		super();
-
-		this._type = 0;
 	}
 
 	/*********************

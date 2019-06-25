@@ -1,4 +1,4 @@
-import { Atomic } from './atomic.mjs';
+import { Atomic } from './atomic.js';
 
 export class AtomicA1 extends Atomic {
 	/*********************
@@ -7,6 +7,11 @@ export class AtomicA1 extends Atomic {
 
 	constructor() {
 		super();
+
+		this._baseStrength = 6;
+		this._baseConstitution = 6;
+		this._baseInteligence = 9;
+		this._baseAgility = 6;
 	}
 
 	/*********************
