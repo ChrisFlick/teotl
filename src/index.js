@@ -1,5 +1,5 @@
-import 'dotenv/config';
+import { Atomic } from '../objects/elementals/atomic/atomic.js';
 
-console.log('Hello Node.js project.');
+var test = new Atomic();
 
-console.log(process.env.MY_SECRET);
+test.test();

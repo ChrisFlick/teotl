@@ -30,20 +30,39 @@ export class Elemental {
 	****** Setters *******
     *********************/
     
-    get baseStrength(stat) {
-        this._baseStrength = stat;
+    set baseStrength(stat) {
+        if (typeof stat === 'number') {
+            this._baseStrength = stat;
+        } else {
+            console.log(`Invalid input; please ensure stat is a number`);
+        }
     }
 
-    get baseConstitution(stat) {
-        this._baseConstitution = stat;
+    set baseConstitution(stat) {
+        if (typeof stat === 'number') {
+            this._baseConstitution = stat;
+        } else {
+            console.log(`Invalid input; please ensure stat is a number`);
+        }
+        
     }
 
-    get baseInteligence(stat) {
-        this.baseInteligence = stat;
+    set baseInteligence(stat) {
+        if (typeof stat === 'number') {
+            this.baseInteligence = stat;
+        } else {
+            console.log(`Invalid input; please ensure stat is a number`);
+        }
+        
     }
 
     get baseAgilitystat() {
-        this._baseAgility = stat;
+        if (typeof stat === 'number') {
+            this._baseAgility = stat;
+        } else {
+            console.log(`Invalid input; please ensure stat is a number`);
+        }
+        
     }
 
 	/*********************

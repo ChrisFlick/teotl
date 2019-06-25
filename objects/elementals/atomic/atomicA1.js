@@ -1,4 +1,4 @@
-import {Atomic} from './atomic.mjs';
+import { Atomic } from './atomic.mjs';
 
 export class AtomicA1 extends Atomic {
 	/*********************

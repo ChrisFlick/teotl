@@ -1,6 +1,6 @@
 import {Elemental} from '../elemental.js';
 
-export class Atomic {
+export class Atomic extends Elemental {
 	/*********************
 	**** Constructor *****
 	*********************/
