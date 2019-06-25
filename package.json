@@ -1,0 +1,26 @@
+{
+  "name": "teotl",
+  "version": "0.0.1",
+  "description": "Turn based RPG fighting game.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChrisFlick/teotl2.0.git"
+  },
+  "keywords": [
+    "RPG",
+    "Turn",
+    "Based",
+    "Fighting",
+    "Game"
+  ],
+  "author": "Games.toArt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChrisFlick/teotl2.0/issues"
+  },
+  "homepage": "https://github.com/ChrisFlick/teotl2.0#readme"
+}

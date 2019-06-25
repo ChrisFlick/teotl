@@ -1,13 +1,9 @@
-class Elemental {
+export class Elemental {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-        this._baseStrength = 5;
-        this._baseConstitution = 5;
-        this._baseInteligence = 5;
-        this._baseAgility = 5;
 	}
 
 	/*********************
@@ -52,5 +48,9 @@ class Elemental {
 
 	/*********************
 	****** Methods *******
-	*********************/
+    *********************/
+    
+    test() {
+        console.log('test');
+    }
 }
