@@ -1,5 +1,9 @@
-import { Atomic } from '../objects/elementals/atomic/atomic.js';
+import { AtomicC2 } from '../objects/elementals/atomic/atomicC2.js';
 
-var test = new Atomic();
+var elemental = new AtomicC2();
 
-test.test();
+console.log(`Type: ${elemental.type}`);
+console.log(`Strength: ${elemental.strength}`);
+console.log(`Constitution: ${elemental.constitution}`);
+console.log(`Inteligence: ${elemental.inteligence}`);
+console.log(`Agility: ${elemental.agility}`);

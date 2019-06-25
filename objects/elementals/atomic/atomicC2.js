@@ -1,16 +1,15 @@
 import { Atomic } from './atomic.js';
 
-export class AtomicA2 extends Atomic {
+export class AtomicC2 extends Atomic {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
 		super();
-
-		this._baseStrength = 13;
-		this._baseConstitution = 12;
-		this._baseInteligence = 14;
+		this._baseStrength = 28;
+		this._baseConstitution = 22;
+		this._baseInteligence = 24;
 		this._baseAgility = 7;
 	}
 
@@ -26,4 +25,3 @@ export class AtomicA2 extends Atomic {
 	****** Methods *******
 	*********************/
 }
-

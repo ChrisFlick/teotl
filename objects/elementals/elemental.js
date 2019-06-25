@@ -10,27 +10,31 @@ export class Elemental {
 	****** Getters *******
 	*********************/
 
-    get baseStrength() {
+    get strength() {
         return this._baseStrength;
     }
 
-    get baseConstitution() {
+    get constitution() {
         return this._baseConstitution;
     }
 
-    get baseInteligence() {
-        return this.baseInteligence;
+    get inteligence() {
+        return this._baseInteligence;
     }
 
-    get baseAgility() {
+    get agility() {
         return this._baseAgility;
+    }
+
+    get type() {
+        return this._type;
     }
 
 	/*********************
 	****** Setters *******
     *********************/
     
-    set baseStrength(stat) {
+    /*set baseStrength(stat) {
         if (typeof stat === 'number') {
             this._baseStrength = stat;
         } else {
@@ -54,7 +58,7 @@ export class Elemental {
             console.log(`Invalid input; please ensure stat is a number`);
         }
         
-    }
+    }*/
 
     get baseAgilitystat() {
         if (typeof stat === 'number') {
