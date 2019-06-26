@@ -30,6 +30,10 @@ export class Elemental {
         return this._type;
     }
 
+    get name() {
+        return this._name;
+    }
+
 	/*********************
 	****** Setters *******
     *********************/
@@ -72,8 +76,4 @@ export class Elemental {
 	/*********************
 	****** Methods *******
     *********************/
-    
-    test() {
-        console.log('test');
-    }
 }
