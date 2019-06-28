@@ -34,7 +34,15 @@ export class Player {
 
 	/*********************
 	****** Setters *******
-	*********************/
+    *********************/
+    
+    set health(h) {
+        if (typeof h === 'number') {
+            this._health = h;
+        } else {
+            throw new TypeError(`Invalid Input; Health must be a number.`);
+        }
+    }
 
 	/*********************
 	****** Methods *******
@@ -43,7 +51,7 @@ export class Player {
     calculateMaxHealth() {
         let health = 0;
         for (let i = 0; i < this.elemental.length; i++) {
-            health += this.elemental[i];
+            health += this.elemental[i].maxHealth;
         }
         return health;
     }

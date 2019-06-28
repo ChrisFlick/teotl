@@ -6,6 +6,9 @@ export class Elemental {
 	*********************/
 
 	constructor() {
+        this._baseDamageShield = 0;
+        this._damageShieldBuff = 0;
+
         this._strengthBuff = 0;
         this._baseConstitutionBuff = 0;
         this._inteligenceBuff = 0;
@@ -71,6 +74,10 @@ export class Elemental {
         return this.inteligence * 0.1;
     }
 
+    get damageShield() {
+        return this._baseDamageShield + this._damageShieldBuff;
+    }
+
 	/*********************
 	****** Setters *******
     *********************/
@@ -126,6 +133,10 @@ export class Elemental {
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
+    }
+
+    set damageShield(buff) {
+        this._damageShieldBuff = buff;
     }
 
 	/*********************
@@ -259,5 +270,8 @@ export class Elemental {
         }
 
         return multiplier;
+    }
+
+    ability(player, enemy) {
     }
 }
