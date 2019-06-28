@@ -38,6 +38,8 @@ export class WindC1 extends Wind {
 		this._baseConstitution = 20;
 		this._baseInteligence = 5;
 		this._baseAgility = 20;
+
+		this.health = this.maxHealth;
 	}
 
 	/*********************
@@ -67,6 +69,8 @@ export class WindC2 extends Wind {
 		this._baseConstitution = 20;
 		this._baseInteligence = 5;
 		this._baseAgility = 25;
+
+		this.health = this.maxHealth;
 	}
 
 	/*********************
@@ -96,6 +100,8 @@ export class WindC3 extends Wind {
 		this._baseConstitution = 27;
 		this._baseInteligence = 10;
 		this._baseAgility = 18;
+
+		this.health = this.maxHealth;
 	}
 
 	/*********************
@@ -125,6 +131,8 @@ export class WindC4 extends Wind {
 		this._baseConstitution = 22;
 		this._baseInteligence = 15;
 		this._baseAgility = 18;
+
+		this.health = this.maxHealth;
 	}
 
 	/*********************
