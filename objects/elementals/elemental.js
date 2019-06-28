@@ -16,6 +16,7 @@ export class Elemental {
         this._defenseBuff = 0;
 
         this._health = 0;
+        this._barrier = 0;
 	}
 
 	/*********************
@@ -76,6 +77,10 @@ export class Elemental {
 
     get damageShield() {
         return this._baseDamageShield + this._damageShieldBuff;
+    }
+
+    get barrier() {
+        return this._barrier;
     }
 
 	/*********************
@@ -139,6 +144,18 @@ export class Elemental {
         this._damageShieldBuff = buff;
     }
 
+    set barrier(buff) {
+        if (typeof buff === 'number') {
+            this._barrier = buff;
+
+            if (this._barrier < 0) {
+                this._barrier = 0;
+            }
+        } else {
+            throw new TypeError(`Invalid Input; Strength must be a number`);
+        }
+    }
+
 	/*********************
 	****** Methods *******
     *********************/
@@ -169,7 +186,20 @@ export class Elemental {
     }
 
     attack(enemy) { // Attack enemy Elemental's health
-            enemy.health -= this.calculateDmg(enemy);
+            let initialDmg = this.calculateDmg(enemy) 
+            let dmg = initialDmg - enemy.barrier;
+            enemy.barrier -= initialDmg;
+
+            if (dmg < 0) {
+                dmg = 0;
+            }
+
+
+            if (enemy.barrier < 0) {
+                enemy.barrier = 0;
+            }
+
+            enemy.health -= dmg;
     }
 
     calculateDmg(enemy) { // Calculates damage.

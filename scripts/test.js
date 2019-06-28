@@ -1,4 +1,11 @@
 import {type} from '../src/enum.js';
+import {Player} from '../objects/player.js';
+
+import { AtomicC1, AtomicC2, AtomicC3, AtomicC4 } from '../objects/elementals/atomic.js';
+import { EarthC1, EarthC2, EarthC3, EarthC4 } from '../objects/elementals/earth.js';
+import { WaterC1, WaterC2, WaterC3, WaterC4 } from '../objects/elementals/Water.js';
+import { FireC1, FireC2, FireC3, FireC4 } from '../objects/elementals/fire.js';
+import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
 
 /*********************
 ******* Atomic *******
@@ -98,6 +105,22 @@ export function test_abilityAtomicC4(player, enemy) {
 *********************/
 
 export function test_abilityFireC1(player, enemy) {
+    var player = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    );
+
+    var enemy = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    ); 
+
     var ele;
 
     console.log(`Enemy Health: ${enemy.health}`);
@@ -127,4 +150,154 @@ export function test_abilityFireC3(player, enemy) {
     console.log(`
         ${ele.getType()} Damage Shield: ${ele.damageShield}`);
     }
+}
+
+/*********************
+******* Water ********
+*********************/
+
+export function test_abilityWaterC1() {
+    var player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    );
+
+var enemy = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    ); 
+
+
+    var ele;
+
+    console.log(`Starting Health:`);
+    for (let i = 0; i < player.elemental.length; i++) {
+        ele = player.elemental[i]
+    console.log(`
+        ${ele.getType()} health: ${ele.health}`);
+    }
+    console.log(``);
+
+    let test = type.atomic;
+    ele = enemy.elemental[test];
+
+    console.log(`Testing ${ele.getType()} ${ele.name} ability`);
+    ele.ability(enemy, player);
+
+    for (let i = 0; i < player.elemental.length; i++) {
+        ele = player.elemental[i]
+    console.log(`
+        ${ele.getType()} health: ${ele.health}`);
+    }
+    console.log(``);
+
+    test = type.water;
+    ele = player.elemental[test];
+
+    console.log(`Testing ${ele.getType()} ${ele.name} ability`);
+    ele.ability(player, enemy);
+
+    for (let i = 0; i < player.elemental.length; i++) {
+        ele = player.elemental[i]
+    console.log(`
+        ${ele.getType()} health: ${ele.health}`);
+    }
+    console.log(``);
+    
+
+}
+
+export function test_abilityWaterC2() {
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC2,
+        new EarthC4,
+        new WindC4,
+    );
+
+    var enemy = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    ); 
+
+    let playerEle = player.elemental[type.water];
+    let enemyEle =  enemy.elemental[type.fire];
+
+    
+
+    for (let i = 0; i < player.elemental.length; i++) {
+        let ele = player.elemental[i]
+    console.log(`
+        ${ele.getType()} Barrier: ${playerEle.barrier}`);
+    }
+    console.log(``);
+
+    playerEle.ability(player, enemy);
+
+    console.log(`
+        ${playerEle.getType()} 
+        Barrier: ${playerEle.barrier}
+        Health: ${playerEle.health}
+    `);
+
+    for (let i = 0; i < player.elemental.length; i++) {
+        let ele = player.elemental[i]
+    console.log(`
+        ${ele.getType()} Barrier: ${playerEle.barrier}`);
+    }
+    console.log(``);
+
+    enemyEle.attack(playerEle);
+
+    console.log(`
+        ${playerEle.getType()} 
+        Barrier: ${playerEle.barrier}
+        Health: ${playerEle.health}
+    `);
+}
+
+export function test_abilityWaterC4() {
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC4,
+        new EarthC4,
+        new WindC4,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    ); 
+
+    let enemyEle =  enemy.elemental[type.fire];
+    let playerEle = player.elemental[type.water];
+
+    console.log(`Player health: ${player.health}`);
+
+    console.log(`Testing ${enemyEle.getType()} ${enemyEle.name} ability`);
+    enemyEle.ability(enemy, player);
+
+    console.log(`Player health: ${player.health}`);
+
+    console.log(`Testing ${playerEle.getType()} ${playerEle.name} ability`);
+    playerEle.ability(player, enemy);
+    console.log(`Player health: ${player.health}`);
+
+    console.log(`Testing ${playerEle.getType()} ${playerEle.name} ability`);
+    playerEle.ability(player, enemy);
+    console.log(`Player health: ${player.health}`);
 }

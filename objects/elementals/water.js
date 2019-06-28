@@ -34,10 +34,10 @@ export class WaterC1 extends Water {
 
 		this._name = "C1";
 
-		this._baseStrength = 35;
-		this._baseConstitution = 20;
+		this._baseStrength = 22;
+		this._baseConstitution = 35;
 		this._baseInteligence = 5;
-		this._baseAgility = 20;
+		this._baseAgility = 8;
 
 		this.health = this.maxHealth;
 	}
@@ -53,6 +53,19 @@ export class WaterC1 extends Water {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Heal Wounds
+		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+		//console.log(heal);
+
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].health += heal;
+
+			if (player.elemental[i].health > player.elemental[i].maxHealth) {
+				player.elemental[i].health = player.elemental[i].maxHealth;
+			}
+		}
+	}
 }
 
 export class WaterC2 extends Water {
@@ -84,6 +97,14 @@ export class WaterC2 extends Water {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Sacred Barrier
+		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].barrier = heal;
+		}
+	}
 }
 
 export class WaterC3 extends Water {
@@ -146,4 +167,10 @@ export class WaterC4 extends Water {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Sacred Oath
+		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+
+		player.health += heal;
+	}
 }

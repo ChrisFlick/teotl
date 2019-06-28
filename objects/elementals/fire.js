@@ -55,9 +55,8 @@ export class FireC1 extends Fire {
 	*********************/
 
 	ability(player, enemy) { // Direct Damage
-		let dmg = Math.round(this.strength * this.abilityMod);
-		console.log(dmg);
-
+		let dmg = Math.round(this.strength + (this.abilityMod * this.strength));
+		//console.log(dmg);
 		enemy.health -= dmg;
 	}
 }

@@ -6,25 +6,10 @@ import { WaterC1, WaterC2, WaterC3, WaterC4 } from '../objects/elementals/Water.
 import { FireC1, FireC2, FireC3, FireC4 } from '../objects/elementals/fire.js';
 import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
 
-import {test_abilityFireC1, test_abilityFireC3} from '../scripts/test.js';
+import {test_abilityFireC1, test_abilityFireC3, test_abilityWaterC1, test_abilityWaterC4, test_abilityWaterC2} from '../scripts/test.js';
 import { type } from './enum.js';
 
 
-var player = new Player(
-        new AtomicC4,
-        new FireC3,
-        new WaterC1,
-        new EarthC4,
-        new WindC4,
-);
-
-var enemy = new Player(
-        new AtomicC4,
-        new FireC1,
-        new WaterC1,
-        new EarthC4,
-        new WindC4,
-);
 
 
-test_abilityFireC3(player, enemy);
+test_abilityWaterC2();
