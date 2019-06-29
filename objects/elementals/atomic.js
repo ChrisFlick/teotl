@@ -33,11 +33,13 @@ export class AtomicC1 extends Atomic {
 		super();
 		this._name = "C1";
 
+		// Main Stats
 		this._baseStrength = 33;
 		this._baseConstitution = 22;
 		this._baseInteligence = 38;
 		this._baseAgility = 11;	
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -53,7 +55,8 @@ export class AtomicC1 extends Atomic {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Radiation (Damage)
+	ability(player, enemy) { // Radiation (Strength)
+		// Lowers the strength of each Enemy Elemental by deBuff ammount.
 		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].strength = -deBuff;
@@ -70,12 +73,15 @@ export class AtomicC2 extends Atomic {
 		super();
 		this._name = "C2";
 
+		// Main Stats
 		this._baseStrength = 28;
 		this._baseConstitution = 22;
 		this._baseInteligence = 24;
 		this._baseAgility = 11;
 
+		// Secondary Stats
 		this.health = this.maxHealth;
+	
 	}
 
 	/*********************
@@ -106,14 +112,15 @@ export class AtomicC3 extends Atomic {
 
 	constructor() {
 		super()
-
 		this._name = "C3";
 
+		// Main Stats
 		this._baseStrength = 23;
 		this._baseConstitution = 27;
 		this._baseInteligence = 14;
-		this._baseAgility = 21;
+		this._baseAgility = 21;	
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -130,6 +137,7 @@ export class AtomicC3 extends Atomic {
 	*********************/
 
 	ability(player, enemy) { // Radiation (Agility)
+		// Lowers the Agility of every Enemy Elemental.
 		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].agility = -deBuff;
@@ -145,14 +153,15 @@ export class AtomicC4 extends Atomic {
 
 	constructor() {
 		super()
-
 		this._name = "C4";
 
+		// Main Stats
 		this._baseStrength = 23;
 		this._baseConstitution = 32;
 		this._baseInteligence = 14;
 		this._baseAgility = 16;
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -169,6 +178,7 @@ export class AtomicC4 extends Atomic {
 	*********************/
 
 	ability(player, enemy) { // Radiation (Defense)
+		// Lowers the Defense of every Enemy Elemental.
 		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].defense = -deBuff;

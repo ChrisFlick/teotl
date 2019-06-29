@@ -31,14 +31,15 @@ export class EarthC1 extends Earth {
 
 	constructor() {
 		super();
-
 		this._name = "C1";
 
+		// Main Stats
 		this._baseStrength = 30;
 		this._baseConstitution = 26;
 		this._baseInteligence = 7;
 		this._baseAgility = 2;
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -62,18 +63,17 @@ export class EarthC2 extends Earth {
 
 	constructor() {
 		super();
-
 		this._name = "C2";
 
+		// Main Stats
 		this._baseStrength = 25;
 		this._baseConstitution = 41;
 		this._baseInteligence = 5;
 		this._baseAgility = 2;
 
-		// Has Damage Shield instead of ability "Thorns"
-		this._baseDamageShield = this._baseConstitution * this.abilityMod;
-
+		// Secondary Stats
 		this.health = this.maxHealth;
+		this._baseDamageShield = this._baseConstitution * this.abilityMod;	// Has Damage Shield instead of ability "Thorns"
 	}
 
 	/*********************
@@ -97,15 +97,17 @@ export class EarthC3 extends Earth {
 
 	constructor() {
 		super();
-
 		this._name = "C3";
 
+		this.health = this.maxHealth;
+
+		// Main Stats
 		this._baseStrength = 25;
 		this._baseConstitution = 33;
 		this._baseInteligence = 10;
 		this._baseAgility = 9;
 
-		this.health = this.maxHealth;
+		
 	}
 
 	/*********************
@@ -119,6 +121,14 @@ export class EarthC3 extends Earth {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Mud Sling
+		// Decreases the Damage Shield of all enemy Elementals
+		let deBuff = - Math.round(this.strength * this.abilityMod);
+		for (let i = 0; i < enemy.elemental.length; i++) {
+			enemy.elemental[i].damageShield = deBuff;
+		}
+	}
 }
 
 export class EarthC4 extends Earth {
@@ -128,15 +138,17 @@ export class EarthC4 extends Earth {
 
 	constructor() {
 		super();
-
 		this._name = "C4";
 
+		this.health = this.maxHealth;
+
+		// Main Stats
 		this._baseStrength = 25;
 		this._baseConstitution = 33;
 		this._baseInteligence = 15;
 		this._baseAgility = 4;
 
-		this.health = this.maxHealth;
+		
 	}
 
 	/*********************

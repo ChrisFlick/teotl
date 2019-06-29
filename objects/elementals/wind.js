@@ -31,14 +31,15 @@ export class WindC1 extends Wind {
 
 	constructor() {
 		super();
-
 		this._name = "C1";
 
+		// Main Stats
 		this._baseStrength = 35;
 		this._baseConstitution = 20;
 		this._baseInteligence = 5;
 		this._baseAgility = 20;
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -62,14 +63,15 @@ export class WindC2 extends Wind {
 
 	constructor() {
 		super();
-
 		this._name = "C2";
 
+		// Main Stats
 		this._baseStrength = 30;
 		this._baseConstitution = 20;
 		this._baseInteligence = 5;
 		this._baseAgility = 25;
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -93,14 +95,15 @@ export class WindC3 extends Wind {
 
 	constructor() {
 		super();
-
 		this._name = "C3";
 
+		// Main Stats
 		this._baseStrength = 25;
 		this._baseConstitution = 27;
 		this._baseInteligence = 10;
 		this._baseAgility = 18;
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 
@@ -124,14 +127,15 @@ export class WindC4 extends Wind {
 
 	constructor() {
         super();
-        
-        this._name = "C4";
-        
+		this._name = "C4";
+		
+		// Main Stats
 		this._baseStrength = 25;
 		this._baseConstitution = 22;
 		this._baseInteligence = 15;
-		this._baseAgility = 18;
+		this._baseAgility = 18;	
 
+		// Secondary Stats
 		this.health = this.maxHealth;
 	}
 

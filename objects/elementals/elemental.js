@@ -6,46 +6,49 @@ export class Elemental {
 	*********************/
 
 	constructor() {
-        this._baseDamageShield = 0;
-        this._damageShieldBuff = 0;
-
+        // Main Stat buffs
         this._strengthBuff = 0;
         this._baseConstitutionBuff = 0;
         this._inteligenceBuff = 0;
         this._agilityBuff = 0;
-        this._defenseBuff = 0;
 
+        // Secondary stats
         this._health = 0;
+        this._baseDamageShield = 0;
         this._barrier = 0;
+
+        // Secondary stat buffs
+        this._defenseBuff = 0;
+        this._damageShieldBuff = 0;
 	}
 
 	/*********************
 	****** Getters *******
 	*********************/
 
-    get name() {
+    get name() { // Name of Elemental
         return this._name;
     }
 
-    get type() {
+    get type() { // Elementals type
         return this._type;
     }
 
     // stats
 
-    get strength() {
+    get strength() { // Used in Damage calculations
         return this._baseStrength + this._strengthBuff;
     }
 
-    get constitution() {
+    get constitution() { // Used to calculate Damage and Defense
         return this._baseConstitution + this._baseConstitutionBuff;
     }
 
-    get inteligence() {
+    get inteligence() { // Used to calculate Ability Modifier
         return this._baseInteligence + this._inteligenceBuff;
     }
 
-    get agility() {
+    get agility() { // Used to calculate Speed.
         return this._baseAgility + this._agilityBuff;
     }
 
@@ -55,31 +58,37 @@ export class Elemental {
         return this.strength;
     }
 
-    get speed() {
+    get speed() { // Used to see which Elemental goes first
         return this.agility;
     }
 
-    get maxHealth() {
+    get maxHealth() { // Maximum Health for the Elemental
         return this.constitution * 5;
     }
 
-    get health() {
+    get health() { // Current Health of the Elemental
         return this._health;
     }
 
-    get defense() {
+    get defense() { // Mitigates Damage.
         return (this.constitution * 0.25) + this._defenseBuff;
     }
 
-    get abilityMod() {
+    get abilityMod() { // Used to modify various Elemental Abilities.
         return this.inteligence * 0.1;
     }
 
-    get damageShield() {
-        return Math.round(this._baseDamageShield + this._damageShieldBuff);
+    get damageShield() { // Causes Damage to attacking Elemental.
+        let shield = Math.round(this._baseDamageShield + this._damageShieldBuff);
+
+        if (shield < 0) {
+            return 0;
+        } else {
+            return shield;
+        }
     }
 
-    get barrier() {
+    get barrier() { // Mitigates Damage then is removed based on damage .
         return this._barrier;
     }
 
@@ -87,7 +96,7 @@ export class Elemental {
 	****** Setters *******
     *********************/
 
-    set health(h) {
+    set health(h) { 
        if (typeof h === 'number') {
            if (h > 0) {
                this._health = h;
@@ -100,7 +109,7 @@ export class Elemental {
     }
 
     // Stats
-    set strength(buff) {
+    set strength(buff) { // Sets the Elementals Strength Buff (Does not affect Base Strength)
         if (typeof buff === 'number') {
             this._strengthBuff = buff;
         } else {
@@ -108,7 +117,7 @@ export class Elemental {
         } 
     }
 
-    set constitution(buff) {
+    set constitution(buff) { // Sets the Elementals Constitution Buff (Does not affect Base Constitution)
         if (typeof buff === 'number') {
             this._constitutionBuff = buff;
         } else {
@@ -116,7 +125,7 @@ export class Elemental {
         }
     }
 
-    set inteligence(buff) {
+    set inteligence(buff) { // Sets the Elementals Inteligence Buff (Does not affect Base Inteligence)
         if (typeof buff === 'number') {
             this._inteligenceBuff = buff;
         } else {
@@ -124,7 +133,7 @@ export class Elemental {
         }
     }
 
-    set agility(buff) {
+    set agility(buff) { // Sets the Elementals agility Buff (Does not affect Base Agility)
         if (typeof buff === 'number') {
             this._agilityBuff = buff;
         } else {
@@ -132,7 +141,7 @@ export class Elemental {
         }
     }
 
-    set defense(buff) {
+    set defense(buff) { // Sets the Elementals defense Buff (Does not affect Base Defense)
         if (typeof buff === 'number') {
             this._defenseBuff = buff;
         } else {
@@ -140,11 +149,11 @@ export class Elemental {
         }
     }
 
-    set damageShield(buff) {
+    set damageShield(buff) { // Sets the Elementals Damage Shield Buff (Does not affect Base Damage Shield)
         this._damageShieldBuff = buff;
     }
 
-    set barrier(buff) {
+    set barrier(buff) { // Sets Barrier Buff
         if (typeof buff === 'number') {
             this._barrier = buff;
 
@@ -187,20 +196,21 @@ export class Elemental {
 
     attack(enemy) { // Attack enemy Elemental's health
             let initialDmg = this.calculateDmg(enemy) 
-            let dmg = initialDmg - enemy.barrier;
-            enemy.barrier -= initialDmg;
+            let dmg = initialDmg - enemy.barrier; // Subtracts Enemy Elementals Barrier from Damage.
 
-            if (dmg < 0) {
+            enemy.barrier -= initialDmg; // Subtracts Damage done to Enemy Elementals Barrier.
+
+            if (dmg < 0) { // Ensures that intended Damage does not Heal.
                 dmg = 0;
             }
 
 
-            if (enemy.barrier < 0) {
+            if (enemy.barrier < 0) { // Ensures that Enemy's Barrier is not a negateive.
                 enemy.barrier = 0;
             }
 
-            enemy.health -= dmg;
-            this.health -= enemy.damageShield;
+            enemy.health -= dmg; // Inflicts Damage onto the Enemy Elemental.
+            this.health -= enemy.damageShield * enemy.multiplier(this); // Take damage if enemy has a Damage Shield
     }
 
     calculateDmg(enemy) { // Calculates damage.
@@ -303,6 +313,6 @@ export class Elemental {
         return multiplier;
     }
 
-    ability(player, enemy) {
+    ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
     }
 }
