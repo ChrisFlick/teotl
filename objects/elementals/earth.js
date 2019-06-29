@@ -67,8 +67,11 @@ export class EarthC2 extends Earth {
 
 		this._baseStrength = 25;
 		this._baseConstitution = 41;
-		this._baseInteligence = 7;
+		this._baseInteligence = 5;
 		this._baseAgility = 2;
+
+		// Has Damage Shield instead of ability "Thorns"
+		this._baseDamageShield = this._baseConstitution * this.abilityMod;
 
 		this.health = this.maxHealth;
 	}
@@ -84,6 +87,7 @@ export class EarthC2 extends Earth {
 	/*********************
 	****** Methods *******
 	*********************/
+	
 }
 
 export class EarthC3 extends Earth {

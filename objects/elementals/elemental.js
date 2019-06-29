@@ -76,7 +76,7 @@ export class Elemental {
     }
 
     get damageShield() {
-        return this._baseDamageShield + this._damageShieldBuff;
+        return Math.round(this._baseDamageShield + this._damageShieldBuff);
     }
 
     get barrier() {
@@ -200,6 +200,7 @@ export class Elemental {
             }
 
             enemy.health -= dmg;
+            this.health -= enemy.damageShield;
     }
 
     calculateDmg(enemy) { // Calculates damage.

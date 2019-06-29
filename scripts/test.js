@@ -301,3 +301,50 @@ export function test_abilityWaterC4() {
     playerEle.ability(player, enemy);
     console.log(`Player health: ${player.health}`);
 }
+
+/*********************
+****** Earth *********
+*********************/
+
+export function test_abilityEarthC2() {
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC4,
+        new EarthC2,
+        new WindC4,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC4,
+        new WindC4,
+    ); 
+
+    let enemyEle =  enemy.elemental[type.fire];
+    let playerEle = player.elemental[type.earth];
+    let ele = player.elemental[type.fire];
+
+    console.log(`
+        ${playerEle.getType()} ${playerEle.name} Damage Shield: ${playerEle.damageShield}
+    `);
+
+    console.log(`Testing ${ele.getType()} ${ele.name} ability to see if it stacks with Earths damage shield`);
+    ele.ability(player, enemy);
+
+    console.log(`
+        ${playerEle.getType()} ${playerEle.name} Damage Shield: ${playerEle.damageShield}
+
+        ${enemyEle.getType()} ${enemyEle.name} Health: ${enemyEle.health}
+    `);
+
+    console.log(`Testing ${playerEle.getType()} ${playerEle.name} ability to ensure it damages attacker`);
+
+    enemyEle.attack(playerEle);
+
+    console.log(`
+        ${enemyEle.getType()} ${enemyEle.name} Health: ${enemyEle.health}
+    `)
+}
