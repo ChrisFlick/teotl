@@ -94,7 +94,7 @@ export class FireC2 extends Fire {
 
 	calculateDmg(enemy) { // Armor Penetration
 		// Instead of an Ability FireC2 gets a modified calculateDmg allowing it to ignore Defense and Barriers.
-        return Math.round(this.damage * this.multiplier(enemy));
+		return Math.round(this.damage * this.multiplier(enemy));
     }
 }
 

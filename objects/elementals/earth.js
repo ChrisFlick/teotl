@@ -97,9 +97,7 @@ export class EarthC3 extends Earth {
 
 	constructor() {
 		super();
-		this._name = "C3";
-
-		this.health = this.maxHealth;
+		this._name = "C3";	
 
 		// Main Stats
 		this._baseStrength = 25;
@@ -107,7 +105,8 @@ export class EarthC3 extends Earth {
 		this._baseInteligence = 10;
 		this._baseAgility = 9;
 
-		
+		// Secondary Stats
+		this.health = this.maxHealth;	
 	}
 
 	/*********************
@@ -140,9 +139,7 @@ export class EarthC4 extends Earth {
 
 	constructor() {
 		super();
-		this._name = "C4";
-
-		this.health = this.maxHealth;
+		this._name = "C4";		
 
 		// Main Stats
 		this._baseStrength = 25;
@@ -150,7 +147,8 @@ export class EarthC4 extends Earth {
 		this._baseInteligence = 15;
 		this._baseAgility = 4;
 
-		
+		// Secondary Stats
+		this.health = this.maxHealth;
 	}
 
 	/*********************

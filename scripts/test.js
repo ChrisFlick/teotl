@@ -8,7 +8,7 @@ import { FireC1, FireC2, FireC3, FireC4 } from '../objects/elementals/fire.js';
 import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
 
 
-export function test_defense() {
+export function test_defense() { // Tests Defense and Armor Penetration.
     console.log(`Running test_defense(), ensureing that Defense properly mitigates damage
     with the exception of FireC2's Armor Penetration`);
 
@@ -44,6 +44,48 @@ export function test_defense() {
 
     enemyWater.attack(player.elemental[0]);
     enemyFire.attack(player.elemental[0]);
+}
+
+export function test_barrier() {
+    console.log(`Running test_barrier() ensuring Barrier properly mitigates damage
+    with the exception of FireC2's Armor Penetration`);
+
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC2,
+        new EarthC4,
+        new WindC4,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC2,
+        new WaterC1,
+        new EarthC2,
+        new WindC4,
+    ); 
+
+
+    let playerEle = player.elemental[type.water];
+    let ele = player.elemental[type.wind];
+    let ele2 = player.elemental[type.earth];
+
+    player.listBarrier();
+
+    enemy.elemental[type.fire].attack(ele);
+    enemy.elemental[type.wind].attack(ele2);
+
+    test_ability(playerEle, player, enemy);
+
+    player.listBarrier();
+    player.listHealth();
+    
+    enemy.elemental[type.fire].attack(ele);
+    enemy.elemental[type.wind].attack(ele2);
+
+    player.listBarrier();
+    player.listHealth();
 }
 
 

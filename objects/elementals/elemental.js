@@ -200,7 +200,13 @@ export class Elemental {
     }
 
     calculateDmg(enemy) { // Calculates damage.
-        return Math.round((this.damage * this.multiplier(enemy)) - enemy.defense);
+        let dmg = Math.round((this.damage * this.multiplier(enemy)) - enemy.defense);
+
+        if (dmg < 0) {
+            dmg = 0;
+        }
+
+        return dmg;
     }
 
     multiplier(enemy) { // Decides multiplier based on weakness
