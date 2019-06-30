@@ -162,4 +162,14 @@ export class EarthC4 extends Earth {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) {
+		let buff = Math.round((this.constitution * 0.2) * this.abilityMod);	
+		
+		console.log(`${this.getType()} buffing all of it's allies Defense by ${buff}.`)
+
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].defense = buff;
+		}
+	}
 }

@@ -55,4 +55,80 @@ export class Player {
         }
         return health;
     }
+
+    // For testing purposes:
+
+    // Main Stats
+    listStrength() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Strength : ${ele.Strength}`);
+        }
+    }
+
+    listConstitution() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Constitution : ${ele.constitution}`);
+        }
+    }
+
+    listInteligence() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Inteligence : ${ele.inteligence}`);
+        }
+    }
+
+    listAgility() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Agility : ${ele.agility}`);
+        }
+    }
+
+    // Secondary Stats
+    listHealth() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Health : ${ele.health}`);
+        }
+    }
+
+    listDefense() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Defense : ${ele.defense}`);
+        }
+    }
+
+    listDamageShield() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Damage Shield : ${ele.damageShield}`);
+        }
+    }
+
+    listBarrier() {
+        let ele;
+        for (let i = 0; i < this.elemental.length; i++) {
+            ele = this.elemental[i]
+        console.log(`
+            ${ele.getType()} Barrier : ${ele.barrier}`);
+        }
+    }
 }

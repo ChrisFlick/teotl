@@ -351,7 +351,7 @@ export function test_abilityEarthC2() {
     `)
 }
 
-export function test_abilityEarthC3() {
+/*export function test_abilityEarthC2() {
     let player = new Player(
         new AtomicC2,
         new FireC3,
@@ -400,7 +400,7 @@ export function test_abilityEarthC3() {
     console.log(``);
 }
 
-export function test_abilityEarthC4() {
+export function test_abilityEarthC3() {
     let player = new Player(
         new AtomicC2,
         new FireC3,
@@ -430,4 +430,44 @@ export function test_abilityEarthC4() {
 
     console.log(`Testing ${playerEle.getType()} ${playerEle.name} ability`);
     playerEle.ability(player, enemy);
+}*/
+
+export function test_abilityEarthC4() {
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC4,
+        new EarthC4,
+        new WindC4,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC1,
+        new EarthC2,
+        new WindC4,
+    ); 
+
+
+    let playerEle = player.elemental[type.earth];
+    let ele;
+
+    player.listDefense();
+
+    test_ability(playerEle, player, enemy);
+    
+
+    player.listDefense();
+}
+
+
+/*********************
+****** Internal ******
+****** Functions *****
+*********************/
+
+function test_ability(elemental, player, enemy) {
+    console.log(`Testing ${elemental.getType()} ${elemental.name} ability`);
+    elemental.ability(player, enemy);
 }

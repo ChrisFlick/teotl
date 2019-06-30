@@ -71,7 +71,7 @@ export class Elemental {
     }
 
     get defense() { // Mitigates Damage.
-        return (this.constitution * 0.25) + this._defenseBuff;
+        return Math.round((this.constitution * 0.25) + this._defenseBuff);
     }
 
     get abilityMod() { // Used to modify various Elemental Abilities.
@@ -96,19 +96,7 @@ export class Elemental {
 	****** Setters *******
     *********************/
 
-    set health(h) { 
-       if (typeof h === 'number') {
-           if (h > 0) {
-               this._health = h;
-           } else {
-               this._health = 0;
-           }
-       } else {
-           throw new TypeError(`Invalid Input; Health must be a number.`);
-       }
-    }
-
-    // Stats
+    // Main Stats
     set strength(buff) { // Sets the Elementals Strength Buff (Does not affect Base Strength)
         if (typeof buff === 'number') {
             this._strengthBuff = buff;
@@ -141,11 +129,24 @@ export class Elemental {
         }
     }
 
+    // Secondary Stats
+    set health(h) { 
+        if (typeof h === 'number') {
+            if (h > 0) {
+                this._health = h;
+            } else {
+                this._health = 0;
+            }
+        } else {
+            throw new TypeError(`Invalid Input; Health must be a number.`);
+        }
+     }
+
     set defense(buff) { // Sets the Elementals defense Buff (Does not affect Base Defense)
         if (typeof buff === 'number') {
             this._defenseBuff = buff;
         } else {
-            throw new TypeError(`Invalid Input; Strength must be a number`);
+            throw new TypeError(`Invalid Input; Defense must be a number`);
         }
     }
 
@@ -161,34 +162,13 @@ export class Elemental {
                 this._barrier = 0;
             }
         } else {
-            throw new TypeError(`Invalid Input; Strength must be a number`);
+            throw new TypeError(`Invalid Input; Barrier must be a number`);
         }
     }
 
 	/*********************
 	****** Methods *******
     *********************/
-
-    listStats() { // Lists all stats (for debugging).
-        console.log(`
-            Name: ${this.name}
-            Type: ${this.getType()}
-
-            Max Health: ${this.maxHealth}
-            Current Health: ${this.health}
-
-            Strength: ${this.strength}
-            Constitution: ${this.constitution}
-            Inteligence: ${this.inteligence}
-            Agility: ${this.agility}
-
-            Damage: ${this.damage}
-            Speed: ${this.speed}
-
-            Defense: ${this.defense}
-            Ability Mod: ${this.abilityMod}
-        `);
-    }
 
     getType() { // Gives string of type 
         return Object.keys(type)[this.type];
@@ -314,5 +294,28 @@ export class Elemental {
     }
 
     ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
+    }
+
+    // For testing purposes:
+
+    listStats() { // Lists all stats.
+        console.log(`
+            Name: ${this.name}
+            Type: ${this.getType()}
+
+            Max Health: ${this.maxHealth}
+            Current Health: ${this.health}
+
+            Strength: ${this.strength}
+            Constitution: ${this.constitution}
+            Inteligence: ${this.inteligence}
+            Agility: ${this.agility}
+
+            Damage: ${this.damage}
+            Speed: ${this.speed}
+
+            Defense: ${this.defense}
+            Ability Mod: ${this.abilityMod}
+        `);
     }
 }

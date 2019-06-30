@@ -6,9 +6,9 @@ import { WaterC1, WaterC2, WaterC3, WaterC4 } from '../objects/elementals/Water.
 import { FireC1, FireC2, FireC3, FireC4 } from '../objects/elementals/fire.js';
 import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
 
-import {test_abilityFireC1, test_abilityFireC3, test_abilityWaterC1, test_abilityWaterC4, test_abilityWaterC2, test_abilityEarthC2, test_abilityEarthC3} from '../scripts/test.js';
+import {test_abilityFireC1, test_abilityFireC3, test_abilityWaterC1, test_abilityWaterC4, test_abilityWaterC2, test_abilityEarthC2, test_abilityEarthC3, test_abilityEarthC4} from '../scripts/test.js';
 import { type } from './enum.js';
 
 
-test_abilityEarthC3();
+test_abilityEarthC4();
 
