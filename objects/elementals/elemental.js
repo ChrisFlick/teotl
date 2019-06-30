@@ -20,6 +20,8 @@ export class Elemental {
         // Secondary stat buffs
         this._defenseBuff = 0;
         this._damageShieldBuff = 0;
+
+        this.doubleStrike = false;
 	}
 
 	/*********************
@@ -348,5 +350,9 @@ export class Elemental {
             Defense: ${this.defense}
             Ability Mod: ${this.abilityMod}
         `);
+    }
+
+    logHealth() {
+        console.log(`${this.getType()} ${this.name} Health: ${this.health}`);
     }
 }

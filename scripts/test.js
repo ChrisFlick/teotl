@@ -88,6 +88,39 @@ export function test_barrier() {
     player.listHealth();
 }
 
+export function test_lifeLeech() {
+    console.log(`Running test_lifeLeech() ensuring Elemental WindC2 properly heals itself`);
+
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC2,
+        new EarthC4,
+        new WindC2,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC2,
+        new WaterC1,
+        new EarthC1,
+        new WindC4,
+    ); 
+
+    let playerEle = player.elemental[type.wind];
+    let enemyEle = enemy.elemental[type.earth];
+
+    playerEle.logHealth();
+
+    enemy.elemental[type.fire].attack(playerEle);
+
+    playerEle.logHealth();
+
+    playerEle.attack(enemyEle);
+
+    playerEle.logHealth();
+}
+
 
 /*********************
 ****** Internal ******

@@ -34,13 +34,15 @@ export class WindC1 extends Wind {
 		this._name = "C1";
 
 		// Main Stats
-		this._baseStrength = 30;
+		this._baseStrength = 25;
 		this._baseConstitution = 25;
 		this._baseInteligence = 5;
-		this._baseAgility = 25;
+		this._baseAgility = 30;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		this.doubleStrike = true; // In place of ability; Hit the enemy's Elemental twice, once after the opponent has gone.
 	}
 
 	/*********************
@@ -86,6 +88,16 @@ export class WindC2 extends Wind {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	attack(enemy) { // Life Leech
+		// In place of Ability; attacks from Elemental Heal itself.
+		enemy.attack.call(this, enemy);
+
+		let heal = (this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2);
+
+		console.log(`Healing self with Life Leech for ${heal}`);
+		this.health += heal;
+	}
 }
 
 export class WindC3 extends Wind {

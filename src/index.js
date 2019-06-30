@@ -6,7 +6,7 @@ import { WaterC1, WaterC2, WaterC3, WaterC4 } from '../objects/elementals/Water.
 import { FireC1, FireC2, FireC3, FireC4 } from '../objects/elementals/fire.js';
 import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
 
-import { test_defense, test_barrier } from '../scripts/test.js';
+import { test_defense, test_barrier, test_lifeLeech } from '../scripts/test.js';
 import { type } from './enum.js';
 
-test_barrier();
+test_lifeLeech();
