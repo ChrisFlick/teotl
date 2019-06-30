@@ -121,6 +121,39 @@ export function test_lifeLeech() {
     playerEle.logHealth();
 }
 
+export function test_intelligence() {
+    console.log(`Running test_intelligence() ensuring Intelligence properly increases the strength of abilities`);
+
+    let player = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC2,
+        new EarthC4,
+        new WindC3,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC2,
+        new WaterC1,
+        new EarthC1,
+        new WindC4,
+    ); 
+
+    let playerEle = player.elemental[type.wind];
+    let ele = player.elemental[type.fire];
+    let enemyEle = enemy.elemental[type.earth];
+
+    test_ability(ele, player, enemy);
+
+    test_ability(playerEle, player, enemy);
+    test_ability(playerEle, player, enemy);
+    test_ability(playerEle, player, enemy);
+    test_ability(playerEle, player, enemy);
+
+    test_ability(ele, player, enemy);
+}
+
 
 /*********************
 ****** Internal ******
