@@ -198,91 +198,86 @@ export class Elemental {
     }
 
     multiplier(enemy) { // Decides multiplier based on weakness
-        let STRONG = 2;
-        let GOOD = 1.5;
-        let WEAK = 0.5;
-        let TRIVIAL = 0.25
-
         let multiplier;
         
         switch (this.type) {
             case type.atomic:
                 switch (enemy.type) {
                     case type.earth:
-                        multiplier = STRONG;
+                        multiplier = weakness.strong;
                         break;
                     case type.water:
-                        multiplier = WEAK;
+                        multiplier = weakness.weak;
                         break;
                     case type.fire:
-                        multiplier = WEAK;
+                        multiplier = weakness.weak;
                         break;
                     case type.wind:
-                        multiplier = STRONG;
+                        multiplier = weakness.strong;
                         break;
                 }
                 break;
             case type.earth:
                 switch (enemy.type) {
                     case type.atomic:
-                    multiplier = TRIVIAL;
+                    multiplier = weakness.trivial;
                     break;
                     case type.water:
-                        multiplier = STRONG;
+                        multiplier = weakness.strong;
                         break;
                     case type.fire:
-                        multiplier = GOOD;
+                        multiplier = weakness.good;
                         break;
                     case type.wind:
-                        multiplier = WEAK;
+                        multiplier = weakness.weak;
                         break;
                 }
                 break;
             case type.water:
                 switch (enemy.type) {
                     case type.atomic:
-                    multiplier = GOOD;
+                    multiplier = weakness.good;
                     break;
                 case type.earth:
-                    multiplier = TRIVIAL;
+                    multiplier = weakness.trivial;
                     break;
                 case type.fire:
-                    multiplier = STRONG;
+                    multiplier = weakness.strong;
                     break;
                 case type.wind:
-                    multiplier = WEAK;
+                    multiplier = weakness.weak;
                     break;
                 }
                 break;
             case type.fire:
                 switch (enemy.type) {
                     case type.atomic:
-                        multiplier = GOOD;
+                        multiplier = weakness.good;
                         break;
                     case type.earth:
-                        multiplier = WEAK;
+                        multiplier = weakness.weak;
                         break;
                     case type.water:
-                        multiplier = TRIVIAL
+                        multiplier = weakness.trivial
                         break;
                     case type.wind:
-                        multiplier = STRONG;
+                        multiplier = weakness.strong;
                         break;
                 }
                 break;
             case type.wind:
                 switch (enemy.type) {
                     case type.atomic:
-                        multiplier = TRIVIAL;
+                        multiplier = weakness.trivial;
                         break;
                     case type.earth:
-                        multiplier = GOOD;
+                        multiplier = weakness.good;
                         break;
                     case type.water:
-                        multiplier = GOOD;
+                        multiplier = weakness.good;
                         break;
                     case type.fire:
-                        multiplier = TRIVIAL;
+                        multiplier = weakness.trivial;
                         break;
                 }
                 break;

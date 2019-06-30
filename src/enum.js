@@ -12,3 +12,10 @@ export const type = {
     earth: 3,
     wind: 4,
 }
+
+export const weakness = {
+    strong: 2,
+    good: 1.5,
+    weak: 0.5,
+    trivial: 0.25
+}
