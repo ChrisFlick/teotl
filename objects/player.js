@@ -61,6 +61,8 @@ export class Player {
     // Main Stats
     listStrength() {
         let ele;
+
+        console.log(`Listing all Elementals Strength`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -70,6 +72,8 @@ export class Player {
 
     listConstitution() {
         let ele;
+
+        console.log(`Listing all Elementals Constitution`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -79,6 +83,8 @@ export class Player {
 
     listInteligence() {
         let ele;
+
+        console.log(`Listing all Elementals Inteligence`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -88,6 +94,8 @@ export class Player {
 
     listAgility() {
         let ele;
+
+        console.log(`Listing all Elementals Agility`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -98,6 +106,8 @@ export class Player {
     // Secondary Stats
     listHealth() {
         let ele;
+
+        console.log(`Listing all Elementals Health`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -107,6 +117,8 @@ export class Player {
 
     listDefense() {
         let ele;
+
+        console.log(`Listing all Elementals Defense`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -116,6 +128,8 @@ export class Player {
 
     listDamageShield() {
         let ele;
+
+        console.log(`Listing all Elementals Damage Shield`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
@@ -125,6 +139,8 @@ export class Player {
 
     listBarrier() {
         let ele;
+
+        console.log(`Listing all Elementals Barrier`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`

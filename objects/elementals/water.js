@@ -59,6 +59,7 @@ export class WaterC1 extends Water {
 		// Heals every friendly Elemental.
 		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
 
+		console.log(`${this.getType()} Healing all allies for ${heal}`);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].health += heal;
 
@@ -105,6 +106,7 @@ export class WaterC2 extends Water {
 		// Gives each friendly Elemental a Barrier that mitigates Damage until it is exausted
 		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
 
+		console.log(`${this.getType()} giving all allies a Barrier of ${heal} HP`);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].barrier = heal;
 		}
@@ -176,6 +178,8 @@ export class WaterC4 extends Water {
 	ability(player, enemy) { // Sacred Oath
 		// Heals the player.
 		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+
+		console.log(`${this.getType} Healing it's Player for ${heal}.`);
 
 		player.health += heal;
 

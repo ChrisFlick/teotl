@@ -1,4 +1,4 @@
-import {type} from '../../src/enum.js';
+import { type, weakness } from '../../src/enum.js';
 
 export class Elemental {
 	/*********************
@@ -189,8 +189,14 @@ export class Elemental {
                 enemy.barrier = 0;
             }
 
+            console.log(`Attacking ${enemy.getType()} for ${dmg} Damage.`);
             enemy.health -= dmg; // Inflicts Damage onto the Enemy Elemental.
-            this.health -= enemy.damageShield * enemy.multiplier(this); // Take damage if enemy has a Damage Shield
+
+
+            if (enemy.damageShield > 0) {
+                console.log(`Taking ${enemy.damageShield} Damage from Damage Shield`);
+                this.health -= enemy.damageShield * enemy.multiplier(this); // Take damage if enemy has a Damage Shield
+            }     
     }
 
     calculateDmg(enemy) { // Calculates damage.
@@ -199,37 +205,45 @@ export class Elemental {
 
     multiplier(enemy) { // Decides multiplier based on weakness
         let multiplier;
+        let weak;
         
         switch (this.type) {
             case type.atomic:
                 switch (enemy.type) {
                     case type.earth:
                         multiplier = weakness.strong;
+                        weak = 'Strong';
                         break;
                     case type.water:
                         multiplier = weakness.weak;
+                        weak = 'Weak';
                         break;
                     case type.fire:
                         multiplier = weakness.weak;
+                        weak = 'Weak';
                         break;
                     case type.wind:
                         multiplier = weakness.strong;
+                        weak = 'Strong';
                         break;
                 }
                 break;
             case type.earth:
                 switch (enemy.type) {
                     case type.atomic:
-                    multiplier = weakness.trivial;
-                    break;
+                        multiplier = weakness.trivial;
+                        weak = 'Trivial';
+                        break;
                     case type.water:
                         multiplier = weakness.strong;
+                        weak = 'Strong';
                         break;
                     case type.fire:
                         multiplier = weakness.good;
                         break;
                     case type.wind:
                         multiplier = weakness.weak;
+                        weak = 'Weak';
                         break;
                 }
                 break;
@@ -237,15 +251,19 @@ export class Elemental {
                 switch (enemy.type) {
                     case type.atomic:
                     multiplier = weakness.good;
+                    weak = 'Good';
                     break;
                 case type.earth:
                     multiplier = weakness.trivial;
+                    weak = 'Trivial';
                     break;
                 case type.fire:
                     multiplier = weakness.strong;
+                    weak = 'Strong';
                     break;
                 case type.wind:
                     multiplier = weakness.weak;
+                    weak = 'Weak';
                     break;
                 }
                 break;
@@ -253,15 +271,19 @@ export class Elemental {
                 switch (enemy.type) {
                     case type.atomic:
                         multiplier = weakness.good;
+                        weak = 'Good';
                         break;
                     case type.earth:
                         multiplier = weakness.weak;
+                        weak = 'Weak';
                         break;
                     case type.water:
                         multiplier = weakness.trivial
+                        weak = 'Trivial';
                         break;
                     case type.wind:
                         multiplier = weakness.strong;
+                        weak = 'Strong';
                         break;
                 }
                 break;
@@ -269,20 +291,28 @@ export class Elemental {
                 switch (enemy.type) {
                     case type.atomic:
                         multiplier = weakness.trivial;
+                        weak = 'Trivial';
                         break;
                     case type.earth:
                         multiplier = weakness.good;
+                        weak = 'Good';
                         break;
                     case type.water:
                         multiplier = weakness.good;
+                        weak = 'Good';
                         break;
                     case type.fire:
                         multiplier = weakness.trivial;
+                        weak = 'Trivial';
                         break;
                 }
                 break;
             default: 
                 multiplier = 0;
+        }
+
+        if (weak != null) {
+            console.log(`${this.getType()}'s attack is ${weak}`);
         }
 
         return multiplier;

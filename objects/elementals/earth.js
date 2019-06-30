@@ -125,6 +125,8 @@ export class EarthC3 extends Earth {
 	ability(player, enemy) { // Mud Sling
 		// Decreases the Damage Shield of all enemy Elementals
 		let deBuff = - Math.round(this.strength * this.abilityMod);
+
+		console.log(`Debuffing all enemy Elementals Damage Shield by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].damageShield = deBuff;
 		}
