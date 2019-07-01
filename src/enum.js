@@ -19,3 +19,21 @@ export const weakness = {
     weak: 0.5,
     trivial: 0.25
 }
+
+export const stat = {
+    /*********************************************************************
+            IMPORTANT: If this is changed in ANY way make sure to
+            update the stat Array inside the the Elemental Class 
+            constructor located inside elemental.js.
+    *********************************************************************/
+
+    // Main Stats
+    str: 0,
+    con: 1,
+    int: 2,
+    agil: 3,
+
+    // Secondary Stats
+    def: 4,
+    dmgShield: 5,
+}

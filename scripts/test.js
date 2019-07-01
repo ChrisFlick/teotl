@@ -46,7 +46,7 @@ export function test_defense() { // Tests Defense and Armor Penetration.
     enemyFire.attack(player.elemental[0]);
 }
 
-export function test_barrier() {
+export function test_barrier() { // Tests Barrier and Armor Penetration.
     console.log(`Running test_barrier() ensuring Barrier properly mitigates damage
     with the exception of FireC2's Armor Penetration`);
 
@@ -88,7 +88,7 @@ export function test_barrier() {
     player.listHealth();
 }
 
-export function test_lifeLeech() {
+export function test_lifeLeech() { // Tests Life Leech ability.
     console.log(`Running test_lifeLeech() ensuring Elemental WindC2 properly heals itself`);
 
     let player = new Player(
@@ -121,7 +121,7 @@ export function test_lifeLeech() {
     playerEle.logHealth();
 }
 
-export function test_intelligence() {
+export function test_intelligence() { // Tests Intelligence's affect on other abilities such as Direct Damage.
     console.log(`Running test_intelligence() ensuring Intelligence properly increases the strength of abilities`);
 
     let player = new Player(
@@ -142,17 +142,61 @@ export function test_intelligence() {
 
     let playerEle = player.elemental[type.wind];
     let ele = player.elemental[type.fire];
-    let enemyEle = enemy.elemental[type.earth];
+    
+    console.log(`Player health ${player.health}`);
 
     test_ability(ele, player, enemy);
 
     test_ability(playerEle, player, enemy);
+
+    test_ability(ele, player, enemy);
+
     test_ability(playerEle, player, enemy);
-    test_ability(playerEle, player, enemy);
+
+    test_ability(ele, player, enemy);
+
     test_ability(playerEle, player, enemy);
 
     test_ability(ele, player, enemy);
 }
+
+export function test_damageShield() { // Tests Damage Shield by imitating an ineraction between FireC1 and EarthC2 after FireC3 buffs EarthC2.
+    console.log(`Running test_damageShield(), ensureing that Damage Shield works propely`);
+
+    let player = new Player(
+        new AtomicC2,
+        new FireC3,
+        new WaterC4,
+        new EarthC2,
+        new WindC4,
+    );
+
+    let enemy = new Player(
+        new AtomicC2,
+        new FireC1,
+        new WaterC1,
+        new EarthC2,
+        new WindC4,
+    ); 
+
+    let earthEle = player.elemental[type.earth];
+    let fireEle = player.elemental[type.fire]
+    let enemyEle = enemy.elemental[type.fire];
+
+    player.listDamageShield();
+    test_ability(fireEle, player, enemy);
+    player.listDamageShield();
+
+    enemyEle.logHealth();
+    enemyEle.attack(earthEle);
+    enemyEle.logHealth();
+
+
+    earthEle.attack(enemyEle);
+    enemyEle.logHealth();
+}
+
+    
 
 
 /*********************

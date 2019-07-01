@@ -1,4 +1,4 @@
-import { type, weakness } from '../../src/enum.js';
+import { type, weakness, stat } from '../../src/enum.js';
 
 export class Elemental {
 	/*********************
@@ -6,20 +6,27 @@ export class Elemental {
 	*********************/
 
 	constructor() {
-        // Main Stat buffs
-        this._strengthBuff = 0;
-        this._baseConstitutionBuff = 0;
-        this._inteligenceBuff = 0;
-        this._agilityBuff = 0;
+        
+        this._buff = [
+            // Main Stats
+            0, // Strength
+            0, // Constitution
+            0, // Inteligence
+            0, // Agility
+
+            // Secondary Stats
+            0, // Defense
+            0, // Damage Shield
+        ];
+
+        this._buffTime = []
+        for (let i = 0; i < this._buff.length; i++) { // Initiates the timer for every buff at 0.
+            this._buffTime.push(0);
+        }
 
         // Secondary stats
         this._health = 0;
-        this._baseDamageShield = 0;
         this._barrier = 0;
-
-        // Secondary stat buffs
-        this._defenseBuff = 0;
-        this._damageShieldBuff = 0;
 
         this.doubleStrike = false;
 	}
@@ -36,22 +43,31 @@ export class Elemental {
         return this._type;
     }
 
-    // stats
+    
+    // Arrays
+    get buff() {
+        return this._buff;
+    }
 
+    get buffTime() {
+        return this._buffTime;
+    }
+
+    // stats
     get strength() { // Used in Damage calculations
-        return this._baseStrength + this._strengthBuff;
+        return this._baseStrength + this._buff[stat.str];
     }
 
     get constitution() { // Used to calculate Damage and Defense
-        return this._baseConstitution + this._baseConstitutionBuff;
+        return this._baseConstitution + this._buff[stat.con];
     }
 
     get inteligence() { // Used to calculate Ability Modifier
-        return this._baseInteligence + this._inteligenceBuff;
+        return this._baseInteligence + this._buff[stat.int];
     }
 
     get agility() { // Used to calculate Speed.
-        return this._baseAgility + this._agilityBuff;
+        return this._baseAgility + this._buff[stat.agil];
     }
 
     // Calculated stats
@@ -73,7 +89,7 @@ export class Elemental {
     }
 
     get defense() { // Mitigates Damage.
-        return Math.round((this.constitution * 0.25) + this._defenseBuff);
+        return Math.round((this.constitution * 0.25) + this._buff[stat.def]);
     }
 
     get abilityMod() { // Used to modify various Elemental Abilities.
@@ -81,12 +97,12 @@ export class Elemental {
     }
 
     get damageShield() { // Causes Damage to attacking Elemental.
-        let shield = Math.round(this._baseDamageShield + this._damageShieldBuff);
+        let shield = Math.round(this._baseDamageShield + this._buff[stat.dmgShield]);
 
-        if (shield < 0) {
-            return 0;
-        } else {
+        if (shield > 0) {
             return shield;
+        } else {
+            return 0;
         }
     }
 
@@ -98,10 +114,19 @@ export class Elemental {
 	****** Setters *******
     *********************/
 
+    // Arrays
+    set buff(stat) {
+        this.buff = stat;
+    }
+
+    set buffTime(t) {
+        this.buffTime = t;
+    }
+
     // Main Stats
     set strength(buff) { // Sets the Elementals Strength Buff (Does not affect Base Strength)
         if (typeof buff === 'number') {
-            this._strengthBuff = buff;
+            this._buff[stat.str] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         } 
@@ -109,7 +134,7 @@ export class Elemental {
 
     set constitution(buff) { // Sets the Elementals Constitution Buff (Does not affect Base Constitution)
         if (typeof buff === 'number') {
-            this._constitutionBuff = buff;
+            this._buff[stat.con] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -117,7 +142,7 @@ export class Elemental {
 
     set inteligence(buff) { // Sets the Elementals Inteligence Buff (Does not affect Base Inteligence)
         if (typeof buff === 'number') {
-            this._inteligenceBuff = buff;
+            this._buff[stat.int] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -125,7 +150,7 @@ export class Elemental {
 
     set agility(buff) { // Sets the Elementals agility Buff (Does not affect Base Agility)
         if (typeof buff === 'number') {
-            this._agilityBuff = buff;
+            this._buff[stat.agil] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -146,22 +171,22 @@ export class Elemental {
 
     set defense(buff) { // Sets the Elementals defense Buff (Does not affect Base Defense)
         if (typeof buff === 'number') {
-            this._defenseBuff = buff;
+            this._buff[stat.def] = buff;
         } else {
             throw new TypeError(`Invalid Input; Defense must be a number`);
         }
     }
 
     set damageShield(buff) { // Sets the Elementals Damage Shield Buff (Does not affect Base Damage Shield)
-        this._damageShieldBuff = buff;
+        this._buff[stat.dmgShield] = buff;
     }
 
     set barrier(buff) { // Sets Barrier Buff
         if (typeof buff === 'number') {
             this._barrier = buff;
 
-            if (this._barrier < 0) {
-                this._barrier = 0;
+            if (this.barrier < 0) {
+                this.barrier = 0;
             }
         } else {
             throw new TypeError(`Invalid Input; Barrier must be a number`);
@@ -196,8 +221,9 @@ export class Elemental {
 
 
             if (enemy.damageShield > 0) {
-                console.log(`Taking ${enemy.damageShield} Damage from Damage Shield`);
-                this.health -= enemy.damageShield * enemy.multiplier(this); // Take damage if enemy has a Damage Shield
+                dmg = Math.round(enemy.damageShield * enemy.multiplier(this));
+                console.log(`Taking ${dmg} Damage from Damage Shield`);
+                this.health -= dmg; // Take damage if enemy has a Damage Shield
             }     
     }
 
@@ -326,6 +352,17 @@ export class Elemental {
         return multiplier;
     }
 
+    resetBuffs() { // Checks the timer of each buff and resets them to 0 if their timer is up.
+        for (let i = 0; i < this.buff.length; i++) {
+            if (this.buffTime[i] > 0) {
+                buffTime[i] --;
+            } else {
+                buff[i] = 0;
+            }
+        }
+
+    }
+
     ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
     }
 
@@ -355,4 +392,6 @@ export class Elemental {
     logHealth() {
         console.log(`${this.getType()} ${this.name} Health: ${this.health}`);
     }
+
+
 }

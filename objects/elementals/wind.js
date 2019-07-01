@@ -131,9 +131,8 @@ export class WindC3 extends Wind {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Clarity 
-		// Increases the Intelligence of all ally Elementals.
-		let buff = Math.round((this.inteligence * 0.5) * this.abilityMod);
+	ability(player, enemy) { // Clarity: Increases the Intelligence of all ally Elementals.
+		let buff = Math.round(this.inteligence * this.abilityMod);
 
 		console.log(`${this.getType()} buffing all ally Elementals Inteligence by: ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
@@ -172,4 +171,6 @@ export class WindC4 extends Wind {
 	/*********************
 	****** Methods *******
 	*********************/
+	ability(player, enemy) { // Haste: Increases the agility of all allied Elementals
+	}
 }

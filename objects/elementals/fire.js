@@ -172,8 +172,7 @@ export class FireC4 extends Fire {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Sacred Flame
-		// Increases the strength of each friendly Elemental by buff.
+	ability(player, enemy) { // Sacred Flame: Increases the strength of each friendly Elemental by buff.
 		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
