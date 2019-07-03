@@ -137,6 +137,7 @@ export class WindC3 extends Wind {
 		console.log(`${this.getType()} buffing all ally Elementals Inteligence by: ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].inteligence = buff;
+			player.elemental[i].buffTime[stat.inteligence] = 1;
 		}
 	}
 }

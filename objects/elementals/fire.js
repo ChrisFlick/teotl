@@ -1,4 +1,4 @@
-import {type} from '../../src/enum.js';
+import {type, stat} from '../../src/enum.js';
 import {Elemental} from './elemental.js';
 
 export class Fire extends Elemental {
@@ -133,9 +133,11 @@ export class FireC3 extends Fire {
 
 	ability(player, enemy) { // Shield of Flames
 		// Increases the Damage Shield of every friendly elemental.
-		let buff = Math.round((this.strength * 0.25) * this.abilityMod);
+		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
+		console.log(`Buffing ally Damage Shield by ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
+			player.elemental[i].buffTime[stat.dmgShield] = 1;
 		}
 	}
 }
@@ -176,6 +178,7 @@ export class FireC4 extends Fire {
 		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
+			player.elemental[i].buffTime[stat.strength] = 1;
 		}
 	}
 }

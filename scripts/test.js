@@ -194,6 +194,8 @@ export function test_damageShield() { // Tests Damage Shield by imitating an ine
 
     earthEle.attack(enemyEle);
     enemyEle.logHealth();
+
+    enemy.elemental[type.water].attack(earthEle);
 }
 
     

@@ -62,6 +62,7 @@ export class AtomicC1 extends Atomic {
 		console.log(`Debuffing all enemy Elementals Strength by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].strength = -deBuff;
+			player.elemental[i].buffTime[stat.strength] = 1;
 		}
 	}
 }
@@ -147,6 +148,7 @@ export class AtomicC3 extends Atomic {
 		console.log(`Debuffing all enemy Elementals Agility by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].agility = -deBuff;
+			player.elemental[i].buffTime[stat.agility] = 1;
 		}
 	}
 }
@@ -190,6 +192,7 @@ export class AtomicC4 extends Atomic {
 		console.log(`Debuffing all enemy Elementals Defense by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].defense = -deBuff;
+			player.elemental[i].buffTime[stat.defense] = 1;
 		}
 	}
 }

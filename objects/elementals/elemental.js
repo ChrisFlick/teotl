@@ -19,6 +19,7 @@ export class Elemental {
             0, // Damage Shield
         ];
 
+
         this._buffTime = []
         for (let i = 0; i < this._buff.length; i++) { // Initiates the timer for every buff at 0.
             this._buffTime.push(0);
@@ -27,6 +28,7 @@ export class Elemental {
         // Secondary stats
         this._health = 0;
         this._barrier = 0;
+        this._baseDamageShield = 0;
 
         this.doubleStrike = false;
 	}
@@ -55,19 +57,19 @@ export class Elemental {
 
     // stats
     get strength() { // Used in Damage calculations
-        return this._baseStrength + this._buff[stat.str];
+        return this._baseStrength + this._buff[stat.strength];
     }
 
     get constitution() { // Used to calculate Damage and Defense
-        return this._baseConstitution + this._buff[stat.con];
+        return this._baseConstitution + this._buff[stat.constitution];
     }
 
     get inteligence() { // Used to calculate Ability Modifier
-        return this._baseInteligence + this._buff[stat.int];
+        return this._baseInteligence + this._buff[stat.inteligence];
     }
 
     get agility() { // Used to calculate Speed.
-        return this._baseAgility + this._buff[stat.agil];
+        return this._baseAgility + this._buff[stat.agility];
     }
 
     // Calculated stats
@@ -89,7 +91,7 @@ export class Elemental {
     }
 
     get defense() { // Mitigates Damage.
-        return Math.round((this.constitution * 0.25) + this._buff[stat.def]);
+        return Math.round((this.constitution * 0.25) + this._buff[stat.defense]);
     }
 
     get abilityMod() { // Used to modify various Elemental Abilities.
@@ -97,12 +99,13 @@ export class Elemental {
     }
 
     get damageShield() { // Causes Damage to attacking Elemental.
-        let shield = Math.round(this._baseDamageShield + this._buff[stat.dmgShield]);
+        let shield = Math.round(this._baseDamageShield + this._buff[stat.damageShield]);
 
-        if (shield > 0) {
-            return shield;
-        } else {
+        if (shield < 0) {
             return 0;
+            
+        } else {
+            return shield;
         }
     }
 
@@ -116,17 +119,17 @@ export class Elemental {
 
     // Arrays
     set buff(stat) {
-        this.buff = stat;
+        this._buff = stat;
     }
 
     set buffTime(t) {
-        this.buffTime = t;
+        this._buffTime = t;
     }
 
     // Main Stats
     set strength(buff) { // Sets the Elementals Strength Buff (Does not affect Base Strength)
         if (typeof buff === 'number') {
-            this._buff[stat.str] = buff;
+            this._buff[stat.strength] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         } 
@@ -134,7 +137,7 @@ export class Elemental {
 
     set constitution(buff) { // Sets the Elementals Constitution Buff (Does not affect Base Constitution)
         if (typeof buff === 'number') {
-            this._buff[stat.con] = buff;
+            this._buff[stat.constitution] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -142,7 +145,7 @@ export class Elemental {
 
     set inteligence(buff) { // Sets the Elementals Inteligence Buff (Does not affect Base Inteligence)
         if (typeof buff === 'number') {
-            this._buff[stat.int] = buff;
+            this._buff[stat.inteligence] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -150,7 +153,7 @@ export class Elemental {
 
     set agility(buff) { // Sets the Elementals agility Buff (Does not affect Base Agility)
         if (typeof buff === 'number') {
-            this._buff[stat.agil] = buff;
+            this._buff[stat.agility] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -171,14 +174,14 @@ export class Elemental {
 
     set defense(buff) { // Sets the Elementals defense Buff (Does not affect Base Defense)
         if (typeof buff === 'number') {
-            this._buff[stat.def] = buff;
+            this._buff[stat.defense] = buff;
         } else {
             throw new TypeError(`Invalid Input; Defense must be a number`);
         }
     }
 
     set damageShield(buff) { // Sets the Elementals Damage Shield Buff (Does not affect Base Damage Shield)
-        this._buff[stat.dmgShield] = buff;
+        this._buff[stat.damageShield] = buff;
     }
 
     set barrier(buff) { // Sets Barrier Buff
@@ -221,14 +224,19 @@ export class Elemental {
 
 
             if (enemy.damageShield > 0) {
-                dmg = Math.round(enemy.damageShield * enemy.multiplier(this));
+                let enemyType = enemy.type;
+                if (enemy.buff[stat.damageShield] > 0) {
+                    enemyType = type.fire;
+                }
+
+                dmg = Math.round(enemy.damageShield * enemy.multiplier(enemyType, this.type));
                 console.log(`Taking ${dmg} Damage from Damage Shield`);
                 this.health -= dmg; // Take damage if enemy has a Damage Shield
             }     
     }
 
     calculateDmg(enemy) { // Calculates damage.
-        let dmg = Math.round((this.damage * this.multiplier(enemy)) - enemy.defense);
+        let dmg = Math.round((this.damage * this.multiplier(this.type, enemy.type)) - enemy.defense);
 
         if (dmg < 0) {
             dmg = 0;
@@ -237,13 +245,13 @@ export class Elemental {
         return dmg;
     }
 
-    multiplier(enemy) { // Decides multiplier based on weakness
-        let multiplier;
+    multiplier(playerType, enemyType) { // Decides multiplier based on weakness
+        let multiplier = 1;
         let weak;
         
-        switch (this.type) {
+        switch (playerType) {
             case type.atomic:
-                switch (enemy.type) {
+                switch (enemyType) {
                     case type.earth:
                         multiplier = weakness.strong;
                         weak = 'Strong';
@@ -263,7 +271,7 @@ export class Elemental {
                 }
                 break;
             case type.earth:
-                switch (enemy.type) {
+                switch (enemyType) {
                     case type.atomic:
                         multiplier = weakness.trivial;
                         weak = 'Trivial';
@@ -282,7 +290,7 @@ export class Elemental {
                 }
                 break;
             case type.water:
-                switch (enemy.type) {
+                switch (enemyType) {
                     case type.atomic:
                     multiplier = weakness.good;
                     weak = 'Good';
@@ -302,7 +310,7 @@ export class Elemental {
                 }
                 break;
             case type.fire:
-                switch (enemy.type) {
+                switch (enemyType) {
                     case type.atomic:
                         multiplier = weakness.good;
                         weak = 'Good';
@@ -322,7 +330,7 @@ export class Elemental {
                 }
                 break;
             case type.wind:
-                switch (enemy.type) {
+                switch (enemyType) {
                     case type.atomic:
                         multiplier = weakness.trivial;
                         weak = 'Trivial';
@@ -342,7 +350,7 @@ export class Elemental {
                 }
                 break;
             default: 
-                multiplier = 0;
+                multiplier = 1;
         }
 
         if (weak != null) {

@@ -9,4 +9,4 @@ import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
 import { test_defense, test_barrier, test_lifeLeech, test_intelligence, test_damageShield } from '../scripts/test.js';
 import { type } from './enum.js';
 
-test_intelligence();
+test_damageShield();

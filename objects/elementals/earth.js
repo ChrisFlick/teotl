@@ -128,6 +128,7 @@ export class EarthC3 extends Earth {
 		console.log(`Debuffing all enemy Elementals Damage Shield by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].damageShield = deBuff;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 	}
 }
@@ -170,6 +171,7 @@ export class EarthC4 extends Earth {
 
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].defense = buff;
+			player.elemental[i].buffTime[stat.defense] = 1;
 		}
 	}
 }

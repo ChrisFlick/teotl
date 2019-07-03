@@ -28,12 +28,12 @@ export const stat = {
     *********************************************************************/
 
     // Main Stats
-    str: 0,
-    con: 1,
-    int: 2,
-    agil: 3,
+    strength: 0,
+    constitution: 1,
+    inteligence: 2,
+    agility: 3,
 
     // Secondary Stats
-    def: 4,
-    dmgShield: 5,
+    defense: 4,
+    damageShield: 5,
 }
