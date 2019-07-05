@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js",
+    "start": "nodemon --exec babel-node src/main.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -13,7 +13,6 @@
   },
   "keywords": [],
   "author": "Chris Flick",
-  "license": "none",
   "bugs": {
     "url": "https://github.com/ChrisFlick/teotl2.0/issues"
   },
@@ -22,6 +21,7 @@
     "@babel/core": "^7.4.5",
     "@babel/node": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "electron": "^5.0.6",
     "nodemon": "^1.19.1"
   },
   "dependencies": {
