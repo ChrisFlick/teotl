@@ -8,7 +8,8 @@ export class Fire extends Elemental {
 
 	constructor() {
         super();
-        this._type = type.fire;
+		this._type = type.fire;
+		this._shieldType = this.type;
 	}
 
 	/*********************
@@ -137,7 +138,8 @@ export class FireC3 extends Fire {
 		console.log(`Buffing ally Damage Shield by ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
-			player.elemental[i].buffTime[stat.dmgShield] = 1;
+			player.elemental[i]._shieldType = this.type;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 	}
 }

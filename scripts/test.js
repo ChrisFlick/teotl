@@ -127,7 +127,7 @@ export function test_intelligence() { // Tests Intelligence's affect on other ab
     let player = new Player(
         new AtomicC2,
         new FireC1,
-        new WaterC2,
+        new WaterC4,
         new EarthC4,
         new WindC3,
     );
@@ -140,7 +140,7 @@ export function test_intelligence() { // Tests Intelligence's affect on other ab
         new WindC4,
     ); 
 
-    let playerEle = player.elemental[type.wind];
+    let playerEle = player.elemental[type.water];
     let ele = player.elemental[type.fire];
     
     console.log(`Player health ${player.health}`);
@@ -160,15 +160,15 @@ export function test_intelligence() { // Tests Intelligence's affect on other ab
     test_ability(ele, player, enemy);
 }
 
-export function test_damageShield() { // Tests Damage Shield by imitating an ineraction between FireC1 and EarthC2 after FireC3 buffs EarthC2.
+export function test_damageShield() { // Tests Damage Shield
     console.log(`Running test_damageShield(), ensureing that Damage Shield works propely`);
 
     let player = new Player(
-        new AtomicC2,
+        new AtomicC3,
         new FireC3,
-        new WaterC4,
-        new EarthC2,
-        new WindC4,
+        new WaterC2,
+        new EarthC3,
+        new WindC3,
     );
 
     let enemy = new Player(
@@ -180,11 +180,11 @@ export function test_damageShield() { // Tests Damage Shield by imitating an ine
     ); 
 
     let earthEle = player.elemental[type.earth];
-    let fireEle = player.elemental[type.fire]
+    let buffer = player.elemental[type.wind]
     let enemyEle = enemy.elemental[type.fire];
 
     player.listDamageShield();
-    test_ability(fireEle, player, enemy);
+    test_ability(buffer, player, enemy);
     player.listDamageShield();
 
     enemyEle.logHealth();

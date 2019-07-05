@@ -1,4 +1,4 @@
-import {type} from '../../src/enum.js';
+import {type, stat} from '../../src/enum.js';
 import {Elemental} from './elemental.js';
 
 export class Water extends Elemental {
@@ -8,7 +8,8 @@ export class Water extends Elemental {
 
 	constructor() {
         super();
-        this._type = type.water;
+		this._type = type.water;
+		this._shieldType = this.type;
 	}
 
 	/*********************
@@ -81,9 +82,9 @@ export class WaterC2 extends Water {
 		this._name = "C2";
 
 		// Main Stats
-		this._baseStrength = 30;
+		this._baseStrength = 20;
 		this._baseConstitution = 20;
-		this._baseInteligence = 5;
+		this._baseInteligence = 15;
 		this._baseAgility = 25;
 
 		// Secondary Stats
@@ -102,13 +103,14 @@ export class WaterC2 extends Water {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Sacred Barrier
-		// Gives each friendly Elemental a Barrier that mitigates Damage until it is exausted
-		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
-
-		console.log(`${this.getType()} giving all allies a Barrier of ${heal} HP`);
+	ability(player, enemy) { // Water Barrier
+		// Increases the Damage Shield of every friendly elemental.
+		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
+		console.log(`Buffing ally Damage Shield by ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
-			player.elemental[i].barrier = heal;
+			player.elemental[i].damageShield = buff;
+			player.elemental[i]._shieldType = this.type;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 	}
 }
@@ -143,6 +145,19 @@ export class WaterC3 extends Water {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Sacred Oath
+		// Heals the player.
+		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+
+		console.log(`${this.getType} Healing it's Player for ${heal}.`);
+
+		player.health += heal;
+
+		if (player.health > player.maxHealth) { // Ensure the player isn't healed past Max Health.
+			player.health = player.maxHealth;
+		}
+	}
 }
 
 export class WaterC4 extends Water {
@@ -175,16 +190,13 @@ export class WaterC4 extends Water {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Sacred Oath
-		// Heals the player.
-		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+	ability(player, enemy) { // Clarity: Increases the Intelligence of all ally Elementals.
+		let buff = Math.round(this.inteligence * this.abilityMod);
 
-		console.log(`${this.getType} Healing it's Player for ${heal}.`);
-
-		player.health += heal;
-
-		if (player.health > player.maxHealth) { // Ensure the player isn't healed past Max Health.
-			player.health = player.maxHealth;
+		console.log(`${this.getType()} buffing all ally Elementals Inteligence by: ${buff}`);
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].inteligence = buff;
+			player.elemental[i].buffTime[stat.inteligence] = 1;
 		}
 	}
 }

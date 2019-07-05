@@ -45,6 +45,10 @@ export class Elemental {
         return this._type;
     }
 
+    get shieldType() { // Elemental type of damage shield
+        return this._shieldType;
+    }
+
     
     // Arrays
     get buff() {
@@ -78,7 +82,7 @@ export class Elemental {
         return this.strength;
     }
 
-    get speed() { // Used to see which Elemental goes first
+    get speed() { // Used to see which Elemental goes first.
         return this.agility;
     }
 
@@ -116,6 +120,14 @@ export class Elemental {
 	/*********************
 	****** Setters *******
     *********************/
+
+    set shieldType(type) {
+        if (type === type.atomic || type === type.fire || type === type.water || type === type.earth || type === type.wind) {
+            this._shieldType = type;
+        } else {
+            throw new TypeError(`Invalid Input; Type must match type.x in enum.js`);
+        }
+    }
 
     // Arrays
     set buff(stat) {
@@ -226,7 +238,7 @@ export class Elemental {
             if (enemy.damageShield > 0) {
                 let enemyType = enemy.type;
                 if (enemy.buff[stat.damageShield] > 0) {
-                    enemyType = type.fire;
+                    enemyType = enemy.shieldType;
                 }
 
                 dmg = Math.round(enemy.damageShield * enemy.multiplier(enemyType, this.type));

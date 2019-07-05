@@ -1,4 +1,4 @@
-import {type} from '../../src/enum.js';
+import {type, stat} from '../../src/enum.js';
 import {Elemental} from './elemental.js';
 
 export class Wind extends Elemental {
@@ -8,7 +8,8 @@ export class Wind extends Elemental {
 
 	constructor() {
         super();
-        this._type = type.wind;
+		this._type = type.wind;
+		this._shieldType = this.type;
 	}
 
 	/*********************
@@ -111,8 +112,8 @@ export class WindC3 extends Wind {
 
 		// Main Stats
 		this._baseStrength = 20;
-		this._baseConstitution = 22;
-		this._baseInteligence = 10;
+		this._baseConstitution = 20;
+		this._baseInteligence = 12;
 		this._baseAgility = 18;
 
 		// Secondary Stats
@@ -131,13 +132,14 @@ export class WindC3 extends Wind {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Clarity: Increases the Intelligence of all ally Elementals.
-		let buff = Math.round(this.inteligence * this.abilityMod);
-
-		console.log(`${this.getType()} buffing all ally Elementals Inteligence by: ${buff}`);
+	ability(player, enemy) { // Vortex
+		// Increases the Damage Shield of every friendly elemental.
+		let buff = Math.round((this.strength * 0.7) * this.abilityMod);
+		console.log(`Buffing ally Damage Shield by ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
-			player.elemental[i].inteligence = buff;
-			player.elemental[i].buffTime[stat.inteligence] = 1;
+			player.elemental[i].damageShield = buff;
+			player.elemental[i]._shieldType = this.type;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 	}
 }
@@ -172,6 +174,11 @@ export class WindC4 extends Wind {
 	/*********************
 	****** Methods *******
 	*********************/
-	ability(player, enemy) { // Haste: Increases the agility of all allied Elementals
+	ability(player, enemy) { // Haste
+		let buff = Math.round((this.agility * 0.1) * this.abilityMod);
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].strength = buff;
+			player.elemental[i].buffTime[stat.agility] = 1;
+		}
 	}
 }

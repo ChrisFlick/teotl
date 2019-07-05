@@ -1,4 +1,4 @@
-import {type} from '../../src/enum.js';
+import {type, stat} from '../../src/enum.js';
 import {Elemental} from './elemental.js';
 
 export class Earth extends Elemental {
@@ -8,7 +8,8 @@ export class Earth extends Elemental {
 
 	constructor() {
         super();
-        this._type = type.earth;
+		this._type = type.earth;
+		this._shieldType = this.type;
 	}
 
 	/*********************
@@ -73,7 +74,7 @@ export class EarthC2 extends Earth {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
-		this._baseDamageShield = this._baseConstitution * this.abilityMod;	// Has Damage Shield instead of ability "Thorns"
+		this._baseDamageShield = this._baseConstitution * this.abilityMod;	// Has Damage Shield instead of ability
 	}
 
 	/*********************
@@ -121,13 +122,13 @@ export class EarthC3 extends Earth {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Mud Sling
-		// Decreases the Damage Shield of all enemy Elementals
-		let deBuff = - Math.round(this.strength * this.abilityMod);
-
-		console.log(`Debuffing all enemy Elementals Damage Shield by ${deBuff}.`);
-		for (let i = 0; i < enemy.elemental.length; i++) {
-			enemy.elemental[i].damageShield = deBuff;
+	ability(player, enemy) { // Thorns
+		// Increases the Damage Shield of every friendly elemental.
+		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
+		console.log(`Buffing ally Damage Shield by ${buff}`);
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].damageShield = buff;
+			player.elemental[i]._shieldType = this.type;
 			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 	}

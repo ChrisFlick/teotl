@@ -1,4 +1,4 @@
-import {type} from '../../src/enum.js';
+import {type, stat} from '../../src/enum.js';
 import { Elemental } from './elemental.js';
 
 export class Atomic extends Elemental {
@@ -8,7 +8,8 @@ export class Atomic extends Elemental {
 
 	constructor() {
 		super();
-		this._type = type.atomic;	
+		this._type = type.atomic;
+		this._shieldType = this.type;
 	}
 
 	/*********************
@@ -55,16 +56,7 @@ export class AtomicC1 extends Atomic {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Radiation (Strength)
-		// Lowers the strength of each Enemy Elemental by deBuff ammount.
-		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
-
-		console.log(`Debuffing all enemy Elementals Strength by ${deBuff}.`);
-		for (let i = 0; i < enemy.elemental.length; i++) {
-			enemy.elemental[i].strength = -deBuff;
-			player.elemental[i].buffTime[stat.strength] = 1;
-		}
-	}
+	
 }
 
 export class AtomicC2 extends Atomic {
@@ -141,14 +133,14 @@ export class AtomicC3 extends Atomic {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Radiation (Agility)
-		// Lowers the Agility of every Enemy Elemental.
-		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
-
-		console.log(`Debuffing all enemy Elementals Agility by ${deBuff}.`);
-		for (let i = 0; i < enemy.elemental.length; i++) {
-			enemy.elemental[i].agility = -deBuff;
-			player.elemental[i].buffTime[stat.agility] = 1;
+	ability(player, enemy) { // Radiation Shield
+		// Increases the Damage Shield of every friendly elemental.
+		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
+		console.log(`Buffing ally Damage Shield by ${buff}`);
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].damageShield = buff;
+			player.elemental[i]._shieldType = this.type;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 	}
 }
