@@ -1,12 +1,17 @@
-import {Player} from '../objects/player.js';
+const { app, BrowserWindow } = require('electron')
 
-import { AtomicC1, AtomicC2, AtomicC3, AtomicC4 } from '../objects/elementals/atomic.js';
-import { EarthC1, EarthC2, EarthC3, EarthC4 } from '../objects/elementals/earth.js';
-import { WaterC1, WaterC2, WaterC3, WaterC4 } from '../objects/elementals/Water.js';
-import { FireC1, FireC2, FireC3, FireC4 } from '../objects/elementals/fire.js';
-import { WindC1, WindC2, WindC3, WindC4 } from '../objects/elementals/wind.js';
+function createWindow () {
+  // Create the browser window.
+  let win = new BrowserWindow({
+    width: 800,
+    height: 800,
+    webPreferences: {
+      nodeIntegration: true
+    }
+  })
 
-import { test_defense, test_barrier, test_lifeLeech, test_intelligence, test_damageShield } from '../scripts/test.js';
-import { type } from './enum.js';
+  // and load the index.html of the app.
+  win.loadFile('pentacle.html')
+}
 
-test_damageShield();
+app.on('ready', createWindow)
