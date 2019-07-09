@@ -1,14 +1,14 @@
 import {type, stat} from '../../src/enum.js';
-import {Elemental} from './elemental.js';
+import { Elemental } from './elemental.js';
 
-export class Fire extends Elemental {
+export class Atomic extends Elemental {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-        super();
-		this._type = type.fire;
+		super();
+		this._type = type.atomic;
 		this._shieldType = this.type;
 	}
 
@@ -25,7 +25,7 @@ export class Fire extends Elemental {
 	*********************/
 }
 
-export class FireC1 extends Fire {
+export class AtomicC1 extends Atomic {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -35,10 +35,10 @@ export class FireC1 extends Fire {
 		this._name = "C1";
 
 		// Main Stats
-		this._baseStrength = 40;
-		this._baseConstitution = 15;
-		this._baseInteligence = 5;
-		this._baseAgility = 7;
+		this._baseStrength = 33;
+		this._baseConstitution = 22;
+		this._baseIntelligence = 38;
+		this._baseAgility = 11;	
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -56,15 +56,10 @@ export class FireC1 extends Fire {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Direct Damage
-		let dmg = Math.round(this.strength + (this.abilityMod * this.strength));
-
-		console.log(`Dealing ${dmg} Damage directly to the player`);
-		enemy.health -= dmg;
-	}
+	
 }
 
-export class FireC2 extends Fire {
+export class AtomicC2 extends Atomic {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -74,13 +69,14 @@ export class FireC2 extends Fire {
 		this._name = "C2";
 
 		// Main Stats
-		this._baseStrength = 40;
-		this._baseConstitution = 18;
-		this._baseInteligence = 5;
-		this._baseAgility = 17;
+		this._baseStrength = 28;
+		this._baseConstitution = 22;
+		this._baseIntelligence = 24;
+		this._baseAgility = 11;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+	
 	}
 
 	/*********************
@@ -95,26 +91,31 @@ export class FireC2 extends Fire {
 	****** Methods *******
 	*********************/
 
-	calculateDmg(enemy) { // Armor Penetration
-		// Instead of an Ability FireC2 gets a modified calculateDmg allowing it to ignore Defense and Barriers.
-		return Math.round(this.damage * this.multiplier(enemy));
-    }
+	ability(player, enemy) { // Hydrogen Blast
+		// Does dmg ammount of Damage to each enemy Elemental.
+		let dmg = Math.round((this.strength * .25) * this.abilityMod);
+
+		console.log(`Inflicting ${dmg} to all enemy Elementals`);
+		for (let i = 0; i < enemy.elemental.length; i++) {
+			enemy.elemental[i].health -= dmg;
+		}
+	}
 }
 
-export class FireC3 extends Fire {
+export class AtomicC3 extends Atomic {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-		super();
+		super()
 		this._name = "C3";
 
 		// Main Stats
-		this._baseStrength = 32;
-		this._baseConstitution = 25;
-		this._baseInteligence = 10;
-		this._baseAgility = 5;
+		this._baseStrength = 23;
+		this._baseConstitution = 27;
+		this._baseIntelligence = 14;
+		this._baseAgility = 21;	
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -132,7 +133,7 @@ export class FireC3 extends Fire {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Shield of Flames
+	ability(player, enemy) { // Radiation Shield
 		// Increases the Damage Shield of every friendly elemental.
 		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
 		console.log(`Buffing ally Damage Shield by ${buff}`);
@@ -144,21 +145,21 @@ export class FireC3 extends Fire {
 	}
 }
 
-export class FireC4 extends Fire {
+
+export class AtomicC4 extends Atomic {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-		super();
+		super()
 		this._name = "C4";
 
-
 		// Main Stats
-		this._baseStrength = 32;
-		this._baseConstitution = 20;
-		this._baseInteligence = 15;
-		this._baseAgility = 5;
+		this._baseStrength = 23;
+		this._baseConstitution = 32;
+		this._baseIntelligence = 14;
+		this._baseAgility = 16;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -176,11 +177,14 @@ export class FireC4 extends Fire {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Sacred Flame: Increases the strength of each friendly Elemental by buff.
-		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
-		for (let i = 0; i < player.elemental.length; i++) {
-			player.elemental[i].strength = buff;
-			player.elemental[i].buffTime[stat.strength] = 1;
+	ability(player, enemy) { // Radiation (Defense)
+		// Lowers the Defense of every Enemy Elemental.
+		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
+
+		console.log(`Debuffing all enemy Elementals Defense by ${deBuff}.`);
+		for (let i = 0; i < enemy.elemental.length; i++) {
+			enemy.elemental[i].defense = -deBuff;
+			player.elemental[i].buffTime[stat.defense] = 1;
 		}
 	}
 }

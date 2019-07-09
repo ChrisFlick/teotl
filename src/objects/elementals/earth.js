@@ -1,14 +1,14 @@
 import {type, stat} from '../../src/enum.js';
-import { Elemental } from './elemental.js';
+import {Elemental} from './elemental.js';
 
-export class Atomic extends Elemental {
+export class Earth extends Elemental {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-		super();
-		this._type = type.atomic;
+        super();
+		this._type = type.earth;
 		this._shieldType = this.type;
 	}
 
@@ -25,7 +25,7 @@ export class Atomic extends Elemental {
 	*********************/
 }
 
-export class AtomicC1 extends Atomic {
+export class EarthC1 extends Earth {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -35,10 +35,10 @@ export class AtomicC1 extends Atomic {
 		this._name = "C1";
 
 		// Main Stats
-		this._baseStrength = 33;
-		this._baseConstitution = 22;
-		this._baseInteligence = 38;
-		this._baseAgility = 11;	
+		this._baseStrength = 30;
+		this._baseConstitution = 26;
+		this._baseIntelligence = 7;
+		this._baseAgility = 2;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -55,11 +55,9 @@ export class AtomicC1 extends Atomic {
 	/*********************
 	****** Methods *******
 	*********************/
-
-	
 }
 
-export class AtomicC2 extends Atomic {
+export class EarthC2 extends Earth {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -69,14 +67,14 @@ export class AtomicC2 extends Atomic {
 		this._name = "C2";
 
 		// Main Stats
-		this._baseStrength = 28;
-		this._baseConstitution = 22;
-		this._baseInteligence = 24;
-		this._baseAgility = 11;
+		this._baseStrength = 25;
+		this._baseConstitution = 41;
+		this._baseIntelligence = 5;
+		this._baseAgility = 2;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
-	
+		this._baseDamageShield = this._baseConstitution * this.abilityMod;	// Has Damage Shield instead of ability
 	}
 
 	/*********************
@@ -90,35 +88,26 @@ export class AtomicC2 extends Atomic {
 	/*********************
 	****** Methods *******
 	*********************/
-
-	ability(player, enemy) { // Hydrogen Blast
-		// Does dmg ammount of Damage to each enemy Elemental.
-		let dmg = Math.round((this.strength * .25) * this.abilityMod);
-
-		console.log(`Inflicting ${dmg} to all enemy Elementals`);
-		for (let i = 0; i < enemy.elemental.length; i++) {
-			enemy.elemental[i].health -= dmg;
-		}
-	}
+	
 }
 
-export class AtomicC3 extends Atomic {
+export class EarthC3 extends Earth {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-		super()
-		this._name = "C3";
+		super();
+		this._name = "C3";	
 
 		// Main Stats
-		this._baseStrength = 23;
-		this._baseConstitution = 27;
-		this._baseInteligence = 14;
-		this._baseAgility = 21;	
+		this._baseStrength = 25;
+		this._baseConstitution = 33;
+		this._baseIntelligence = 10;
+		this._baseAgility = 9;
 
 		// Secondary Stats
-		this.health = this.maxHealth;
+		this.health = this.maxHealth;	
 	}
 
 	/*********************
@@ -133,7 +122,7 @@ export class AtomicC3 extends Atomic {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Radiation Shield
+	ability(player, enemy) { // Thorns
 		// Increases the Damage Shield of every friendly elemental.
 		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
 		console.log(`Buffing ally Damage Shield by ${buff}`);
@@ -145,21 +134,20 @@ export class AtomicC3 extends Atomic {
 	}
 }
 
-
-export class AtomicC4 extends Atomic {
+export class EarthC4 extends Earth {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
-		super()
-		this._name = "C4";
+		super();
+		this._name = "C4";		
 
 		// Main Stats
-		this._baseStrength = 23;
-		this._baseConstitution = 32;
-		this._baseInteligence = 14;
-		this._baseAgility = 16;
+		this._baseStrength = 25;
+		this._baseConstitution = 33;
+		this._baseIntelligence = 15;
+		this._baseAgility = 4;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -177,13 +165,13 @@ export class AtomicC4 extends Atomic {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Radiation (Defense)
-		// Lowers the Defense of every Enemy Elemental.
-		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
+	ability(player, enemy) {
+		let buff = Math.round((this.constitution * 0.2) * this.abilityMod);	
+		
+		console.log(`${this.getType()} buffing all of it's allies Defense by ${buff}.`)
 
-		console.log(`Debuffing all enemy Elementals Defense by ${deBuff}.`);
-		for (let i = 0; i < enemy.elemental.length; i++) {
-			enemy.elemental[i].defense = -deBuff;
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].defense = buff;
 			player.elemental[i].buffTime[stat.defense] = 1;
 		}
 	}

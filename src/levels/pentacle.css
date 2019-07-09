@@ -13,8 +13,8 @@
 }
 
 .pentacle button img {
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
 }
 
 
@@ -26,26 +26,26 @@
 }
 
 .pentacle .button_atom {
-  top: 65px;
-  left: 200px;
-}
-
-.pentacle .button_earth {
-  top: 190px;
-  left: 30px;
-}
-
-.pentacle .button_water {
-  top: 190px;
-  left: 370px;
+  top: 40px;
+  left: 230px;
 }
 
 .pentacle .button_fire {
-  top: 390px;
-  left: 95px;
+  top: 195px;
+  left: 25px;
+}
+
+.pentacle .button_water {
+  top: 192px;
+  left: 440px;
+}
+
+.pentacle .button_earth {
+  top: 440px;
+  left: 100px;
 }
 
 .pentacle .button_wind {
-  top: 390px;
-  left: 310px;
+  top: 440px;
+  left: 366px;
 }

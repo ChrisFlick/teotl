@@ -81,14 +81,14 @@ export class Player {
         }
     }
 
-    listInteligence() {
+    listintelligence() {
         let ele;
 
-        console.log(`Listing all Elementals Inteligence`);
+        console.log(`Listing all Elementals intelligence`);
         for (let i = 0; i < this.elemental.length; i++) {
             ele = this.elemental[i]
         console.log(`
-            ${ele.getType()} Inteligence : ${ele.inteligence}`);
+            ${ele.getType()} intelligence : ${ele.intelligence}`);
         }
     }
 

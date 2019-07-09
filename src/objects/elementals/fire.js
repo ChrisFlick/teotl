@@ -1,14 +1,14 @@
 import {type, stat} from '../../src/enum.js';
 import {Elemental} from './elemental.js';
 
-export class Earth extends Elemental {
+export class Fire extends Elemental {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
         super();
-		this._type = type.earth;
+		this._type = type.fire;
 		this._shieldType = this.type;
 	}
 
@@ -25,7 +25,7 @@ export class Earth extends Elemental {
 	*********************/
 }
 
-export class EarthC1 extends Earth {
+export class FireC1 extends Fire {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -35,10 +35,10 @@ export class EarthC1 extends Earth {
 		this._name = "C1";
 
 		// Main Stats
-		this._baseStrength = 30;
-		this._baseConstitution = 26;
-		this._baseInteligence = 7;
-		this._baseAgility = 2;
+		this._baseStrength = 40;
+		this._baseConstitution = 15;
+		this._baseIntelligence = 5;
+		this._baseAgility = 7;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -55,9 +55,16 @@ export class EarthC1 extends Earth {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Direct Damage
+		let dmg = Math.round(this.strength + (this.abilityMod * this.strength));
+
+		console.log(`Dealing ${dmg} Damage directly to the player`);
+		enemy.health -= dmg;
+	}
 }
 
-export class EarthC2 extends Earth {
+export class FireC2 extends Fire {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -67,14 +74,13 @@ export class EarthC2 extends Earth {
 		this._name = "C2";
 
 		// Main Stats
-		this._baseStrength = 25;
-		this._baseConstitution = 41;
-		this._baseInteligence = 5;
-		this._baseAgility = 2;
+		this._baseStrength = 40;
+		this._baseConstitution = 18;
+		this._baseIntelligence = 5;
+		this._baseAgility = 17;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
-		this._baseDamageShield = this._baseConstitution * this.abilityMod;	// Has Damage Shield instead of ability
 	}
 
 	/*********************
@@ -88,26 +94,30 @@ export class EarthC2 extends Earth {
 	/*********************
 	****** Methods *******
 	*********************/
-	
+
+	calculateDmg(enemy) { // Armor Penetration
+		// Instead of an Ability FireC2 gets a modified calculateDmg allowing it to ignore Defense and Barriers.
+		return Math.round(this.damage * this.multiplier(enemy));
+    }
 }
 
-export class EarthC3 extends Earth {
+export class FireC3 extends Fire {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
 		super();
-		this._name = "C3";	
+		this._name = "C3";
 
 		// Main Stats
-		this._baseStrength = 25;
-		this._baseConstitution = 33;
-		this._baseInteligence = 10;
-		this._baseAgility = 9;
+		this._baseStrength = 32;
+		this._baseConstitution = 25;
+		this._baseIntelligence = 10;
+		this._baseAgility = 5;
 
 		// Secondary Stats
-		this.health = this.maxHealth;	
+		this.health = this.maxHealth;
 	}
 
 	/*********************
@@ -122,7 +132,7 @@ export class EarthC3 extends Earth {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Thorns
+	ability(player, enemy) { // Shield of Flames
 		// Increases the Damage Shield of every friendly elemental.
 		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
 		console.log(`Buffing ally Damage Shield by ${buff}`);
@@ -134,20 +144,21 @@ export class EarthC3 extends Earth {
 	}
 }
 
-export class EarthC4 extends Earth {
+export class FireC4 extends Fire {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
 		super();
-		this._name = "C4";		
+		this._name = "C4";
+
 
 		// Main Stats
-		this._baseStrength = 25;
-		this._baseConstitution = 33;
-		this._baseInteligence = 15;
-		this._baseAgility = 4;
+		this._baseStrength = 32;
+		this._baseConstitution = 20;
+		this._baseIntelligence = 15;
+		this._baseAgility = 5;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -165,14 +176,11 @@ export class EarthC4 extends Earth {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) {
-		let buff = Math.round((this.constitution * 0.2) * this.abilityMod);	
-		
-		console.log(`${this.getType()} buffing all of it's allies Defense by ${buff}.`)
-
+	ability(player, enemy) { // Sacred Flame: Increases the strength of each friendly Elemental by buff.
+		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
-			player.elemental[i].defense = buff;
-			player.elemental[i].buffTime[stat.defense] = 1;
+			player.elemental[i].strength = buff;
+			player.elemental[i].buffTime[stat.strength] = 1;
 		}
 	}
 }

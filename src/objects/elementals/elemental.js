@@ -11,7 +11,7 @@ export class Elemental {
             // Main Stats
             0, // Strength
             0, // Constitution
-            0, // Inteligence
+            0, // intelligence
             0, // Agility
 
             // Secondary Stats
@@ -68,8 +68,8 @@ export class Elemental {
         return this._baseConstitution + this._buff[stat.constitution];
     }
 
-    get inteligence() { // Used to calculate Ability Modifier
-        return this._baseInteligence + this._buff[stat.inteligence];
+    get intelligence() { // Used to calculate Ability Modifier
+        return this._baseIntelligence + this._buff[stat.intelligence];
     }
 
     get agility() { // Used to calculate Speed.
@@ -99,7 +99,7 @@ export class Elemental {
     }
 
     get abilityMod() { // Used to modify various Elemental Abilities.
-        return this.inteligence * 0.1;
+        return this.intelligence * 0.1;
     }
 
     get damageShield() { // Causes Damage to attacking Elemental.
@@ -155,9 +155,9 @@ export class Elemental {
         }
     }
 
-    set inteligence(buff) { // Sets the Elementals Inteligence Buff (Does not affect Base Inteligence)
+    set intelligence(buff) { // Sets the Elementals intelligence Buff (Does not affect Base intelligence)
         if (typeof buff === 'number') {
-            this._buff[stat.inteligence] = buff;
+            this._buff[stat.intelligence] = buff;
         } else {
             throw new TypeError(`Invalid Input; Strength must be a number`);
         }
@@ -398,7 +398,7 @@ export class Elemental {
 
             Strength: ${this.strength}
             Constitution: ${this.constitution}
-            Inteligence: ${this.inteligence}
+            intelligence: ${this.intelligence}
             Agility: ${this.agility}
 
             Damage: ${this.damage}

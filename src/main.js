@@ -10,8 +10,8 @@ function createWindow () {
     }
   })
 
-  // and load the index.html of the app.
-  win.loadFile('pentacle.html')
+
+  win.loadFile('src/pentacle.html')
 }
 
 app.on('ready', createWindow)

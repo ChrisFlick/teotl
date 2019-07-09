@@ -1,14 +1,14 @@
 import {type, stat} from '../../src/enum.js';
 import {Elemental} from './elemental.js';
 
-export class Wind extends Elemental {
+export class Water extends Elemental {
 	/*********************
 	**** Constructor *****
 	*********************/
 
 	constructor() {
         super();
-		this._type = type.wind;
+		this._type = type.water;
 		this._shieldType = this.type;
 	}
 
@@ -25,7 +25,7 @@ export class Wind extends Elemental {
 	*********************/
 }
 
-export class WindC1 extends Wind {
+export class WaterC1 extends Water {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -35,15 +35,13 @@ export class WindC1 extends Wind {
 		this._name = "C1";
 
 		// Main Stats
-		this._baseStrength = 25;
-		this._baseConstitution = 25;
-		this._baseInteligence = 5;
-		this._baseAgility = 30;
+		this._baseStrength = 22;
+		this._baseConstitution = 35;
+		this._baseIntelligence = 5;
+		this._baseAgility = 8;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
-
-		this.doubleStrike = true; // In place of ability; Hit the enemy's Elemental twice, once after the opponent has gone.
 	}
 
 	/*********************
@@ -57,9 +55,24 @@ export class WindC1 extends Wind {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Heal Wounds
+		// Heals every friendly Elemental.
+		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+
+		console.log(`${this.getType()} Healing all allies for ${heal}`);
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].health += heal;
+
+			// Ensures Elementals are not healed above their Max Health
+			if (player.elemental[i].health > player.elemental[i].maxHealth) {
+				player.elemental[i].health = player.elemental[i].maxHealth;
+			}
+		}
+	}
 }
 
-export class WindC2 extends Wind {
+export class WaterC2 extends Water {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -71,8 +84,8 @@ export class WindC2 extends Wind {
 		// Main Stats
 		this._baseStrength = 20;
 		this._baseConstitution = 20;
-		this._baseInteligence = 5;
-		this._baseAgility = 15;
+		this._baseIntelligence = 15;
+		this._baseAgility = 25;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -90,18 +103,19 @@ export class WindC2 extends Wind {
 	****** Methods *******
 	*********************/
 
-	attack(enemy) { // Life Leech
-		// In place of Ability; attacks from Elemental Heal itself.
-		enemy.attack.call(this, enemy);
-
-		let heal = (this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2);
-
-		console.log(`Healing self with Life Leech for ${heal}`);
-		this.health += heal;
+	ability(player, enemy) { // Water Barrier
+		// Increases the Damage Shield of every friendly elemental.
+		let buff = Math.round((this.strength * 0.5) * this.abilityMod);
+		console.log(`Buffing ally Damage Shield by ${buff}`);
+		for (let i = 0; i < player.elemental.length; i++) {
+			player.elemental[i].damageShield = buff;
+			player.elemental[i]._shieldType = this.type;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
+		}
 	}
 }
 
-export class WindC3 extends Wind {
+export class WaterC3 extends Water {
 	/*********************
 	**** Constructor *****
 	*********************/
@@ -111,9 +125,53 @@ export class WindC3 extends Wind {
 		this._name = "C3";
 
 		// Main Stats
-		this._baseStrength = 20;
-		this._baseConstitution = 20;
-		this._baseInteligence = 12;
+		this._baseStrength = 25;
+		this._baseConstitution = 27;
+		this._baseIntelligence = 10;
+		this._baseAgility = 18;	
+
+		// Secondary Stats
+		this.health = this.maxHealth;
+	}
+
+	/*********************
+	****** Getters *******
+	*********************/
+
+	/*********************
+	****** Setters *******
+	*********************/
+
+	/*********************
+	****** Methods *******
+	*********************/
+
+	ability(player, enemy) { // Sacred Oath
+		// Heals the player.
+		let heal = Math.round(this.constitution + (this.constitution * this.abilityMod));
+
+		console.log(`${this.getType} Healing it's Player for ${heal}.`);
+
+		player.health += heal;
+
+		if (player.health > player.maxHealth) { // Ensure the player isn't healed past Max Health.
+			player.health = player.maxHealth;
+		}
+	}
+}
+
+export class WaterC4 extends Water {
+	/*********************
+	**** Constructor *****
+	*********************/
+
+	constructor() {
+        super();
+        this._name = "C4";
+
+		this._baseStrength = 25;
+		this._baseConstitution = 22;
+		this._baseIntelligence = 15;
 		this._baseAgility = 18;
 
 		// Secondary Stats
@@ -132,53 +190,13 @@ export class WindC3 extends Wind {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Vortex
-		// Increases the Damage Shield of every friendly elemental.
-		let buff = Math.round((this.strength * 0.7) * this.abilityMod);
-		console.log(`Buffing ally Damage Shield by ${buff}`);
+	ability(player, enemy) { // Clarity: Increases the Intelligence of all ally Elementals.
+		let buff = Math.round(this.intelligence * this.abilityMod);
+
+		console.log(`${this.getType()} buffing all ally Elementals intelligence by: ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
-			player.elemental[i].damageShield = buff;
-			player.elemental[i]._shieldType = this.type;
-			player.elemental[i].buffTime[stat.damageShield] = 1;
-		}
-	}
-}
-
-export class WindC4 extends Wind {
-	/*********************
-	**** Constructor *****
-	*********************/
-
-	constructor() {
-        super();
-		this._name = "C4";
-		
-		// Main Stats
-		this._baseStrength = 25;
-		this._baseConstitution = 22;
-		this._baseInteligence = 15;
-		this._baseAgility = 18;	
-
-		// Secondary Stats
-		this.health = this.maxHealth;
-	}
-
-	/*********************
-	****** Getters *******
-	*********************/
-
-	/*********************
-	****** Setters *******
-	*********************/
-
-	/*********************
-	****** Methods *******
-	*********************/
-	ability(player, enemy) { // Haste
-		let buff = Math.round((this.agility * 0.1) * this.abilityMod);
-		for (let i = 0; i < player.elemental.length; i++) {
-			player.elemental[i].strength = buff;
-			player.elemental[i].buffTime[stat.agility] = 1;
+			player.elemental[i].intelligence = buff;
+			player.elemental[i].buffTime[stat.intelligence] = 1;
 		}
 	}
 }

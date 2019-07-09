@@ -1,7 +1,7 @@
 function elementClick(button) {
     // Declare variables.
     let image;
-    let source = "sprites/buttons/";
+    let source = "../../sprites/buttons/";
     let extension = ".png"
 
     // Revert all other buttons to their non clicked image.
