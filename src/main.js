@@ -1,17 +1,17 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow } = require('electron');
 
 function createWindow () {
   // Create the browser window.
   let win = new BrowserWindow({
-    width: 800,
-    height: 800,
+    width: 1000,
+    height: 1000,
     webPreferences: {
       nodeIntegration: true
     }
   })
-
-
-  win.loadFile('src/pentacle.html')
+  //win.removeMenu();
+  win.loadFile('src/levels/character_select.html');
 }
 
-app.on('ready', createWindow)
+
+app.on('ready', createWindow);
