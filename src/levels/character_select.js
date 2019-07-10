@@ -1,4 +1,4 @@
-let playerElementals = [];
+let playerElementals = []; // Initializing Player Elementals
 
 let elementals = [
     [
@@ -57,7 +57,36 @@ function select(prefix, button, num, type) {
         } else { // Change image to it's clicked variant
             image.src = source + elementID + "Clicked" + extension;
             playerElementals[type] = elementals[type][i];
+
+            let ele = playerElementals[type]
+            document.getElementById(ele.getType() + "Stats").innerHTML = 
+                ele.name + "<br>" +
+                "Strength: " + ele.strength + "<br>" +
+                "Constitution: " + ele.constitution + "<br>" +
+                "Intelligence: " + ele.intelligence + "<br>" +
+                "Agility: " + ele.agility + "<br>";
+
+            document.getElementById(ele.getType() + "Desc").innerHTML = ele.description;
+        }
+    }
+    console.log("Selected Elementals:")
+    console.log(playerElementals);
+};
+
+function continueButton() {
+    let ready = true;
+
+    for (let i = 0; i < 5; i++) {
+        if (playerElementals[i] == undefined) {
+            ready = false;
         }
     }
 
+    if (ready) {
+        player = new Player(playerElementals);
+        console.log('Constructing Player object');
+        console.log(player);
+
+        win.loadUrl("pentacle.html");
+    }
 }

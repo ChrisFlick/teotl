@@ -1,10 +1,13 @@
 const { app, BrowserWindow } = require('electron');
+var { win } = require(`./variables.js`);
+
+//const { type, weakness, stat} = require('./enum.js');
 
 function createWindow () {
   // Create the browser window.
-  let win = new BrowserWindow({
-    width: 1000,
-    height: 1000,
+  win = new BrowserWindow({
+    width: 1100,
+    height: 1100,
     webPreferences: {
       nodeIntegration: true
     }

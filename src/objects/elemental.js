@@ -4,7 +4,8 @@ class Elemental {
 	*********************/
 
 	constructor() {
-        
+		this._description = "This Elemental currently does not have an Ability";
+
         this._buff = [
             // Main Stats
             0, // Strength
@@ -45,11 +46,15 @@ class Elemental {
 
     get shieldType() { // Elemental type of damage shield
         return this._shieldType;
-    }
+	}
+	
+	get description() {
+		return this._description;
+	}
 
     
     // Arrays
-    get buff() {
+    get buff() { 
         return this._buff;
     }
 
@@ -59,15 +64,15 @@ class Elemental {
 
     // stats
     get strength() { // Used in Damage calculations
-        return this._baseStrength + this._buff[stat.strength];
+        return this._baseStrength + this.buff[stat.strength];
     }
 
     get constitution() { // Used to calculate Damage and Defense
-        return this._baseConstitution + this._buff[stat.constitution];
+        return this._baseConstitution + this.buff[stat.constitution];
     }
 
     get intelligence() { // Used to calculate Ability Modifier
-        return this._baseIntelligence + this._buff[stat.intelligence];
+        return this._baseIntelligence + this.buff[stat.intelligence];
     }
 
     get agility() { // Used to calculate Speed.
@@ -93,7 +98,7 @@ class Elemental {
     }
 
     get defense() { // Mitigates Damage.
-        return Math.round((this.constitution * 0.25) + this._buff[stat.defense]);
+        return Math.round((this.constitution * 0.25) + this.buff[stat.defense]);
     }
 
     get abilityMod() { // Used to modify various Elemental Abilities.
@@ -101,7 +106,7 @@ class Elemental {
     }
 
     get damageShield() { // Causes Damage to attacking Elemental.
-        let shield = Math.round(this._baseDamageShield + this._buff[stat.damageShield]);
+        let shield = Math.round(this._baseDamageShield + this.buff[stat.damageShield]);
 
         if (shield < 0) {
             return 0;
@@ -128,7 +133,7 @@ class Elemental {
     }
 
     // Arrays
-    set buff(stat) {
+    set buff(stat) { // Getter and setter for _buff so that buffs can be reset when they wear
         this._buff = stat;
     }
 
@@ -382,7 +387,8 @@ class Elemental {
     }
 
     ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
-    }
+	}
+	
 
     // For testing purposes:
 
@@ -493,6 +499,9 @@ class AtomicC2 extends Atomic {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Hydrogen Blast:</b> Upon victory sets off a powerful explosion damaging all enemy elementals by an ammount based on it's <i>Strength</i> and <i>Intelligence</i>";
 	
 	}
 
@@ -536,6 +545,9 @@ class AtomicC3 extends Atomic {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Radiation Shield:</b> Upon victory radiates all Ally Elementals with an <i>Atomic type Damage Shield</i> based on <i>Strength</i> and <i>Intelligence</i>"
 	}
 
 	/*********************
@@ -580,6 +592,9 @@ class AtomicC4 extends Atomic {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Radiation(Defense):</b> Upon victory lowers the <i>Defense</i> of every Enemy Elemental based on <i>Strength</i> and <i>Intelligence</i>"
 	}
 
 	/*********************
@@ -651,6 +666,9 @@ class FireC1 extends Fire {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Direct Damage:</b> Upon victory damages the Enemy Player's <i>Health</i> Directly based on <i>Strength</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -690,6 +708,9 @@ class FireC2 extends Fire {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Armor Penetration:</b> Attacks ignores all <i>Damage Mitigation</i> including <i>Damage Shields</i>";
 	}
 
 	/*********************
@@ -727,6 +748,9 @@ class FireC3 extends Fire {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Shield of Flames:</b> Upon victory inflames Ally Elementals with a <i>Fire</i> type <i>Damage Shield</i>";
 	}
 
 	/*********************
@@ -771,6 +795,9 @@ class FireC4 extends Fire {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Power Within:</b> Buffs all Ally Elementals with increased <i>Strength</i>; based on <i>Strength</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -785,7 +812,7 @@ class FireC4 extends Fire {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Sacred Flame: Increases the strength of each friendly Elemental by buff.
+	ability(player, enemy) { // Power Within: Increases the strength of each friendly Elemental by buff.
 		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
@@ -839,6 +866,9 @@ class WaterC1 extends Water {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Heal Wounds:</b> Upon victory heals all Ally Elementals <i>Health</i>; based on <i>Constitution</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -886,6 +916,9 @@ class WaterC2 extends Water {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Water Barrier:</b> Upon victory covers all Ally Elementals in a Water Barrier giving them a <i>Water</i> type <i>Damage Shield</i> based on <i>Strength</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -929,6 +962,9 @@ class WaterC3 extends Water {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Sacred Oath:</b> Upon victory heals the Player; based on <i>Constitution</i> and <i>Intelligence</i>"
 	}
 
 	/*********************
@@ -973,6 +1009,9 @@ class WaterC4 extends Water {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Clarity:</b> Gives Ally Elementals a burst of insight increasing it's <i>Intelligence</i>; based on <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -1078,6 +1117,9 @@ class EarthC2 extends Earth {
 		// Secondary Stats
 		this.health = this.maxHealth;
 		this._baseDamageShield = this._baseConstitution * this.abilityMod;	// Has Damage Shield instead of ability
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Tough Hide:</b> Has inate <i>Damage Shield</i>; changes types when buffed with a <i>Damage Shield</i> from an Ally Elemental.";
 	}
 
 	/*********************
@@ -1111,6 +1153,9 @@ class EarthC3 extends Earth {
 
 		// Secondary Stats
 		this.health = this.maxHealth;	
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Thorns:</b> Upon victory engulfs Ally Elementals in Thorns giving them a <i>Earth</i> type <i>Damage Shield</i>";
 	}
 
 	/*********************
@@ -1154,6 +1199,9 @@ class EarthC4 extends Earth {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Ardent Defender:</b> Upon victory protects all Ally Elementals with increased <i>Defense</i>;based on <i>Constitution</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -1168,7 +1216,7 @@ class EarthC4 extends Earth {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) {
+	ability(player, enemy) { // Ardent Defender
 		let buff = Math.round((this.constitution * 0.2) * this.abilityMod);	
 		
 		console.log(`${this.getType()} buffing all of it's allies Defense by ${buff}.`)
@@ -1227,6 +1275,9 @@ class WindC1 extends Wind {
 		this.health = this.maxHealth;
 
 		this.doubleStrike = true; // In place of ability; Hit the enemy's Elemental twice, once after the opponent has gone.
+
+		// Ability Description (HTML5 String)
+		this._description = "<b>Double Strike:</b> Swiftly attacks the opponent twice, once after the Enemy Elemental has attacked";
 	}
 
 	/*********************
@@ -1259,6 +1310,8 @@ class WindC2 extends Wind {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		this._description = "<b>Life Leech:</b> Heals itself based on <i>Damage</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -1301,6 +1354,8 @@ class WindC3 extends Wind {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		this._description = "<b>Vortex:</b> Upon victory surrounds all Ally Elementals in a <i>Wind</i> type <i>Damage Shield</i>; based on <i>Strength</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -1344,6 +1399,8 @@ class WindC4 extends Wind {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		this._description = "<b>Haste:</b> Gives all Ally Elementals a <i>Speed</i> boost by increasing their <i>Agility</i>; based on <i>Agility</i> and <i>Intelligence</i>";
 	}
 
 	/*********************

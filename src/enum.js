@@ -31,7 +31,7 @@ const stat = {
     // Main Stats
     strength: 0,
     constitution: 1,
-    inteligence: 2,
+    intelligence: 2,
     agility: 3,
 
     // Secondary Stats

@@ -3,14 +3,8 @@ class Player {
 	**** Constructor *****
 	*********************/
 
-	constructor(atomic,fire, water, earth, wind) {
-        this._elemental = [
-            atomic,
-            fire,
-            water,
-            earth,
-            wind,
-        ];
+	constructor(elementals) {
+        this._elemental = elementals;
 
         this._maxHealth = this.calculateMaxHealth();
         this._health = this._maxHealth;

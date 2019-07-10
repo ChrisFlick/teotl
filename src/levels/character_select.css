@@ -3,6 +3,20 @@
 }
 
 .portrait {
-    height: 80px;
-    width: 80px;
+    height: 100px;
+    width: 100px;
+}
+
+td {
+    width: 100px; 
+    height: 150px;
+    padding: 5px;
+}
+
+.description {
+    width: 300px;
+}
+
+.stats {
+    width: 150px;
 }
