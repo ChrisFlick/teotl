@@ -3,8 +3,9 @@ class Player {
 	**** Constructor *****
 	*********************/
 
-	constructor(elementals) {
+	constructor(elementals, eleSelect) {
         this._elemental = elementals;
+        this._eleSelect = eleSelect;
 
         this._maxHealth = this.calculateMaxHealth();
         this._health = this._maxHealth;
@@ -26,6 +27,10 @@ class Player {
         return this._health;
     }
 
+    get eleSelect() {
+        return this._eleSelect;
+    }
+
 	/*********************
 	****** Setters *******
     *********************/
@@ -36,6 +41,10 @@ class Player {
         } else {
             throw new TypeError(`Invalid Input; Health must be a number.`);
         }
+    }
+
+    set elemental(ele) {
+        this._elemental = ele;
     }
 
 	/*********************

@@ -1,11 +1,15 @@
 const { app, BrowserWindow } = require('electron');
-var { win } = require(`./variables.js`);
 
 //const { type, weakness, stat} = require('./enum.js');
 
+app.on('ready', createWindow);
+app.on('closed', exitGame)
+
+
+// Internal functions
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({
+  let win = new BrowserWindow({
     width: 1100,
     height: 1100,
     webPreferences: {
@@ -16,5 +20,7 @@ function createWindow () {
   win.loadFile('src/levels/character_select.html');
 }
 
-
-app.on('ready', createWindow);
+function exitGame() {
+  window.localStorage.removeItem("teotlPlayer");
+  win = null;
+}

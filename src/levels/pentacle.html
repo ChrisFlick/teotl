@@ -2,7 +2,12 @@
 <header>
         <link rel="stylesheet" type="text/css" href="pentacle.css" media="screen" />
 
-        <script type="text/javascript" src="pentacle.js"></script>
+        
+        <script type="text/javascript" src="../enum.js"></script>
+        <script type="text/javascript" src="../objects/elemental.js"></script>
+        <script type="text/javascript" src="../objects/player.js"></script>
+        <script type="text/javascript" src="../variables.js"></script>
+        <script type="text/javascript" src="./pentacle.js"></script>
 </header>
 <body>
     <div class = "pentacle">
@@ -11,42 +16,48 @@
             class = "button_atom"
             >
             <img src="../../sprites/buttons/element_0.png" 
-            id = "element_0" 
+            id = "0" 
             onclick = "elementClick(id)"
             />
         </button>
         <button 
             class = "button_fire">
             <img src = "../../sprites/buttons/element_1.png" 
-            id = "element_1" 
+            id = "1"
             onclick = "elementClick(id)"
             />
         </button>
         <button 
             class = "button_water">
             <img src = "../../sprites/buttons/element_2.png" 
-            id = "element_2" 
+            id = "2"
             onclick = "elementClick(id)"
             />
         </button>
         <button 
             class = "button_earth">
             <img src = "../../sprites/buttons/element_3.png" 
-            id = "element_3" 
+            id = "3"
             onclick = "elementClick(id)"
             />
         </button>
         <button 
             class = "button_wind">
             <img src = "../../sprites/buttons/element_4.png" 
-            id = "element_4" 
+            id = "4"
             onclick = "elementClick(id)"
             />
         </button>
     </div>
 
     </h3>
-    <p id = "log">
+    <p id = "elemental">
+        <table>
+            <tr>
+                <td id = "Stats"></td>
+                <td id = "Desc"></td>
+            </tr>
+        </table>
     </p
 </body>
 <footer> 

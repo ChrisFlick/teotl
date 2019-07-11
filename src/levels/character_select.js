@@ -1,42 +1,5 @@
 let playerElementals = []; // Initializing Player Elementals
-
-let elementals = [
-    [
-        new AtomicC1,
-        new AtomicC2,
-        new AtomicC3,
-        new AtomicC4,
-    ],
-
-    [
-        new FireC1,
-        new FireC2,
-        new FireC3,
-        new FireC4,
-    ],
-      
-    [
-        new WaterC1,
-        new WaterC2,
-        new WaterC3,
-        new WaterC4,
-    ],
-      
-    [
-        new EarthC1,
-        new EarthC2,
-        new EarthC3,
-        new EarthC4,
-    ],
-      
-    [
-        new WindC1,
-        new WindC2,
-        new WindC3,
-        new WindC4,
-    ],    
-];
-
+let eleSelect = [];
 
 // Internal Functions
 
@@ -57,15 +20,11 @@ function select(prefix, button, num, type) {
         } else { // Change image to it's clicked variant
             image.src = source + elementID + "Clicked" + extension;
             playerElementals[type] = elementals[type][i];
+            eleSelect[type] = i;
 
+            // List Stats and description of Elemental's Abillity
             let ele = playerElementals[type]
-            document.getElementById(ele.getType() + "Stats").innerHTML = 
-                ele.name + "<br>" +
-                "Strength: " + ele.strength + "<br>" +
-                "Constitution: " + ele.constitution + "<br>" +
-                "Intelligence: " + ele.intelligence + "<br>" +
-                "Agility: " + ele.agility + "<br>";
-
+            document.getElementById(ele.getType() + "Stats").innerHTML = ele.getStats();
             document.getElementById(ele.getType() + "Desc").innerHTML = ele.description;
         }
     }
@@ -83,10 +42,11 @@ function continueButton() {
     }
 
     if (ready) {
-        player = new Player(playerElementals);
+        let player = new Player(playerElementals, eleSelect);
         console.log('Constructing Player object');
         console.log(player);
-
-        win.loadUrl("pentacle.html");
+        
+        localStorage.setItem("teotlPlayer", JSON.stringify(player));
+        window.location = "pentacle.html";
     }
 }

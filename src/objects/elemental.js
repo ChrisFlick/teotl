@@ -217,7 +217,15 @@ class Elemental {
 
     getType() { // Gives string of type 
         return Object.keys(type)[this.eleType];
-    }
+	}
+	
+	getStats() { // Returns string of Elemental's Stats for HTML5 purposes.
+		return `${this.name}<br>
+		Strength: ${this.strength}<br>
+		Constitution: ${this.constitution}<br>
+		Intelligence: ${this.intelligence}<br>
+		Agility: ${this.agility} <br>`
+	}
 
     attack(enemy) { // Attack enemy Elemental's health
             let initialDmg = this.calculateDmg(enemy) 
@@ -501,7 +509,7 @@ class AtomicC2 extends Atomic {
 		this.health = this.maxHealth;
 
 		// Ability Description (HTML5 String)
-		this._description = "<b>Hydrogen Blast:</b> Upon victory sets off a powerful explosion damaging all enemy elementals by an ammount based on it's <i>Strength</i> and <i>Intelligence</i>";
+		this._description = "<b>Hydrogen Blast:</b> Upon victory sets off a powerful explosion damaging all Enemy Elementals by an ammount based on it's <i>Strength</i> and <i>Intelligence</i>";
 	
 	}
 
