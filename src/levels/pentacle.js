@@ -25,6 +25,7 @@ function elementClick(type) {
     image = document.getElementById(type);
     image.src = source + "element_" + type + "Clicked" + extension;
 
+    // 
     let ele = player.elemental[type];
     document.getElementById("Stats").innerHTML = ele.getStats();
     document.getElementById("Desc").innerHTML = ele.description;
