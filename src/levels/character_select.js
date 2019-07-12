@@ -47,6 +47,6 @@ function continueButton() {
         console.log(player);
         
         localStorage.setItem("teotlPlayer", JSON.stringify(player));
-        window.location = "pentacle.html";
+        window.location = "waiting.html";
     }
 }

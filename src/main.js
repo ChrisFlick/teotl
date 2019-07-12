@@ -18,8 +18,9 @@ function createWindow () {
   win.loadFile('src/levels/logo.html');
 }
 
-function exitGame() {
+function exitGame() { // On exit delete all stored variabls.
   window.localStorage.removeItem("teotlPlayer");
   window.localStorage.removeItem("teotlPlayerID");
+  window.localStorage.removerItem("teotlEnemyID");
   win = null;
 }
