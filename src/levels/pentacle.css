@@ -26,17 +26,17 @@
 }
 
 .pentacle .button_atom {
-  top: 40px;
-  left: 230px;
+  top: 41px;
+  left: 231px;
 }
 
 .pentacle .button_fire {
-  top: 195px;
-  left: 25px;
+  top: 197px;
+  left: 24px;
 }
 
 .pentacle .button_water {
-  top: 192px;
+  top: 197px;
   left: 440px;
 }
 
@@ -48,4 +48,17 @@
 .pentacle .button_wind {
   top: 440px;
   left: 366px;
+}
+
+
+.elemental {
+  position: relative;
+  left: 700px;
+  top: -700px;
+}
+
+td {
+  width: 150px; 
+  height: 150px;
+  padding: 5px;
 }
