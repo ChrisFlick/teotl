@@ -1,7 +1,5 @@
 const { app, BrowserWindow } = require('electron');
 
-//const { type, weakness, stat} = require('./enum.js');
-
 app.on('ready', createWindow);
 app.on('closed', exitGame)
 
@@ -10,17 +8,18 @@ app.on('closed', exitGame)
 function createWindow () {
   // Create the browser window.
   let win = new BrowserWindow({
-    width: 1100,
-    height: 1100,
+    width: 1584,
+    height: 1000,
     webPreferences: {
       nodeIntegration: true
     }
   })
   //win.removeMenu();
-  win.loadFile('src/levels/character_select.html');
+  win.loadFile('src/levels/logo.html');
 }
 
 function exitGame() {
   window.localStorage.removeItem("teotlPlayer");
+  window.localStorage.removeItem("teotlPlayerID");
   win = null;
 }
