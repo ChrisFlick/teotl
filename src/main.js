@@ -1,7 +1,7 @@
 const { app, BrowserWindow } = require('electron');
 
 app.on('ready', createWindow);
-app.on('closed', exitGame)
+app.on('closed', exitGame);
 
 
 // Internal functions
@@ -22,7 +22,7 @@ function exitGame() { // On exit delete all stored variabls.
   window.localStorage.removeItem("teotlPlayer");
   window.localStorage.removeItem("teotlEnemy");
 
-  window.localStorage.removeItem("teotlPlayerID");
-  window.localStorage.removeItem("teotlEnemyID");
+  localStorage.removeItem("teotlPlayerID");
+  localStorage.removeItem("teotlEnemyID");
   win = null;
 }
