@@ -10,7 +10,7 @@ function connect() {
     let enemyID = document.getElementById('enemyID').value;
 
     console.log(`Storing enemyID ${enemyID}`);
-    localStorage.setItem("teotlPlayerID", enemyID);
+    localStorage.setItem("teotlEnemyID", enemyID);
 
     window.location = "character_select.html";
 }

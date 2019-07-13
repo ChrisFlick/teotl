@@ -23,6 +23,6 @@ function exitGame() { // On exit delete all stored variabls.
   window.localStorage.removeItem("teotlEnemy");
 
   window.localStorage.removeItem("teotlPlayerID");
-  window.localStorage.removerItem("teotlEnemyID");
+  window.localStorage.removeItem("teotlEnemyID");
   win = null;
 }
