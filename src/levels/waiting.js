@@ -9,11 +9,13 @@ var conn = peer.connect(enemyID);
 
 
 peer.on('open', function() {
-    conn.send(JSON.stringify(teotlPlayer._elePicks));
+    
 });
 
 peer.on('connection', function(conn) {
     console.log("Recieving connection with opponent...")
+
+    conn.send(JSON.stringify(teotlPlayer._elePicks));
     conn.on('data', function(data) {
         console.log("Recieving opponents Elementals");
 
