@@ -7,13 +7,10 @@ let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer"));
 var peer = new Peer(playerID, {key: 'lwjd5qra8257b9'});
 var conn = peer.connect(enemyID);
 
-
-peer.on('open', function() {
-    conn.send(JSON.stringify(teotlPlayer._elePicks));
-});
-
 peer.on('connection', function(conn) {
-    console.log("Recieving connection with opponent...")
+    console.log("Recieving connection with opponent and sending Elemental Picks...")
+    conn.send(JSON.stringify(teotlPlayer._elePicks));
+
     conn.on('data', function(data) {
         console.log("Recieving opponents Elementals");
 

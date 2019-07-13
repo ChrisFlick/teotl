@@ -1,3 +1,6 @@
+let playerID = localStorage.getItem("teotlPlayerID");
+var peer = new Peer(playerID, {key: 'lwjd5qra8257b9'});
+
 let playerElementals = []; // Initializing Player Elementals
 let eleSelect = [];
 
