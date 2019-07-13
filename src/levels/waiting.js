@@ -9,7 +9,7 @@ var conn = peer.connect(enemyID);
 
 
 peer.on('open', function() {
-    con.send(JSON.stringify(teotlPlayer._elePicks));
+    conn.send(JSON.stringify(teotlPlayer._elePicks));
 });
 
 peer.on('connection', function(conn) {
