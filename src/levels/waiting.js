@@ -9,7 +9,6 @@ var conn = peer.connect(enemyID);
 
 
 peer.on('open', function() {
-    console.log("sending Elemental Picks");
     conn.send(JSON.stringify(teotlPlayer._elePicks));
 });
 
