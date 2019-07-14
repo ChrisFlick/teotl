@@ -4,7 +4,7 @@ let enemyID = localStorage.getItem("teotlEnemyID");
 let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer"));
 
 // Setting up connection with opponent
-var peer = new Peer(playerID, {key: 'lwjd5qra8257b9'});
+var peer = new Peer(playerID);
 var conn = peer.connect(enemyID);
 console.log(conn);
 

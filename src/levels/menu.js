@@ -1,5 +1,5 @@
 let playerID = localStorage.getItem("teotlPlayerID");
-var peer = new Peer(playerID, {key: 'lwjd5qra8257b9'});
+var peer = new Peer(playerID);
 
 document.getElementById('playerID').value = playerID;
 

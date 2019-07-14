@@ -1,5 +1,4 @@
-var peer = new Peer({key: 'lwjd5qra8257b9'});
-console.log(peer);
+var peer = new Peer();
 
 peer.on('open', function(id) {
     console.log('Initializing PeerJS: ' + id);
