@@ -4,7 +4,15 @@ let enemyID = localStorage.getItem("teotlEnemyID");
 let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer"));
 
 // Setting up connection with opponent
-var peer = new Peer(playerID);
+var peer = new Peer(
+    playerID,
+    {
+        host: '74.207.252.238', 
+        port: 9000, 
+        debug: 3,
+      }
+);
+
 var conn = peer.connect(enemyID);
 console.log(conn);
 
