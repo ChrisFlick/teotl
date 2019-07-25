@@ -14,7 +14,7 @@ peer.on('connection', function(conn) { // Listen for opponents Elemental Picks
     conn.on('data', function(data){
       console.log(`Recieved Enemy Elementals:`);
       console.log(data);
-      localStorage.setItem('enemyPick', data);
+      localStorage.setItem('enemyPick', JSON.stringify(data));
     });
   });
 
