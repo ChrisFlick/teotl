@@ -31,15 +31,16 @@ function elementClick(type) {
     document.getElementById("Desc").innerHTML = ele.description;
 }
 
-function initPlayer() {
+function initPlayer() { // Creates player Object based on stringified object stored in local memory.
     console.log("Loading player object:");
     initElementals()
 
-    let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer"));
-    player = new Player([]);
+    // Grabs stringified object and then assign it to a new Player object.
+    let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer")); 
+    player = new Player([])
     Object.assign(player, teotlPlayer);
 
-    for (let i = 0; i < player.eleSelect.length; i++) {
+    for (let i = 0; i < player.eleSelect.length; i++) { // Assigns the stored Elemental objects to the player object.
         let ele = teotlPlayer._elemental[i];
         player.elemental[i] = elementals[i][player.eleSelect[i]]
 

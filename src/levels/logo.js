@@ -12,4 +12,6 @@ peer.on('open', function(id) {
     localStorage.setItem("teotlPlayerID", id);
   });
 
+  localStorage.setItem('enemyPick', -1);
+
   setTimeout(function(){ window.location = "menu.html"; }, 1000)

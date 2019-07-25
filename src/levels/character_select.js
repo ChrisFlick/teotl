@@ -1,4 +1,6 @@
 let playerID = localStorage.getItem("teotlPlayerID");
+let enemyID = localStorage.getItem("teotlEnemyID");
+
 var peer = new Peer(
     playerID,
     {
@@ -7,6 +9,16 @@ var peer = new Peer(
         debug: 3,
       }
 );
+
+var conn = peer.connect(enemyID);
+
+peer.on('connection', function(conn) { // Listen for opponents Elemental Picks
+    conn.on('data', function(data){
+      console.log(`Recieved Enemy Elementals:`);
+      console.log(data);
+      localStorage.setItem('enemyPick', data);
+    });
+  });
 
 let playerElementals = []; // Initializing Player Elementals
 let eleSelect = [];
@@ -42,7 +54,7 @@ function select(prefix, button, num, type) {
     console.log(playerElementals);
 };
 
-function continueButton() {
+function continueButton() { // Upon pressing the continue button checks to see that the Player has chosen one of each Elemental type before continueing on to the next screen.
     let ready = true;
 
     for (let i = 0; i < 5; i++) {
@@ -57,6 +69,10 @@ function continueButton() {
         console.log(player);
         
         localStorage.setItem("teotlPlayer", JSON.stringify(player));
-        window.location = "waiting.html";
+
+        conn.on('open', function() {
+            conn.send(player.eleSelect());
+            window.location = "waiting.html";  
+        });
     }
 }

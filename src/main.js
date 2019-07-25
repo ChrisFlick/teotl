@@ -21,6 +21,7 @@ function createWindow () {
 function exitGame() { // On exit delete all stored variabls.
   window.localStorage.removeItem("teotlPlayer");
   window.localStorage.removeItem("teotlEnemy");
+  window.localStorage.removeItem("enemyPick");
 
   localStorage.removeItem("teotlPlayerID");
   localStorage.removeItem("teotlEnemyID");

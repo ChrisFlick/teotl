@@ -14,28 +14,43 @@ var peer = new Peer(
 );
 
 var conn = peer.connect(enemyID);
-console.log(conn);
 
-peer.on('connection', function(conn) {
-    console.log("Connection established; sending Elementals..")
-    conn.send(JSON.stringify(teotlPlayer._elePicks));
 
-    conn.on('data', function(data) {
-        console.log("Recieving opponents Elementals");
+if (localStorage.getItem('enemyPick') === -1) {
+    peer.on('connection', function(conn) { // Listen for opponents Elemental Picks
+        conn.on('data', function(data){
+          console.log(`Recieved Enemy Elementals:`);
+          console.log(data);
+          localStorage.setItem('enemyPick', data);
+    
+          createEnemy();
+        });
+      });
+} else {
+    createEnemy();
+}
 
-        let eleSelect = JSON.parse(data);
-        let enemyElementals = [];
 
-        // Go through each of the opponents picks and pull an Elemental from the Elemental Array
-        for (let i = 0; i < eleSelect.length; i++) {
-            enemyElementals[i] = elementals[i][enemyPicks[i]];
-        }
 
-        let enemy = new playerID(enemyElementals, eleSelect)
-        console.log("Creating opponents Player Object");
-        console.log(enemy);
+// Internal function
 
-        // Store opponentes Player Object.
-        localStorage.setItem("teotlEnemy", JSON.stringify(enemy));
-    });
-});
+function createEnemy() { // Take the opponents Elemental picks and create a new Player Object
+    let eleSelect = JSON.parse(localStorage.getItem('enemyPick'));
+    localStorage.setItem('enemyPick', -1);
+
+    let enemyElementals = [];
+
+    // Go through each of the opponents picks and pull an Elemental from the Elemental Array
+    for (let i = 0; i < eleSelect.length; i++) {
+        enemyElementals[i] = elementals[i][enemyPicks[i]];
+    }
+
+    let enemy = new playerID(enemyElementals, eleSelect)
+    console.log("Creating opponents Player Object");
+    console.log(enemy);
+
+    // Store opponentes Player Object.
+    localStorage.setItem("teotlEnemy", JSON.stringify(enemy));
+
+    //Go to 
+}

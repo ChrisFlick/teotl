@@ -8,6 +8,14 @@ var peer = new Peer(
       }
 );
 
+peer.on('connection', function(conn) { // Listen for opponents Elemental Picks
+  conn.on('data', function(data){
+    console.log(`Recieved Enemy Elementals:`);
+    console.log(data);
+    localStorage.setItem('enemyPick', data);
+  });
+});
+
 document.getElementById('playerID').value = playerID;
 
 
