@@ -10,8 +10,6 @@ var peer = new Peer(
       }
 );
 
-var conn = peer.connect(enemyID);
-
 peer.on('connection', function(conn) { // Listen for opponents Elemental Picks
     conn.on('data', function(data){
       console.log(`Recieved Enemy Elementals:`);
@@ -70,6 +68,7 @@ function continueButton() { // Upon pressing the continue button checks to see t
         
         localStorage.setItem("teotlPlayer", JSON.stringify(player));
 
+        var conn = peer.connect(enemyID);
         conn.on('open', function() {
             conn.send(eleSelect);
             window.location = "waiting.html"; 
