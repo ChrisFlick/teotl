@@ -32,7 +32,7 @@ if (localStorage.getItem('enemyPick') === -1) {
 
 
 
-// Internal function
+// Internal functions
 
 function createEnemy() { // Take the opponents Elemental picks and create a new Player Object
     let eleSelect = JSON.parse(localStorage.getItem('enemyPick'));
@@ -45,12 +45,12 @@ function createEnemy() { // Take the opponents Elemental picks and create a new 
         enemyElementals[i] = elementals[i][enemyPicks[i]];
     }
 
-    let enemy = new playerID(enemyElementals, eleSelect)
+    let enemy = new player(enemyElementals, eleSelect)
     console.log("Creating opponents Player Object");
     console.log(enemy);
 
     // Store opponentes Player Object.
     localStorage.setItem("teotlEnemy", JSON.stringify(enemy));
 
-    //Go to 
+    //Go to pentacle
 }

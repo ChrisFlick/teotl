@@ -71,8 +71,8 @@ function continueButton() { // Upon pressing the continue button checks to see t
         localStorage.setItem("teotlPlayer", JSON.stringify(player));
 
         conn.on('open', function() {
-            conn.send(player.eleSelect());    
+            conn.send(eleSelect);
+            window.location = "waiting.html"; 
         });
-        window.location = "waiting.html"; 
     }
 }
