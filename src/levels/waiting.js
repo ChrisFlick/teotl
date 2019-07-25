@@ -35,7 +35,7 @@ if (localStorage.getItem('enemyPick') === -1) {
 // Internal functions
 
 function createEnemy() { // Take the opponents Elemental picks and create a new Player Object
-    let eleSelect = JSON.parse(localStorage.getItem('enemyPick'));
+    let eleSelect = localStorage.getItem("enemyPick");
     localStorage.setItem('enemyPick', -1);
 
     let enemyElementals = [];
