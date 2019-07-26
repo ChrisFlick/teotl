@@ -3,7 +3,6 @@ let playerID = localStorage.getItem("teotlPlayerID");
 let enemyID = localStorage.getItem("teotlEnemyID");
 
 var enemyPick = localStorage.getItem('enemyPick'); // Stores the opponents Elemental pick when recieved from opponents peer client.
-enemyPick = 0; // For debugging purposes.
 
 // Initiating Player Objects
 var player = initPlayer(player, 'teotlPlayer');
@@ -11,7 +10,6 @@ var enemy = initPlayer(enemy, 'teotlEnemy');
 
 // Initiating misc variables
 var pick; // Stores the player's pick
-
 
 // Setting up connection with opponent
 var peer = new Peer(
@@ -24,9 +22,9 @@ var peer = new Peer(
 );
 
 var conn = peer.connect(enemyID);
-peer.on('connection', function() {
+peer.on('connection', function() { // Listens for the opponents pick
     conn.on('data', function(data) {
-        pick = data;
+        localStorage.setItem('enemyPick', data)
     });
 });
 
