@@ -1,5 +1,3 @@
-import { cpus } from "os";
-
 // Grabbing variables from localStorage
 let playerID = localStorage.getItem("teotlPlayerID");
 let enemyID = localStorage.getItem("teotlEnemyID");
@@ -33,10 +31,11 @@ if (enemyPick === -1) {
   peer.on('connection', function() {
     conn.on('data', function(data) {
           enemyPick = data;
+          console
           combat();
     });
   });
-} else {
+} else if (enemyPick > -1) {
   combat();
 }
 
@@ -47,6 +46,7 @@ function combat() { // Perform all the internal logic once the Player has the En
   // Store each Player's chosen elemental
   playerEle = player.elemental[playerPick];
   enemyEle = enemy.elemental[enemyPick];
+  console.log(enemyEle);
 
   // Reset the local storage for player and enemy picks.
   localStorage.setItem('playerPick', -1);

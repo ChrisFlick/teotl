@@ -9,7 +9,7 @@ var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
 // Initiating misc variables
-var pick; // Stores the player's pick
+var pick = -1; // Stores the player's pick
 
 // Setting up connection with opponent
 var peer = new Peer(
@@ -58,13 +58,15 @@ function elementClick(type) {
 }
 
 function select() {
-    var conn = peer.connect(enemyID);
-    conn.on('open', function() {
-        console.log('Sending pick to opponent.')
-        conn.send(pick);
+    if (pick != -1) {
+        var conn = peer.connect(enemyID);
+        conn.on('open', function() {
+            console.log('Sending pick to opponent.')
+            conn.send(pick);
 
-        localStorage.setItem('playerPick', pick); // Storing pick so that it can be used in arena.
+            localStorage.setItem('playerPick', pick); // Storing pick so that it can be used in arena.
 
-        window.location = 'arena.html';
-    });
+            window.location = 'arena.html';
+        });
+    }
 }
