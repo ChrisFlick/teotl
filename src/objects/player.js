@@ -31,6 +31,7 @@ class Player {
         return this._eleSelect;
     }
 
+
 	/*********************
 	****** Setters *******
     *********************/

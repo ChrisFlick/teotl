@@ -62,3 +62,10 @@ td {
   height: 150px;
   padding: 5px;
 }
+
+#select {
+  position: relative;
+  font-size: 50px;
+  top: -250px;
+  left: 750px;
+}

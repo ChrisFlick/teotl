@@ -1,8 +1,34 @@
-let player;
-let pick;
-initPlayer();
+// Grabbing variables from localStorage
+let playerID = localStorage.getItem("teotlPlayerID");
+let enemyID = localStorage.getItem("teotlEnemyID");
+
+var enemyPick = localStorage.getItem('enemyPick'); // Stores the opponents Elemental pick when recieved from opponents peer client.
+enemyPick = 0; // For debugging purposes.
+
+// Initiating Player Objects
+var player = initPlayer(player, 'teotlPlayer');
+var enemy = initPlayer(enemy, 'teotlEnemy');
+
+// Initiating misc variables
+var pick; // Stores the player's pick
 
 
+// Setting up connection with opponent
+var peer = new Peer(
+    playerID,
+    {
+        host: '74.207.252.238', 
+        port: 9000, 
+        debug: 0,
+      }
+);
+
+var conn = peer.connect(enemyID);
+peer.on('connection', function() {
+    conn.on('data', function(data) {
+        pick = data;
+    });
+});
 
 // Internal functions 
 
@@ -25,27 +51,22 @@ function elementClick(type) {
     image = document.getElementById(type);
     image.src = source + "element_" + type + "Clicked" + extension;
 
-    // 
+    pick = type;
+    
+    // Show the stats of selected Elemental on screen.
     let ele = player.elemental[type];
     document.getElementById("Stats").innerHTML = ele.getStats();
     document.getElementById("Desc").innerHTML = ele.description;
 }
 
-function initPlayer() { // Creates player Object based on stringified object stored in local memory.
-    console.log("Loading player object:");
-    initElementals()
+function select() {
+    var conn = peer.connect(enemyID);
+    conn.on('open', function() {
+        console.log('Sending pick to opponent.')
+        conn.send(pick);
 
-    // Grabs stringified object and then assign it to a new Player object.
-    let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer")); 
-    player = new Player([])
-    Object.assign(player, teotlPlayer);
+        localStorage.setItem('playerPick', pick); // Storing pick so that it can be used in arena.
 
-    for (let i = 0; i < player.eleSelect.length; i++) { // Assigns the stored Elemental objects to the player object.
-        let ele = teotlPlayer._elemental[i];
-        player.elemental[i] = elementals[i][player.eleSelect[i]]
-
-        Object.assign(player.elemental[i], ele);
-    }
-
-    console.log(player);
+        window.location = 'arena.html';
+    });
 }
