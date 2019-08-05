@@ -17,15 +17,15 @@ var peer = new Peer(
     {
         host: '74.207.252.238', 
         port: 9000, 
-        debug: 3,
+        debug: 0,
       }
 );
 
 var conn = peer.connect(enemyID);
-peer.on('connection', function() { // Listens for the opponents pick
+peer.on('connection', function(conn) { // Listens for the opponents pick
     conn.on('data', function(data) {
-        console.log("IN DATA LOOK HERE")
-        localStorage.setItem('enemyPick', data)
+        console.log("Recieving Enemy pick");
+        localStorage.setItem('enemyPick', data);
         console.log(data);
         console.log(data);
     });
