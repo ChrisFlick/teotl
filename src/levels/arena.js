@@ -26,16 +26,17 @@ var peer = new Peer(
       }
 );
 
-if (enemyPick === -1) {
+
+if (enemyPick == -1) {
   var conn = peer.connect(enemyID);
   peer.on('connection', function() {
     conn.on('data', function(data) {
           enemyPick = data;
-          console
+          console.log("Enemy pick recieved");
           combat();
     });
   });
-} else if (enemyPick > -1) {
+} else {
   combat();
 }
 
@@ -44,9 +45,11 @@ if (enemyPick === -1) {
 
 function combat() { // Perform all the internal logic once the Player has the Enemy's Elemental pick
   // Store each Player's chosen elemental
+
+  console.log("Starting combat");
+
   playerEle = player.elemental[playerPick];
   enemyEle = enemy.elemental[enemyPick];
-  console.log(enemyEle);
 
   // Reset the local storage for player and enemy picks.
   localStorage.setItem('playerPick', -1);
