@@ -2,11 +2,12 @@
 let playerID = localStorage.getItem("teotlPlayerID");
 let enemyID = localStorage.getItem("teotlEnemyID");
 
-var enemyPick = localStorage.getItem('enemyPick'); // Stores the opponents Elemental pick when recieved from opponents peer client.
+//var enemyPick = localStorage.getItem('enemyPick'); // Stores the opponents Elemental pick when recieved from opponents peer client.
 
 // Initiating Player Objects
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
+
 
 // Initiating misc variables
 var pick = -1; // Stores the player's pick
@@ -26,10 +27,16 @@ peer.on('connection', function(conn) { // Listens for the opponents pick
     conn.on('data', function(data) {
         console.log("Recieving Enemy pick");
         localStorage.setItem('enemyPick', data);
-        console.log(data);
-        console.log(data);
     });
 });
+
+// Write Player and Enemy Health at top of screen;
+document.getElementById("healthP").innerHTML = "Player: " + player.health + "/" + player.maxHealth; 
+document.getElementById("healthE").innerHTML = "Enemy: " + enemy.health + "/" + enemy.maxHealth; 
+
+// Write the Health of Player and Enemy Elementals
+document.getElementById("player").innerHTML = playerStats(player, "Player");
+document.getElementById("enemy").innerHTML = playerStats(enemy, "Enemy");
 
 // Internal functions 
 
@@ -73,4 +80,17 @@ function select() {
             window.location = 'arena.html';
         });
     }
+}
+
+function playerStats(player, type) {
+    let stats;
+
+    stats = "<b>" + type + "<b></br>";
+
+    for (let i = 0; i < player.elemental.length; i++) {
+        ele = player.elemental[i];
+        stats += ele.getType() + ": " + ele.health + "</br>";
+    };
+
+    return stats;
 }

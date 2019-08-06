@@ -54,7 +54,7 @@
 .elemental {
   position: relative;
   left: 700px;
-  top: -700px;
+  top: -300px;
 }
 
 td {
@@ -68,4 +68,27 @@ td {
   font-size: 50px;
   top: -250px;
   left: 750px;
+}
+
+#player { 
+  position: relative;
+  left: 710px;
+  top: -900px;
+}
+
+#enemy {
+  position: relative;
+  left: 900px;
+  top: -1025px;
+}
+
+#health {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  font-size: 120%
 }

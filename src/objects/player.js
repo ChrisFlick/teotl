@@ -20,7 +20,7 @@ class Player {
     }
 
     get maxHealth() {
-        return this.maxHealth;
+        return this._maxHealth;
     }
 
     get health() {

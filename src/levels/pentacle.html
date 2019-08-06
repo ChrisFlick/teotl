@@ -9,9 +9,12 @@
         <script type="text/javascript" src="../objects/player.js"></script>
         <script type="text/javascript" src="../variables.js"></script>
         <script type="text/javascript" src ="../functions.js"></script>
-        <script type="text/javascript" src="./pentacle.js"></script>
 </header>
 <body>
+    <ul id = "health">
+        <li id = "healthP"></li>
+        <li id = "healthE"></li>
+    </ul>
     <div class = "pentacle">
         <img src = "../../sprites/pentacle.jpg" />
         <button 
@@ -61,8 +64,9 @@
 
     <button id = "select" onClick = "select()">Select</button>
 
-    <p id = "player"></p>
-    <p id = "enemy"></p>
+    <p id = "player">Player stats not loaded</p>
+    <p id = "enemy">Enemy stats not loaded</p>
 </body>
 <footer> 
+        <script type="text/javascript" src="./pentacle.js"></script>
 </footer>
