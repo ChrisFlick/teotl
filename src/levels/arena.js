@@ -17,6 +17,7 @@ var log = ""; // Stores entire combat log.
 var weaknessLog = ""; // Stores Elemental Weakness for log.
 var damage = ""; // Stores Elemental Damage for log.
 var shieldLog = ""; // Stores Damage Shield for log.
+var extra = ""; // Stores the results of any inate abilities.
 
 // Initiate Elementals
 var playerEle;
@@ -169,13 +170,13 @@ function combat() { // Perform all the internal logic once the Player has the En
   }
   
 
-  if (playerEle.multiplier(playerEle.type, enemyEle.type) > 1 && playerEle.health > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go of
+  if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && playerEle.health > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
 
     log += "Your " + logAbility(playerEle);
     playerEle.ability(player, enemy);
     log += "</br>";
 
-  } else if (playerEle.multiplier(playerEle.type, enemyEle.type  < 1) && enemyEle.health > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
+  } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && enemyEle.health > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
 
     log += "Enemy " + logAbility(enemyEle);
     enemyEle.ability(enemy, player);
@@ -210,12 +211,13 @@ function logWeakness() {
 }
 
 function logCombat(player, attackingEle, defendingEle) { // Creates log for combat.
-  log += player + " " + eleName(attackingEle) + " is attacking the Enemy " + eleName(defendingEle) + " for " + damage + " damage </br>";
+  log += player + " " + eleName(attackingEle) + " is attacking the Enemy " + eleName(defendingEle) + " for " + damage + " damage </br>" + extra;
     log += logWeakness();
     log += shieldLog;
     log += "</br>"
 
     // Reset variables
+    extra = "";
     weaknessLog = "";
     damage = "";
     shieldLog = "";

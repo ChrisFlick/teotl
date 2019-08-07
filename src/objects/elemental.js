@@ -375,10 +375,6 @@ class Elemental {
 						break;
                 }
                 break;
-            default: 
-				multiplier = 1;
-				weak = "Neutral";
-				break;
         }
 
         if (weak != null) {
@@ -1380,6 +1376,8 @@ class WindC2 extends Wind {
 		enemy.attack.call(this, enemy);
 
 		let heal = (this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2);
+
+		extra = eleName(this) + " leeches off it's Enemies life force, healing itself for " + Math.abs(heal) + "!</br>";
 
 		console.log(`Healing self with Life Leech for ${heal}`);
 		this.health += heal;
