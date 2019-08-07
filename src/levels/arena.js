@@ -189,7 +189,7 @@ function combat() { // Perform all the internal logic once the Player has the En
   checkForDeaths("Enemy", enemy);
   printLog();
 
-  if (player.health < 1 || enemy.health < 1) { // Check to see if the game ends in a tie.
+  if (player.health < 1 && enemy.health < 1) { // Check to see if the game ends in a tie.
     log += "The game has ended in a Tie!"
   } else if (enemy.health < 1) { // Check to see if the Player Wins.
     log += "You are VICTORIOUS!!!"
