@@ -89,7 +89,7 @@ function playerStats(player, type) {
 
     for (let i = 0; i < player.elemental.length; i++) {
         ele = player.elemental[i];
-        stats += ele.getType() + ": " + ele.health + "</br>";
+        stats += ele.getType() + " " + ele.name + ": " + ele.health + "/" + ele.maxHealth + "</br>";
     };
 
     return stats;

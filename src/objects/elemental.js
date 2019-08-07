@@ -244,7 +244,7 @@ class Elemental {
 
             console.log(`Attacking ${enemy.getType()} for ${dmg} Damage.`);
             enemy.health -= dmg; // Inflicts Damage onto the Enemy Elemental.
-
+			damage = dmg; // For log in arena.js
 
             if (enemy.damageShield > 0) {
                 let enemyType = enemy.eleType;
@@ -254,7 +254,10 @@ class Elemental {
 
                 dmg = Math.round(enemy.damageShield * enemy.multiplier(enemyType, this.eleType));
                 console.log(`Taking ${dmg} Damage from Damage Shield`);
-                this.health -= dmg; // Take damage if enemy has a Damage Shield
+				this.health -= dmg; // Take damage if enemy has a Damage Shield
+				
+				shieldLog = "Your Elemental has taken " + dmg + " " + enemy.getType() + " Damage " + "from Enemy Elemental" + "</br>"
+				shieldLog += logWeakness();
             }     
     }
 
@@ -270,7 +273,7 @@ class Elemental {
 
     multiplier(playerType, enemyType) { // Decides multiplier based on weakness
         let multiplier = 1;
-        let weak;
+        let weak = "Neutral";
         
         switch (playerType) {
             case type.atomic:
@@ -369,16 +372,20 @@ class Elemental {
                     case type.fire:
                         multiplier = weakness.trivial;
                         weak = 'Trivial';
-                        break;
+						break;
                 }
                 break;
             default: 
-                multiplier = 1;
+				multiplier = 1;
+				weak = "Neutral";
+				break;
         }
 
         if (weak != null) {
             console.log(`${this.getType()}'s attack is ${weak}`);
         }
+
+		weaknessLog = weak;
 
         return multiplier;
     }
