@@ -409,7 +409,9 @@ class Elemental {
 		this.health = this.maxHealth;
 	}
 
-    ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
+	ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
+		
+		log += "taunts the Enemy."
 	}
 	
 
@@ -548,6 +550,8 @@ class AtomicC2 extends Atomic {
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].health -= dmg;
 		}
+
+		log += "inflicting " + dmg + " to all enemy Elementals</br>";
 	}
 }
 
@@ -594,6 +598,8 @@ class AtomicC3 extends Atomic {
 			player.elemental[i]._shieldType = this.eleType;
 			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
+
+		log += "giving all Ally Elementals an Atomic Damage Shield which inflicts " + buff + " damage!</br>"
 	}
 }
 
@@ -641,6 +647,8 @@ class AtomicC4 extends Atomic {
 			enemy.elemental[i].defense = -deBuff;
 			player.elemental[i].buffTime[stat.defense] = 1;
 		}
+
+		log += "debuffing all Enemy Elementals Defence by " + deBuff + "!</br>";
 	}
 }
 
@@ -711,6 +719,8 @@ class FireC1 extends Fire {
 
 		console.log(`Dealing ${dmg} Damage directly to the player`);
 		enemy.health -= dmg;
+
+		log += "dealing " + dmg + " damage directly to the Player!</br>";
 	}
 }
 
@@ -797,6 +807,8 @@ class FireC3 extends Fire {
 			player.elemental[i]._shieldType = this.eleType;
 			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
+
+		log += "buffing it's allys with a Fire Damage Shield that does " + buff + " damage!</br>";
 	}
 }
 
@@ -841,6 +853,8 @@ class FireC4 extends Fire {
 			player.elemental[i].strength = buff;
 			player.elemental[i].buffTime[stat.strength] = 1;
 		}
+
+		log += "increasing the Strength of all it's allies by " + buff + "!</br>";
 	}
 }
 
@@ -919,6 +933,8 @@ class WaterC1 extends Water {
 				player.elemental[i].health = player.elemental[i].maxHealth;
 			}
 		}
+
+		log += "Healing it's Allies by " + heal + "!</br>";
 	}
 }
 
@@ -965,6 +981,8 @@ class WaterC2 extends Water {
 			player.elemental[i]._shieldType = this.eleType;
 			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
+
+		log += "giving it's Allies a Water Damage Shield of " + buff + " damage!</br>" ;
 	}
 }
 
@@ -1013,6 +1031,8 @@ class WaterC3 extends Water {
 		if (player.health > player.maxHealth) { // Ensure the player isn't healed past Max Health.
 			player.health = player.maxHealth;
 		}
+
+		log += "Healing it's Player for " + heal + "!</br>"
 	}
 }
 
@@ -1057,6 +1077,8 @@ class WaterC4 extends Water {
 			player.elemental[i].intelligence = buff;
 			player.elemental[i].buffTime[stat.intelligence] = 1;
 		}
+
+		log += "increasing it's Allies Intelligence by " + buff + "!</br>";
 	}
 }
 
@@ -1202,6 +1224,8 @@ class EarthC3 extends Earth {
 			player.elemental[i]._shieldType = this.eleType;
 			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
+
+		log += "engulfing it's Allies in Thorns giving them an Earth Damage Shield of " + buff + " damage!</br>"
 	}
 }
 
@@ -1248,6 +1272,8 @@ class EarthC4 extends Earth {
 			player.elemental[i].defense = buff;
 			player.elemental[i].buffTime[stat.defense] = 1;
 		}
+
+		log += "increasing it's Allies Defense by " + buff + "!</br>";
 	}
 }
 
@@ -1402,6 +1428,8 @@ class WindC3 extends Wind {
 			player.elemental[i]._shieldType = this.eleType;
 			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
+
+		log += "surrounds it's Allies in a Vortex giving them a Wind Damage Shield of " + buff + " damage!</br>"
 	}
 }
 
@@ -1443,5 +1471,7 @@ class WindC4 extends Wind {
 			player.elemental[i].strength = buff;
 			player.elemental[i].buffTime[stat.agility] = 1;
 		}
+
+		log += "increasing it's Allies Agility by " + buff + "!</br>"
 	}
 }

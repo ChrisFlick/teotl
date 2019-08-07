@@ -171,11 +171,15 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   if (playerEle.multiplier(playerEle.type, enemyEle.type) > 1 && playerEle.health > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go of
 
+    log += "Your " + logAbility(playerEle);
     playerEle.ability(player, enemy);
+    log += "</br>";
 
   } else if (playerEle.multiplier(playerEle.type, enemyEle.type  < 1) && enemyEle.health > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
 
+    log += "Enemy " + logAbility(enemyEle);
     enemyEle.ability(enemy, player);
+    log += "</br>"
 
   } // If it is a tie ie the multiplier is equal to one neither ability goes off
 
@@ -219,6 +223,10 @@ function logCombat(player, attackingEle, defendingEle) { // Creates log for comb
 
 function logDoubleStrike(ele) { // Returns notification that the Elemental has Double Strike.
   return eleName(ele) + " is invigorated and ready to perform a second attack </br>";
+}
+
+function logAbility(ele) {
+  return eleName(ele) + " Empowered by it's Victory, ";
 }
 
 function done() {
