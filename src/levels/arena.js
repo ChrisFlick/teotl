@@ -168,12 +168,6 @@ function combat() { // Perform all the internal logic once the Player has the En
     printLog();
   }
   
-  /*if (playerEle.health === 0) { // Check to see if Player Elementa is dead so that we can damage the Player and Reincarnate the Elemental
-
-    player.health -= playerEle.maxHealth; // Reduce the player health by the Elementals Max Health
-    playerEle.health = playerEle.maxHealth;
-  
-  }*/
 
   if (playerEle.multiplier(playerEle.type, enemyEle.type) > 1 && playerEle.health > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go of
 
@@ -185,6 +179,10 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   } // If it is a tie ie the multiplier is equal to one neither ability goes off
 
+  // Check for deaths.
+  checkForDeaths("Your", player);
+  checkForDeaths("Enemy", enemy);
+  printLog();
 
   // Store variables
   localStorage.setItem('teotlPlayer', JSON.stringify(player));
@@ -226,6 +224,21 @@ function logDoubleStrike(ele) { // Returns notification that the Elemental has D
 function done() {
   if (ready) {
     window.location = "pentacle.html";
+  }
+}
+
+function checkForDeaths(prefix, player) { // // Check to see if Player Elemental is dead so that we can damage the Player and Reincarnate the Elemental
+
+  for (let i = 0; i < player.elemental.length; i++) { // Cycle through each Elemental and check if dead.
+    let ele = player.elemental[i];
+
+    if (ele.health === 0) { // Check if Elemental is dead
+
+      log += prefix + " Elemental has died! It's owner sacrifices " + ele.maxHealth + " Health to Reincarnate it.</br></br>";
+
+      player.health -= ele.maxHealth; // Reduce the Player health by the Elementals Max Health
+      ele.resetEle(); // Reset the Player's Elemental.
+    }
   }
 }
 

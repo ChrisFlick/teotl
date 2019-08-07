@@ -393,13 +393,21 @@ class Elemental {
     resetBuffs() { // Checks the timer of each buff and resets them to 0 if their timer is up.
         for (let i = 0; i < this.buff.length; i++) {
             if (this.buffTime[i] > 0) {
-                buffTime[i] --;
+                this.buffTime[i] --;
             } else {
-                buff[i] = 0;
+                this.buff[i] = 0;
             }
         }
 
-    }
+	}
+	
+	resetEle() { // Reset Elementals Health and Buffs (used on deaths)
+		for (let i = 0; i < this.buff.length; i++) {
+			this.buff[i] = 0;
+		}
+
+		this.health = this.maxHealth;
+	}
 
     ability(player, enemy) { // Certain Elementals have extra stats or altered attacks; this ensures there are no errors with .ability() is called on them.
 	}
