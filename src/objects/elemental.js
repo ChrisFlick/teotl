@@ -388,18 +388,20 @@ class Elemental {
 
     resetBuffs() { // Checks the timer of each buff and resets them to 0 if their timer is up.
         for (let i = 0; i < this.buff.length; i++) {
-            if (this.buffTime[i] > 0) {
-                this.buffTime[i] --;
-            } else {
-                this.buff[i] = 0;
-            }
-        }
+			this.buffTime[i] --;
 
+            if (this.buffTime[i] < 0) {
+				this.buff[i] = 0;
+				this.buffTime[i] = 0;
+            } 
+		}
+		//console.log(`${this.getType()} ${this.buff}; ${this.buffTime}`);
 	}
 	
 	resetEle() { // Reset Elementals Health and Buffs (used on deaths)
 		for (let i = 0; i < this.buff.length; i++) {
 			this.buff[i] = 0;
+			this.buffTime[i] = 0;
 		}
 
 		this.health = this.maxHealth;
@@ -592,7 +594,7 @@ class AtomicC3 extends Atomic {
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
 			player.elemental[i]._shieldType = this.eleType;
-			player.elemental[i].buffTime[stat.damageShield] = 2;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 
 		log += "giving all Ally Elementals an Atomic Damage Shield which inflicts " + buff + " damage!</br>"
@@ -641,7 +643,7 @@ class AtomicC4 extends Atomic {
 		console.log(`Debuffing all enemy Elementals Defense by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].defense = -deBuff;
-			player.elemental[i].buffTime[stat.defense] = 2;
+			player.elemental[i].buffTime[stat.defense] = 1;
 		}
 
 		log += "debuffing all Enemy Elementals Defence by " + deBuff + "!</br>";
@@ -801,7 +803,7 @@ class FireC3 extends Fire {
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
 			player.elemental[i]._shieldType = this.eleType;
-			player.elemental[i].buffTime[stat.damageShield] = 2;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 
 		log += "buffing it's allys with a Fire Damage Shield that does " + buff + " damage!</br>";
@@ -847,7 +849,7 @@ class FireC4 extends Fire {
 		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
-			player.elemental[i].buffTime[stat.strength] = 2;
+			player.elemental[i].buffTime[stat.strength] = 1;
 		}
 
 		log += "increasing the Strength of all it's allies by " + buff + "!</br>";
@@ -975,7 +977,7 @@ class WaterC2 extends Water {
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
 			player.elemental[i]._shieldType = this.eleType;
-			player.elemental[i].buffTime[stat.damageShield] = 2;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 
 		log += "giving it's Allies a Water Damage Shield of " + buff + " damage!</br>" ;
@@ -1071,7 +1073,7 @@ class WaterC4 extends Water {
 		console.log(`${this.getType()} buffing all ally Elementals intelligence by: ${buff}`);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].intelligence = buff;
-			player.elemental[i].buffTime[stat.intelligence] = 2;
+			player.elemental[i].buffTime[stat.intelligence] = 1;
 		}
 
 		log += "increasing it's Allies Intelligence by " + buff + "!</br>";
@@ -1218,7 +1220,7 @@ class EarthC3 extends Earth {
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
 			player.elemental[i]._shieldType = this.eleType;
-			player.elemental[i].buffTime[stat.damageShield] = 2;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 
 		log += "engulfing it's Allies in Thorns giving them an Earth Damage Shield of " + buff + " damage!</br>"
@@ -1266,7 +1268,7 @@ class EarthC4 extends Earth {
 
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].defense = buff;
-			player.elemental[i].buffTime[stat.defense] = 2;
+			player.elemental[i].buffTime[stat.defense] = 1;
 		}
 
 		log += "increasing it's Allies Defense by " + buff + "!</br>";
@@ -1424,7 +1426,7 @@ class WindC3 extends Wind {
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].damageShield = buff;
 			player.elemental[i]._shieldType = this.eleType;
-			player.elemental[i].buffTime[stat.damageShield] = 2;
+			player.elemental[i].buffTime[stat.damageShield] = 1;
 		}
 
 		log += "surrounds it's Allies in a Vortex giving them a Wind Damage Shield of " + buff + " damage!</br>"
@@ -1467,7 +1469,7 @@ class WindC4 extends Wind {
 		let buff = Math.round((this.agility * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
-			player.elemental[i].buffTime[stat.agility] = 2;
+			player.elemental[i].buffTime[stat.agility] = 1;
 		}
 
 		log += "increasing it's Allies Agility by " + buff + "!</br>"

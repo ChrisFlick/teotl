@@ -188,7 +188,7 @@ function combat() { // Perform all the internal logic once the Player has the En
     enemyEle.ability(enemy, player);
     log += "</br>"
 
-  } // If it is a tie ie the multiplier is equal to one neither ability goes off
+  } // If it is a tie, ie the multiplier is equal to one, neither ability goes off
 
   // Check for deaths.
   checkForDeaths("Your", player);
@@ -204,13 +204,13 @@ function combat() { // Perform all the internal logic once the Player has the En
   }
   printLog();
 
-  // Store variables
-  localStorage.setItem('teotlPlayer', JSON.stringify(player));
-  localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
-
   // Lower the buff timer by one for each elemental
   player.buffTimer();
   enemy.buffTimer();
+
+  // Store variables
+  localStorage.setItem('teotlPlayer', JSON.stringify(player));
+  localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
 
 
   ready = true; // The player can now return back to pentacle by pressing continue
