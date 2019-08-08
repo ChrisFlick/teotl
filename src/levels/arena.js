@@ -73,6 +73,7 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   // Reset the local storage for player and enemy picks.
   localStorage.setItem('playerPick', -1);
+  localStorage.setItem('enemyPick', -1);
   newPick = -1;
 
   conn = peer.connect(enemyID);
