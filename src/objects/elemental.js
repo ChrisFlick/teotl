@@ -256,7 +256,7 @@ class Elemental {
                 console.log(`Taking ${dmg} Damage from Damage Shield`);
 				this.health -= dmg; // Take damage if enemy has a Damage Shield
 				
-				shieldLog = "Your Elemental has taken " + dmg + " " + enemy.getType() + " Damage " + "from Enemy Elemental" + "</br>"
+				shieldLog = "</br>Your Elemental has taken " + dmg + " " + enemy.getType() + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
 				shieldLog += logWeakness();
             }     
     }
