@@ -41,25 +41,13 @@ if (enemyPick == -1) { // Listen for Enemy's pick if not already recieved.
   var conn = peer.connect(enemyID);
   peer.on('connection', function(conn) { // Initiate combat once enemy pick is recieved.
     conn.on('data', function(data) {
-        if (enemyPick == -1) {
-          enemyPick = data;
-          console.log("Enemy pick recieved");
-          combat(); 
-        } else {
-          newPick = data;
-        }  
+        enemyPick = data;
+        console.log("Enemy pick recieved");
+        combat(); 
     });
   });
 
 } else { // Listen for next Enemy's pick if already recieved and initiate combat.
-
-  var conn = peer.connect(enemyID);
-  peer.on('connection', function(conn) {
-    conn.on('data', function(data) {
-          newPick = data;
-    });
-  });
-
   combat();
 }
 
@@ -76,6 +64,13 @@ function combat() { // Perform all the internal logic once the Player has the En
   // Reset the local storage for player and enemy picks.
   localStorage.setItem('playerPick', -1);
   localStorage.setItem('enemyPick', -1);
+
+  conn = peer.connect(enemyID);
+  peer.on('connection', function(conn) {
+    conn.on('data', function(data) {
+          newPick = data;
+    });
+  });
 
   log += "You have chosen: " + eleName(playerEle) + "</br>";
   log += "The Enemy has chosen " + eleName(enemyEle) + "</br>";
