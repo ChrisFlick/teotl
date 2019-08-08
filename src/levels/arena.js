@@ -207,7 +207,12 @@ function combat() { // Perform all the internal logic once the Player has the En
   localStorage.setItem('teotlPlayer', JSON.stringify(player));
   localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
 
-  ready = true;
+  // Lower the buff timer by one for each elemental
+  player.buffTimer();
+  enemy.buffTimer();
+
+
+  ready = true; // The player can now return back to pentacle by pressing continue
 }
 
 

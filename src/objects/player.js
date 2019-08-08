@@ -60,8 +60,13 @@ class Player {
         return health;
     }
 
-    // For testing purposes:
+    buffTimer() {
+        for (let i = 0; i < this.elemental.length; i++) {
+            this.elemental[i].resetBuffs();
+        }
+    }
 
+    // For testing purposes:
     // Main Stats
     listStrength() {
         let ele;
