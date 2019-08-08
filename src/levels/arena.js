@@ -39,16 +39,26 @@ var peer = new Peer(
 if (enemyPick == -1) { // Listen for Enemy's pick if not already recieved.
 
   var conn = peer.connect(enemyID);
-  peer.on('connection', function(conn) { // Initiate combat once enemy pick is recieved.
-    conn.on('data', function(data) {
-        enemyPick = data;
-        console.log("Enemy pick recieved");
-        combat(); 
-    });
+    peer.on('connection', function(conn) { // Initiate combat once enemy pick is recieved.
+      conn.on('data', function(data) {
+        if (enemyPick == -1) {
+          enemyPick = data;
+          console.log("Enemy pick recieved");
+          combat(); 
+        } else {
+          localStorage.setItem('enemyPick', data);
+        }
+      });
   });
 
 } else { // Listen for next Enemy's pick if already recieved and initiate combat.
   combat();
+
+  peer.on('connection', function(conn) { // Initiate combat once enemy pick is recieved.
+    conn.on('data', function(data) {
+      localStorage.setItem('enemyPick', data);
+    });
+  });
 }
 
 // Internal functions
@@ -63,12 +73,12 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   // Reset the local storage for player and enemy picks.
   localStorage.setItem('playerPick', -1);
-  localStorage.setItem('enemyPick', -1);
+  newPick = -1;
 
   conn = peer.connect(enemyID);
   peer.on('connection', function(conn) {
     conn.on('data', function(data) {
-          newPick = data;
+          
     });
   });
 
@@ -196,7 +206,6 @@ function combat() { // Perform all the internal logic once the Player has the En
   // Store variables
   localStorage.setItem('teotlPlayer', JSON.stringify(player));
   localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
-  localStorage.setItem('enemyPick', newPick);
 
   ready = true;
 }
