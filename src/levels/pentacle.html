@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <header>
-        <link rel="stylesheet" type="text/css" href="pentacle.css" media="screen" />
-
         
         <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
         <script type="text/javascript" src="../enum.js"></script>
@@ -11,9 +9,13 @@
         <script type="text/javascript" src ="../functions.js"></script>
 </header>
 <body>
-    <ul id = "health">
-        <li id = "healthP"></li>
-        <li id = "healthE"></li>
+    <ul id="health">
+        <li>Player: <div  id="p_maxHealth" >
+            <div id="p_health"></div>
+        </div></li>
+        <li>Enemy: <div  id="e_maxHealth" >
+            <div id="e_health"></div>
+        </div></li>
     </ul>
     <div class = "pentacle">
         <img src = "../../sprites/pentacle.jpg" />
@@ -68,5 +70,6 @@
     <p id = "enemy">Enemy stats not loaded</p>
 </body>
 <footer> 
+        <link rel="stylesheet" type="text/css" href="pentacle.css" media="screen" />
         <script type="text/javascript" src="./pentacle.js"></script>
 </footer>

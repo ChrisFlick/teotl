@@ -90,5 +90,18 @@ td {
 
 li {
   display: inline;
-  font-size: 120%
+  font-size: 150%
+}
+
+#p_maxHealth, #e_maxHealth {
+  width: 700px;
+  background-color: lightgrey;
+}
+
+#p_health, #e_health {
+  width: 1%;
+  height: 30px;
+  background-color: red;
+
+  text-align: center;
 }

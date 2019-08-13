@@ -5,9 +5,31 @@ let enemyID = localStorage.getItem("teotlEnemyID");
 //var enemyPick = localStorage.getItem('enemyPick'); // Stores the opponents Elemental pick when recieved from opponents peer client.
 
 // Initiating Player Objects
-var player = initPlayer(player, 'teotlPlayer');
-var enemy = initPlayer(enemy, 'teotlEnemy');
+//var player = initPlayer(player, 'teotlPlayer');
+//var enemy = initPlayer(enemy, 'teotlEnemy');
 
+
+var player = new Player([ // For debugging
+    elementals[0,0],
+    elementals[1,0],
+    elementals[2,0],
+    elementals[3,0],
+    elementals[4,0],
+],[0,0,0,0,0]);
+
+var enemy = new Player([ // For debugging
+    elementals[0,1],
+    elementals[1,1],
+    elementals[2,1],
+    elementals[3,1],
+    elementals[4,1],
+],[1,1,1,1,1]);
+
+player.health = 100;
+player.maxHealth = 100;
+
+enemy.health = 100;
+enemy.maxHealth = 200;
 
 // Initiating misc variables
 var pick = -1; // Stores the player's pick
@@ -30,15 +52,24 @@ peer.on('connection', function(conn) { // Listens for the opponents pick
     });
 });
 
-// Write Player and Enemy Health at top of screen;
-document.getElementById("healthP").innerHTML = "Player: " + player.health + "/" + player.maxHealth; 
-document.getElementById("healthE").innerHTML = "Enemy: " + enemy.health + "/" + enemy.maxHealth; 
+// Show healthbars at top of screen.
+healthbar("p_health", player);
+healthbar("e_health", enemy);
+
+
 
 // Write the Health of Player and Enemy Elementals
 document.getElementById("player").innerHTML = playerStats(player, "Player");
 document.getElementById("enemy").innerHTML = playerStats(enemy, "Enemy");
 
 // Internal functions 
+
+function healthbar(hp, p) { // Calculates and shows player health at top of screen.
+
+    let healthP =  document.getElementById(hp); // Get element ID
+    healthP.innerHTML = p.health + "/" + p.maxHealth; // Display the players health as string.
+    healthP.style.width = 100 * (p.health / p.maxHealth) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
+}
 
 function elementClick(type) {
     // Declare variables.

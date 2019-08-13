@@ -44,6 +44,14 @@ class Player {
         }
     }
 
+    set maxHealth(h) { // For debugging purposes only
+        if (typeof h === 'number') {
+            this._maxHealth = h;
+        } else {
+            throw new TypeError(`Invalid Input; Max Health must be a number.`);
+        }
+    }
+
     set elemental(ele) {
         this._elemental = ele;
     }
