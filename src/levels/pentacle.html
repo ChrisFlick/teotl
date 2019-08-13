@@ -9,7 +9,8 @@
         <script type="text/javascript" src ="../functions.js"></script>
 </header>
 <body>
-    <ul id="health">
+
+    <ul id="health"> <!--Displays health of Player and Enemy-->
         <li>Player: <div  id="p_maxHealth" >
             <div id="p_health"></div>
         </div></li>
@@ -17,10 +18,12 @@
             <div id="e_health"></div>
         </div></li>
     </ul>
+
     <div class = "pentacle">
         <img src = "../../sprites/pentacle.jpg" />
-        
+
         <div class="atom">
+            <!--Button to select Atomic-->
             <button 
                 class = "button_atom"
                 >
@@ -29,9 +32,20 @@
                 onclick = "elementClick(id)"
                 />
             </button>
+
+            <!--Display health of player's Atomic-->
+            <div id="p_atomMaxHealth" class="playerMaxHealth">
+                <div id="p_atomHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's Atomic-->
+            <div id="e_atomMaxHealth" class="enemyMaxHealth">
+                <div id="e_atomHealth" class="eleHealth"></div>
+            </div>
         </div>
 
         <div class="fire">
+            <!--Button to select fire-->
             <button 
                 class = "button_fire">
                 <img src = "../../sprites/buttons/element_1.png" 
@@ -39,9 +53,20 @@
                 onclick = "elementClick(id)"
                 />
             </button>
+
+            <!--Display health of player's fire-->
+            <div id="p_fireMaxHealth" class="playerMaxHealth">
+                <div id="p_fireHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's fire-->
+            <div id="e_fireMaxHealth" class="enemyMaxHealth">
+                <div id="e_fireHealth" class="eleHealth"></div>
+            </div>
         </div>
 
         <div class="water">
+            <!--Button to select water-->
             <button 
                 class = "button_water">
                 <img src = "../../sprites/buttons/element_2.png" 
@@ -49,9 +74,20 @@
                 onclick = "elementClick(id)"
                 />
             </button>
+
+            <!--Display health of player's water-->
+            <div id="p_waterMaxHealth" class="playerMaxHealth">
+                <div id="p_waterHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's water-->
+            <div id="e_waterMaxHealth" class="enemyMaxHealth">
+                <div id="e_waterHealth" class="eleHealth"></div>
+            </div>
         </div>
 
         <div class="earth">
+            <!--Button to select earth-->
             <button 
                 class = "button_earth">
                 <img src = "../../sprites/buttons/element_3.png" 
@@ -59,9 +95,20 @@
                 onclick = "elementClick(id)"
                 />
             </button>
+
+            <!--Display health of player's earth-->
+            <div id="p_earthMaxHealth" class="playerMaxHealth">
+                <div id="p_earthHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's earth-->
+            <div id="e_earthMaxHealth" class="enemyMaxHealth">
+                <div id="e_earthHealth" class="eleHealth"></div>
+            </div>
         </div>
 
         <div class="wind">
+            <!--Button to select wind-->
             <button 
                 class = "button_wind">
                 <img src = "../../sprites/buttons/element_4.png" 
@@ -69,6 +116,16 @@
                 onclick = "elementClick(id)"
                 />
             </button>
+
+            <!--Display health of player's wind-->
+            <div id="p_windMaxHealth" class="playerMaxHealth">
+                <div id="p_windHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's wind-->
+            <div id="e_windMaxHealth" class="enemyMaxHealth">
+                <div id="e_windHealth" class="eleHealth"></div>
+        </div>
         </div>
 
     </div>
