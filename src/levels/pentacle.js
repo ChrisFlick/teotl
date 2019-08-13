@@ -5,11 +5,11 @@ let enemyID = localStorage.getItem("teotlEnemyID");
 //var enemyPick = localStorage.getItem('enemyPick'); // Stores the opponents Elemental pick when recieved from opponents peer client.
 
 // Initiating Player Objects
-//var player = initPlayer(player, 'teotlPlayer');
-//var enemy = initPlayer(enemy, 'teotlEnemy');
+var player = initPlayer(player, 'teotlPlayer');
+var enemy = initPlayer(enemy, 'teotlEnemy');
 
 
-var player = new Player([ // For debugging
+/*var player = new Player([ // For debugging
     elementals[0,0],
     elementals[1,0],
     elementals[2,0],
@@ -59,7 +59,7 @@ enemy.elemental[type.earth].maxHealth = 100;
 enemy.elemental[type.earth].health = 50;
 
 enemy.elemental[type.wind].maxHealth = 100;
-enemy.elemental[type.wind].health = 50;
+enemy.elemental[type.wind].health = 50;*/
 
 // Initiating misc variables
 var pick = -1; // Stores the player's pick
