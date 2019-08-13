@@ -31,6 +31,36 @@ player.maxHealth = 100;
 enemy.health = 100;
 enemy.maxHealth = 200;
 
+player.elemental[type.atomic].maxHealth = 100;
+player.elemental[type.atomic].health = 100;
+
+player.elemental[type.fire].maxHealth = 100;
+player.elemental[type.fire].health = 100;
+
+player.elemental[type.water].maxHealth = 100;
+player.elemental[type.water].health = 100;
+
+player.elemental[type.earth].maxHealth = 100;
+player.elemental[type.earth].health = 100;
+
+player.elemental[type.wind].maxHealth = 100;
+player.elemental[type.wind].health = 100;
+
+enemy.elemental[type.atomic].maxHealth = 100;
+enemy.elemental[type.atomic].health = 50;
+
+enemy.elemental[type.fire].maxHealth = 100;
+enemy.elemental[type.fire].health = 50;
+
+enemy.elemental[type.water].maxHealth = 100;
+enemy.elemental[type.water].health = 50;
+
+enemy.elemental[type.earth].maxHealth = 100;
+enemy.elemental[type.earth].health = 50;
+
+enemy.elemental[type.wind].maxHealth = 100;
+enemy.elemental[type.wind].health = 50;
+
 // Initiating misc variables
 var pick = -1; // Stores the player's pick
 
@@ -55,6 +85,20 @@ peer.on('connection', function(conn) { // Listens for the opponents pick
 // Show healthbars at top of screen.
 healthbar("p_health", player);
 healthbar("e_health", enemy);
+
+// Display Health of Player Elementals 
+eleHealthBar("p_atomHealth", player.elemental[type.atomic]); // Atomic Elemental.
+eleHealthBar("p_fireHealth", player.elemental[type.fire]); // Atomic Elemental.
+eleHealthBar("p_waterHealth", player.elemental[type.water]); // Atomic Elemental.
+eleHealthBar("p_earthHealth", player.elemental[type.earth]); // Atomic Elemental.
+eleHealthBar("p_windHealth", player.elemental[type.wind]); // Atomic Elemental.
+
+// Display Health of Enemy Elementals 
+eleHealthBar("e_atomHealth", enemy.elemental[type.atomic]); // Atomic Elemental.
+eleHealthBar("e_fireHealth", enemy.elemental[type.fire]); // Atomic Elemental.
+eleHealthBar("e_waterHealth", enemy.elemental[type.water]); // Atomic Elemental.
+eleHealthBar("e_earthHealth", enemy.elemental[type.earth]); // Atomic Elemental.
+eleHealthBar("e_windHealth", enemy.elemental[type.wind]); // Atomic Elemental.
 
 // Write the Health of Player and Enemy Elementals
 document.getElementById("player").innerHTML = playerStats(player, "Player");
@@ -115,4 +159,9 @@ function playerStats(player, type) {
     };
 
     return stats;
+}
+
+function eleHealthBar(id, obj) { 
+    let healthP =  document.getElementById(id); // Get element ID
+    healthP.style.height = 100 - (100 * (obj.health / obj.maxHealth)) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
 }

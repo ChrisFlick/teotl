@@ -121,15 +121,15 @@ li {
   width: 70px;
   height: 100px;
 
-  background-color: lightgrey;
+  background-color: red;
 }
 
 .eleHealth { /* Elemental Healthbar */
   
   width: 70px;
-  height: 10%;
+  height: 90%;
 
-  background-color: red;
+  background-color: lightgrey;
 }
 
 .playerMaxHealth { /* poisitioning the player health to the left of it's Elemental symbol */
