@@ -56,20 +56,11 @@ peer.on('connection', function(conn) { // Listens for the opponents pick
 healthbar("p_health", player);
 healthbar("e_health", enemy);
 
-
-
 // Write the Health of Player and Enemy Elementals
 document.getElementById("player").innerHTML = playerStats(player, "Player");
 document.getElementById("enemy").innerHTML = playerStats(enemy, "Enemy");
 
 // Internal functions 
-
-function healthbar(hp, p) { // Calculates and shows player health at top of screen.
-
-    let healthP =  document.getElementById(hp); // Get element ID
-    healthP.innerHTML = p.health + "/" + p.maxHealth; // Display the players health as string.
-    healthP.style.width = 100 * (p.health / p.maxHealth) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
-}
 
 function elementClick(type) {
     // Declare variables.
