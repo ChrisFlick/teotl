@@ -9,7 +9,9 @@ var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
 
-/*var player = new Player([ // For debugging
+/*For debugging
+
+var player = new Player([ 
     elementals[0,0],
     elementals[1,0],
     elementals[2,0],
@@ -17,7 +19,7 @@ var enemy = initPlayer(enemy, 'teotlEnemy');
     elementals[4,0],
 ],[0,0,0,0,0]);
 
-var enemy = new Player([ // For debugging
+var enemy = new Player([ 
     elementals[0,1],
     elementals[1,1],
     elementals[2,1],

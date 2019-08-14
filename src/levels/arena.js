@@ -2,15 +2,40 @@
 let playerID = localStorage.getItem("teotlPlayerID");
 let enemyID = localStorage.getItem("teotlEnemyID");
 
-var enemyPick = localStorage.getItem('enemyPick');
-var playerPick = localStorage.getItem('playerPick');
-
+//var enemyPick = localStorage.getItem('enemyPick');
+//var playerPick = localStorage.getItem('playerPick');
 
 // Initiating Player Objects
-var player = initPlayer(player, 'teotlPlayer');
-var enemy = initPlayer(enemy, 'teotlEnemy');
+//var player = initPlayer(player, 'teotlPlayer');
+//var enemy = initPlayer(enemy, 'teotlEnemy');
+
+/* for debugging un comment above variables */
+
+var enemyPick = 1;
+var playerPick = 0;
+
+var player = new Player([
+  elementals[0,0],
+  elementals[1,0],
+  elementals[2,0],
+  elementals[3,0],
+  elementals[4,0]
+], [1,1,1,1,1]);
+
+var enemy = new Player([
+  elementals[0,1],
+  elementals[1,1],
+  elementals[2,1],
+  elementals[3,1],
+  elementals[4,1]
+], [1,1,1,1,1]);
 
 var newPick = -1; // Stores the Enemy's next pick.
+
+// Chose a random background and display it in HTML
+let NUMBER_OF_BACKGROUNDS = 5;
+let bg = Math.round(Math.random() * NUMBER_OF_BACKGROUNDS); // Chose between the backgrounds randomly
+document.getElementById("background").src = "../../sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.
 
 // Initiating log variables
 var log = ""; // Stores entire combat log.
@@ -250,9 +275,20 @@ function logAbility(ele) {
   return eleName(ele) + " Empowered by it's Victory, ";
 }
 
-function done() {
-  if (ready) {
-    window.location = "pentacle.html";
+function done() { // Check to see if combat is done and decide on whether to go back to pentacle or menu depending on whether or not a player has died.
+  if (ready) { // If combat is done allow player to exit arena.
+    if (player.health > 0 && enemy.health > 0) { // As long as neither player is dead return to pentacle.
+      window.location = "pentacle.html";
+    } else { // If a player is dead reset localStorage and return to main menu.
+      // Reset all localStorage to -1
+      localStorage.setItem("teotlPlayer", -1);
+      localStorage.setItem("teotlEnemy", -1);
+      localStorage.setItem("enemyPick", -1);
+      localStorage.setItem("playerPick", -1);
+
+      window.location = "menu.html" // Return to main menu
+    }
+    
   }
 }
 
