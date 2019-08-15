@@ -9,33 +9,35 @@ let enemyID = localStorage.getItem("teotlEnemyID");
 //var player = initPlayer(player, 'teotlPlayer');
 //var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* for debugging un comment above variables */
+/* Start of debug code */
 
-var enemyPick = 1;
-var playerPick = 0;
+var playerPick = 4;
+var enemyPick = 4;
 
 var player = new Player([
-  elementals[0,0],
-  elementals[1,0],
-  elementals[2,0],
-  elementals[3,0],
-  elementals[4,0]
+  new AtomicC1,
+  new FireC1,
+  new WaterC1,
+  new EarthC1,
+  new WindC1
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
-  elementals[0,1],
-  elementals[1,1],
-  elementals[2,1],
-  elementals[3,1],
-  elementals[4,1]
+  new AtomicC2,
+  new FireC2,
+  new WaterC2,
+  new EarthC2,
+  new WindC2
 ], [1,1,1,1,1]);
+
+/* End of debug code */
 
 var newPick = -1; // Stores the Enemy's next pick.
 
 // Chose a random background and display it in HTML
-let NUMBER_OF_BACKGROUNDS = 5;
+let NUMBER_OF_BACKGROUNDS = 2; // Minus one
 let bg = Math.round(Math.random() * NUMBER_OF_BACKGROUNDS); // Chose between the backgrounds randomly
-document.getElementById("background").src = "../../sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.
+document.getElementById("background").src = "../../sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.e
 
 // Initiating log variables
 var log = ""; // Stores entire combat log.
@@ -107,6 +109,35 @@ function combat() { // Perform all the internal logic once the Player has the En
           
     });
   });
+
+  // Create <img> locations in arena.html
+  document.getElementById("player").innerHTML = "<img id='playerEle' alt='playerEle' src=''></img>";
+  document.getElementById("enemy").innerHTML = "<img id='enemyEle' alt='enemyEle' src=''r></img>";
+
+  // Store images into a variables
+  var playerSprite = document.getElementById("playerEle");
+  var enemySprite = document.getElementById("enemyEle");
+
+  playerSprite.src = playerEle.spriteLoc + "/idle/idle.png";
+  enemySprite.src = enemyEle.spriteLoc + "/idle/idle.png";
+
+  /*** Stylize sprites ***/
+  // Variables
+  var Y_POSITION = 190;
+  var x_playerPos = 200;
+  var x_enemyPos = x_playerPos + 200; // Place the Enemy sprite 200px away from the Player sprite
+
+  // Stylize Player sprite
+  playerSprite.style.position = "absolute";
+  playerSprite.style.top = Y_POSITION + "px";
+  playerSprite.style.left = x_playerPos + "px";
+ 
+  // Stylize Enemy sprite
+  enemySprite.style.position = "absolute";
+  enemySprite.style.top = Y_POSITION + "px";
+  enemySprite.style.left = x_enemyPos + "px";
+  enemySprite.style.transform = "scaleX(-1)"; // Flip the Enemy's Elemental so that it faces the Player's elemental
+
 
   log += "You have chosen: " + eleName(playerEle) + "</br>";
   log += "The Enemy has chosen " + eleName(enemyEle) + "</br>";

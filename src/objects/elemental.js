@@ -29,7 +29,8 @@ class Elemental {
         this._barrier = 0;
         this._baseDamageShield = 0;
 
-        this.doubleStrike = false;
+		this.doubleStrike = false;
+
 	}
 
 	/*********************
@@ -456,6 +457,8 @@ class Atomic extends Elemental {
 		super();
 		this._eleType = type.atomic;
 		this._shieldType = this.eleType;
+
+		this.spriteLoc = "../../sprites/elemental/atomic/debug";
 	}
 
 	/*********************
@@ -663,6 +666,8 @@ class Fire extends Elemental {
         super();
 		this._eleType = type.fire;
 		this._shieldType = this.eleType;
+
+		this.spriteLoc = "../../sprites/elemental/fire/debug";
 	}
 
 	/*********************
@@ -869,6 +874,8 @@ class Water extends Elemental {
         super();
 		this._eleType = type.water;
 		this._shieldType = this.eleType;
+
+		this.spriteLoc = "../../sprites/elemental/water/debug";
 	}
 
 	/*********************
@@ -1095,6 +1102,8 @@ class Earth extends Elemental {
         super();
 		this._eleType = type.earth;
 		this._shieldType = this.eleType;
+
+		this.spriteLoc = "../../sprites/elemental/earth/debug";
 	}
 
 	/*********************
@@ -1288,6 +1297,8 @@ class Wind extends Elemental {
         super();
 		this._eleType = type.wind;
 		this._shieldType = this.eleType;
+
+		this.spriteLoc = "../../sprites/elemental/wind/debug";
 	}
 
 	/*********************
