@@ -25,3 +25,10 @@ function healthbar(id, obj) { // Calculates health of (obj) as a bar and display
     healthP.innerHTML = obj.health + "/" + obj.maxHealth; // Display the players health as string.
     healthP.style.width = 100 * (obj.health / obj.maxHealth) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
 }
+
+function sleep(miliseconds) {
+    var currentTime = new Date().getTime();
+ 
+    while (currentTime + miliseconds >= new Date().getTime()) {
+    }
+ }

@@ -459,6 +459,7 @@ class Atomic extends Elemental {
 		this._shieldType = this.eleType;
 
 		this.spriteLoc = "../../sprites/elemental/atomic/debug";
+		this.attackLength = 8;
 	}
 
 	/*********************
