@@ -147,22 +147,23 @@ function combat() { // Perform all the internal logic once the Player has the En
   printLog();
 
   if (playerEle.speed > enemyEle.speed) { // Find out who is faster and calculates damage dealth.
-    playerEle.attack(enemyEle);
 
     timeout += sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength);
 
-    setTimeout(function() { 
+    setTimeout(function() { // Waits until after the animation to perform attack
+      playerEle.attack(enemyEle);
+
       logCombat("Your", playerEle, enemyEle); 
       printLog();
     }, timeout);
     
     
     if (enemyEle.health > 0) { // If after being attacked the Enemy Elemental is still alive calculate it's counter attack.
-      enemyEle.attack(playerEle);
 
       timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength);
-
       setTimeout(function() { 
+        enemyEle.attack(playerEle);
+
         logCombat("Enemy", enemyEle, playerEle);
         printLog();
       }, timeout);
@@ -171,21 +172,23 @@ function combat() { // Perform all the internal logic once the Player has the En
       isDead('Enemy', enemyEle);
     }
   } else {
-    enemyEle.attack(playerEle);
 
     timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength);
 
-      setTimeout(function() { 
-        logCombat("Enemy", enemyEle, playerEle);
-        printLog();
-      }, timeout);
+    setTimeout(function() { // Waits until after the animation to perform attack
+      enemyEle.attack(playerEle);
+
+      logCombat("Enemy", enemyEle, playerEle);
+      printLog();
+    }, timeout);
   
     if (playerEle.health > 0) { // If after being attacked the Player Elemental is still alive calculate it's counter attack
-      playerEle.attack(enemyEle);
 
       timeout += sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength);
 
-      setTimeout(function() { 
+      setTimeout(function() { // Waits until after the animation to perform attack
+        playerEle.attack(enemyEle);
+
         logCombat("Your", playerEle, enemyEle); 
         printLog();
       }, timeout);
@@ -197,22 +200,24 @@ function combat() { // Perform all the internal logic once the Player has the En
   
   if (playerEle.doubleStrike && enemyEle.doubleStrike) { // Check to see if both Elementals have Double strike and find out who is the faster one and perform a second round of attacks.
     if (playerEle.speed > enemyEle.speed && playerEle.health > 0 && enemyEle.health > 0) { // Make sure that the Player Elemental is still alive before performing it's second attack.
-      playerEle.attack(enemyEle);
-
+      
       timeout += sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength);
 
-      setTimeout(function() { 
+      setTimeout(function() { // Waits until after the animation to perform attack
+        playerEle.attack(enemyEle);
+
         log += "Your " + logDoubleStrike(playerEle);
         logCombat('Your', playerEle, enemyEle);
         printLog();
       }, timeout);
 
       if (enemyEle.health > 0) { // Make sure the Enemy Elemental is still alive before performing it's second attack.
-        enemyEle.attack(playerEle);
-
+    
         timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength);
 
         setTimeout(function() { 
+          enemyEle.attack(playerEle);
+
           log += "Enemy " + logDoubleStrike(enemyEle);
           logCombat("Enemy", enemyEle, playerEle);
           printLog();
@@ -223,11 +228,11 @@ function combat() { // Perform all the internal logic once the Player has the En
       }
     } else if (enemyEle.health > 0 && playerEle.health > 0) { // Make sure the Enemy Elemental is still alive before performing it's second attack.
 
-      enemyEle.attack(playerEle);
-
       timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength);
 
         setTimeout(function() { 
+          enemyEle.attack(playerEle);
+
           log += "Enemy " + logDoubleStrike(enemyEle);
           logCombat("Enemy", enemyEle, playerEle);
           printLog();
@@ -235,11 +240,15 @@ function combat() { // Perform all the internal logic once the Player has the En
     
       if (playerEle.health > 0) { // Make sure that the Player Elemental is still alive before performing it's second attack.
 
+      timeout += sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength);
+
+      setTimeout(function() { // Waits until after the animation to perform attack
         playerEle.attack(enemyEle);
 
         log += "Your " + logDoubleStrike(playerEle);
         logCombat('Your', playerEle, enemyEle);
         printLog();
+      }, timeout);
 
       } else {
         isDead('Player', playerEle);
@@ -320,21 +329,22 @@ function eleName(ele) { // Returns Elemental type and name (for combat log).
   return ele.getType() + " " + ele.name;
 };
 
+
 function logWeakness() {
   return "The attack was " + weaknessLog + "</br>"
 };
 
 function logCombat(player, attackingEle, defendingEle) { // Creates log for combat.
-  log += player + " " + eleName(attackingEle) + " is attacking the Enemy " + eleName(defendingEle) + " for " + damage + " damage </br>" + extra;
+  log += player + " " + eleName(attackingEle) + " is attacking its opponents " + eleName(defendingEle) + " for " + damage + " damage </br>" + extra;
     log += logWeakness();
     log += shieldLog;
     log += "</br>"
 
     // Reset variables
     extra = "";
-    weaknessLog = "";
     damage = "";
     shieldLog = "";
+    weaknessLog = "";
 };
 
 function logDoubleStrike(ele) { // Returns notification that the Elemental has Double Strike.
