@@ -23,7 +23,7 @@ var player = new Player([
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
-  new AtomicC2,
+  new AtomicC1,
   new FireC2,
   new WaterC2,
   new EarthC2,
@@ -171,6 +171,21 @@ function combat() { // Perform all the internal logic once the Player has the En
     } else {
       isDead('Enemy', enemyEle);
     }
+  } else if (playerEle.speed === enemyEle.speed)  {
+
+    sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength);
+    timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength);
+
+      setTimeout(function() { // Waits until after the animation to perform attack
+        playerEle.attack(enemyEle);
+        logCombat("Your", playerEle, enemyEle); 
+
+        enemyEle.attack(playerEle)
+        logCombat("Enemy", enemyEle, playerEle);
+
+        printLog();
+      }, timeout);
+
   } else {
 
     timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength);

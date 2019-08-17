@@ -382,7 +382,7 @@ class Elemental {
             console.log(`${this.getType()}'s attack is ${weak}`);
         }
 
-		weaknessLog = weak;
+		weaknessLog = weak; 
 
         return multiplier;
     }
