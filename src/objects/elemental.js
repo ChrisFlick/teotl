@@ -31,6 +31,9 @@ class Elemental {
 
 		this.doubleStrike = false;
 
+		// Default to 0 length for all animations
+		this.attackLength = 0;
+		this.hurtLength = 0;
 	}
 
 	/*********************
