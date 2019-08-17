@@ -11,8 +11,8 @@ let enemyID = localStorage.getItem("teotlEnemyID");
 
 /* Start of debug code */
 
-var playerPick = 0;
-var enemyPick = 0;
+var playerPick = 3;
+var enemyPick = 4;
 
 var player = new Player([
   new AtomicC1,

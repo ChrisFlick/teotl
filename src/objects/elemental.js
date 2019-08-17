@@ -669,6 +669,7 @@ class Fire extends Elemental {
 		this._shieldType = this.eleType;
 
 		this.spriteLoc = "../../sprites/elemental/fire/debug";
+		this.attackLength = 10;
 	}
 
 	/*********************
@@ -877,6 +878,7 @@ class Water extends Elemental {
 		this._shieldType = this.eleType;
 
 		this.spriteLoc = "../../sprites/elemental/water/debug";
+		this.attackLength = 12;
 	}
 
 	/*********************
@@ -1105,6 +1107,7 @@ class Earth extends Elemental {
 		this._shieldType = this.eleType;
 
 		this.spriteLoc = "../../sprites/elemental/earth/debug";
+		this.attackLength = 7;
 	}
 
 	/*********************
@@ -1300,6 +1303,7 @@ class Wind extends Elemental {
 		this._shieldType = this.eleType;
 
 		this.spriteLoc = "../../sprites/elemental/wind/debug";
+		this.attackLength = 8;
 	}
 
 	/*********************
