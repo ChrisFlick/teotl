@@ -368,42 +368,54 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && playerEle.health > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
 
-    log += "Your " + logAbility(playerEle);
-    playerEle.ability(player, enemy);
-    log += "</br>";
+    setTimeout(function(){
+      log += "Your " + logAbility(playerEle);
+      playerEle.ability(player, enemy);
+      log += "</br>";
+    }, timeout);
 
   } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && enemyEle.health > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
 
-    log += "Enemy " + logAbility(enemyEle);
-    enemyEle.ability(enemy, player);
-    log += "</br>"
+    setTimeout(function(){
+      log += "Enemy " + logAbility(enemyEle);
+      enemyEle.ability(enemy, player);
+      log += "</br>"
+  }, timeout);
 
   } // If it is a tie, ie the multiplier is equal to one, neither ability goes off
 
   // Check for deaths.
-  checkForDeaths("Your", player);
-  checkForDeaths("Enemy", enemy);
-  printLog();
+  setTimeout(function(){
+    checkForDeaths("Your", player);
+    checkForDeaths("Enemy", enemy);
+    printLog();
+  }, timeout);
 
-  if (player.health < 1 && enemy.health < 1) { // Check to see if the game ends in a tie.
-    log += "The game has ended in a Tie!"
-  } else if (enemy.health < 1) { // Check to see if the Player Wins.
-    log += "You are VICTORIOUS!!!"
-  } else if (player.health < 1) { // Check to see if the Player Loses
-    log += "YOU LOSE!!!"
-  }
-  printLog();
+  setTimeout(function() {
+    if (player.health < 1 && enemy.health < 1) { // Check to see if the game ends in a tie.
+      
+        log += "The game has ended in a Tie!"
+      
+    } else if (enemy.health < 1) { // Check to see if the Player Wins.
+      log += "You are VICTORIOUS!!!"
+    } else if (player.health < 1) { // Check to see if the Player Loses
+      log += "YOU LOSE!!!"
+    }
+    printLog();
+  
 
-  // Lower the buff timer by one for each elemental
-  player.buffTimer();
-  enemy.buffTimer();
+    // Lower the buff timer by one for each elemental
+    player.buffTimer();
+    enemy.buffTimer();
+  
 
-  // Store variables
-  localStorage.setItem('teotlPlayer', JSON.stringify(player));
-  localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
+    // Store variables
+    localStorage.setItem('teotlPlayer', JSON.stringify(player));
+    localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
 
 
-  ready = true; // The player can now return back to pentacle by pressing continue
+    ready = true; // The player can now return back to pentacle by pressing continue
+  }, timeout);
 };
 
 
