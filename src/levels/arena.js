@@ -9,7 +9,7 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code */
+/* Start of debug code *
 
 var playerPick = 0;
 var enemyPick = 0;
@@ -105,12 +105,12 @@ function combat() { // Perform all the internal logic once the Player has the En
   localStorage.setItem('enemyPick', -1);
   newPick = -1;
 
-  conn = peer.connect(enemyID);
+  /*conn = peer.connect(enemyID);
   peer.on('connection', function(conn) {
     conn.on('data', function(data) {
       localStorage.setItem('enemyPick', data);
     });
-  });
+  });*/
 
   // Create <img> locations in arena.html
   document.getElementById("player").innerHTML = "<img id='playerEle' alt='playerEle' src=''></img>";
