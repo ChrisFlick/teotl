@@ -11,8 +11,8 @@ var enemy = initPlayer(enemy, 'teotlEnemy');
 
 /* Start of debug code */
 
-var playerPick = 1;
-var enemyPick = 2;
+var playerPick = 0;
+var enemyPick = 0;
 
 var player = new Player([
   new AtomicC1,
@@ -83,7 +83,7 @@ if (enemyPick == -1) { // Listen for Enemy's pick if not already recieved.
 } else { // Listen for next Enemy's pick if already recieved and initiate combat.
   combat();
 
-  peer.on('connection', function(conn) { // Initiate combat once enemy pick is recieved.
+  peer.on('connection', function(conn) { // Store Enemy pick once recieved
     conn.on('data', function(data) {
       localStorage.setItem('enemyPick', data);
     });
@@ -108,7 +108,7 @@ function combat() { // Perform all the internal logic once the Player has the En
   conn = peer.connect(enemyID);
   peer.on('connection', function(conn) {
     conn.on('data', function(data) {
-          
+      localStorage.setItem('enemyPick', data);
     });
   });
 
@@ -155,7 +155,7 @@ function combat() { // Perform all the internal logic once the Player has the En
       sprite_enemyAttack(false);
 
     } else {
-      isDead('Enemy', enemyEle);
+      sprite_enemyDead();
     }
   } else if (playerEle.speed === enemyEle.speed)  {
 
@@ -183,7 +183,7 @@ function combat() { // Perform all the internal logic once the Player has the En
       sprite_playerAttack(false);
 
     } else {
-      isDead('Player', playerEle);
+      sprite_playerDead
     }
   }
   
@@ -197,7 +197,7 @@ function combat() { // Perform all the internal logic once the Player has the En
         sprite_enemyAttack(true);
 
       } else {
-        isDead('Enemy', enemyEle);
+        sprite_enemyDead();
       }
     } else if (playerEle.speed === enemyEle.speed) {
 
@@ -257,7 +257,7 @@ function combat() { // Perform all the internal logic once the Player has the En
       sprite_playerAttack(true);
 
       } else {
-        isDead('Player', playerEle);
+        sprite_playerDead()
       }
     }
   } else if (playerEle.doubleStrike && playerEle.health > 0 && enemyEle.health > 0) { // If the Player's Elemental has Double Strike and it's still alive perform a second attack. 
@@ -441,6 +441,21 @@ function sprite_idle(sprite, loc) { // Returns sprite to idle animation
   sprite.src = loc + "/idle/idle.png";
 };
 
+function sprite_enemyDead() {
+  timout += sprite_animate(enemySprite, enemyEle.spriteLoc, "die", enemyEle.deathLength, false);
+
+      setTimeout(function() {
+        isDead('Enemy', enemyEle);
+      }, timeout);
+}
+
+function sprite_playerDead() {
+  timout += sprite_animate(playerSprite, playerEle.spriteLoc, "die", playerEle.deathLength, false);
+
+      setTimeout(function() {
+        isDead('Player', playerEle);
+      }, timeout);
+}
 
 // For debugging
 function isDead(player, ele) { // Log death to console to show why Elemental can not attack.

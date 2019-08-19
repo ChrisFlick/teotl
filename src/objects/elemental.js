@@ -34,6 +34,7 @@ class Elemental {
 		// Default to 0 length for all animations
 		this.attackLength = 0;
 		this.hurtLength = 0;
+		this.deathLength = 0;
 	}
 
 	/*********************
@@ -885,6 +886,7 @@ class Water extends Elemental {
 		this.spriteLoc = "../../sprites/elemental/water/debug";
 		this.attackLength = 12;
 		this.hurtLength = 13;
+		
 	}
 
 	/*********************
