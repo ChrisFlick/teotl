@@ -2,14 +2,14 @@
 let playerID = localStorage.getItem("teotlPlayerID");
 let enemyID = localStorage.getItem("teotlEnemyID");
 
-//var enemyPick = localStorage.getItem('enemyPick');
-//var playerPick = localStorage.getItem('playerPick');
+var enemyPick = localStorage.getItem('enemyPick');
+var playerPick = localStorage.getItem('playerPick');
 
 // Initiating Player Objects
-//var player = initPlayer(player, 'teotlPlayer');
-//var enemy = initPlayer(enemy, 'teotlEnemy');
+var player = initPlayer(player, 'teotlPlayer');
+var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code */
+/* Start of debug code *
 
 var playerPick = 3;
 var enemyPick = 4;
