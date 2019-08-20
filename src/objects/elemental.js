@@ -465,6 +465,8 @@ class Atomic extends Elemental {
 		this.spriteLoc = "../../sprites/elemental/atomic/debug";
 		this.attackLength = 8;
 		this.hurtLength = 9;
+		this.dieLength = 8;
+		this.victoryLength = 13;
 	}
 
 	/*********************
@@ -676,6 +678,8 @@ class Fire extends Elemental {
 		this.spriteLoc = "../../sprites/elemental/fire/debug";
 		this.attackLength = 10;
 		this.hurtLength = 9;
+		this.dieLength = 7;
+		this.victoryLength = 9;
 	}
 
 	/*********************
@@ -886,7 +890,8 @@ class Water extends Elemental {
 		this.spriteLoc = "../../sprites/elemental/water/debug";
 		this.attackLength = 12;
 		this.hurtLength = 13;
-		
+		this.dieLength = 10;
+		this.victoryLength = 9;
 	}
 
 	/*********************
@@ -1117,6 +1122,8 @@ class Earth extends Elemental {
 		this.spriteLoc = "../../sprites/elemental/earth/debug";
 		this.attackLength = 7;
 		this.hurtLength = 9;
+		this.dieLength = 6;
+		this.victoryLength = 7;
 	}
 
 	/*********************
@@ -1314,6 +1321,7 @@ class Wind extends Elemental {
 		this.spriteLoc = "../../sprites/elemental/wind/debug";
 		this.attackLength = 8;
 		this.hurtLength = 9;
+		this.dieLength = 10;
 	}
 
 	/*********************

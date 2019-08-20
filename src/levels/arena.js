@@ -11,8 +11,8 @@ var enemy = initPlayer(enemy, 'teotlEnemy');
 
 /* Start of debug code */
 
-var playerPick = 4;
-var enemyPick = 1;
+var playerPick = 3;
+var enemyPick = 4;
 
 var player = new Player([
   new AtomicC1,
@@ -30,8 +30,7 @@ var enemy = new Player([
   new WindC1
 ], [1,1,1,1,1]);
 
-enemy.elemental[enemyPick].health = 2;
-enemy.elemental[enemyPick].agility += 1;
+player.elemental[playerPick].health = 32;
 
 
 /* End of debug code */
@@ -197,19 +196,27 @@ function combat() { // Perform all the internal logic once the Player has the En
         sprite_playerDead()
       }
     } 
-  } else if (playerEle.doubleStrike && checkIfDead(playerEle, enemyEle, 1) && checkIfDead(enemyEle, playerEle, 1)) { // If the Player's Elemental has Double Strike and it's still alive perform a second attack. 
+  } else if (playerEle.doubleStrike && checkIfDead(playerEle, enemyEle, 1) > 0 && checkIfDead(enemyEle, playerEle, 1) > 0) { // If the Player's Elemental has Double Strike and it's still alive perform a second attack. 
 
     sprite_playerAttack(true);
 
-  } else if (enemyEle.doubleStrike && checkIfDead(playerEle, enemyEle, 1) && checkIfDead(enemyEle, playerEle, 1)) { // If the Enemy Elemental has Double Strike and it's still alive perform a second attack.
+    if (checkIfDead(playerEle, enemyEle, 2) < 1) {
+      sprite_enemyDead();
+    }
+
+  } else if (enemyEle.doubleStrike && checkIfDead(playerEle, enemyEle, 1) > 0 && checkIfDead(enemyEle, playerEle, 1) > 0) { // If the Enemy Elemental has Double Strike and it's still alive perform a second attack.
 
     sprite_enemyAttack(true);
+
+    if (checkIfDead(enemyEle, playerEle, 2) < 1) {
+      sprite_playerDead();
+    }
 }
 
 
 
 
-  if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, enemyNumOfAttack)) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
+  if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, window.enemyNumOfAttack)) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
 
     setTimeout(function(){
       log += "Your " + logAbility(playerEle);
@@ -217,7 +224,7 @@ function combat() { // Perform all the internal logic once the Player has the En
       log += "</br>";
     }, timeout);
 
-  } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && checkIfDead(playerEle, enemyEle, playerNumOfAttacks)) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
+  } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks)) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
 
     setTimeout(function(){
       log += "Enemy " + logAbility(enemyEle);
@@ -386,19 +393,19 @@ function sprite_idle(sprite, loc) { // Returns sprite to idle animation
 };
 
 function sprite_enemyDead() {
-  timout += sprite_animate(enemySprite, enemyEle.spriteLoc, "die", enemyEle.deathLength, false);
+  window.timout += sprite_animate(enemySprite, enemyEle.spriteLoc, "die", enemyEle.dieLength, false);
 
       setTimeout(function() {
         isDead('Enemy', enemyEle);
-      }, timeout);
+      }, window.timeout);
 }
 
 function sprite_playerDead() {
-  timout += sprite_animate(playerSprite, playerEle.spriteLoc, "die", playerEle.deathLength, false);
+  window.timout += sprite_animate(playerSprite, playerEle.spriteLoc, "die", playerEle.dieLength, false);
 
       setTimeout(function() {
         isDead('Player', playerEle);
-      }, timeout);
+      }, window.timeout);
 }
 
 function bothAttack() {
