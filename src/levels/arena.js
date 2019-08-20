@@ -11,7 +11,7 @@ var enemy = initPlayer(enemy, 'teotlEnemy');
 
 /* Start of debug code */
 
-var playerPick = 3;
+var playerPick = 4;
 var enemyPick = 4;
 
 var player = new Player([
@@ -24,13 +24,14 @@ var player = new Player([
 
 var enemy = new Player([
   new AtomicC1,
-  new FireC2,
-  new WaterC2,
-  new EarthC2,
+  new FireC1,
+  new WaterC1,
+  new EarthC1,
   new WindC1
 ], [1,1,1,1,1]);
 
-player.elemental[playerPick].health = 32;
+enemy.elemental[enemyPick].health = 1;
+player.elemental[playerPick].health = 1;
 
 
 /* End of debug code */
@@ -151,6 +152,10 @@ function combat() { // Perform all the internal logic once the Player has the En
 
       sprite_enemyAttack(false);
 
+      if (checkIfDead(enemyEle, playerEle, 1) < 1) {
+        sprite_playerDead();
+      }
+
     } else {
       sprite_enemyDead();
     }
@@ -162,6 +167,10 @@ function combat() { // Perform all the internal logic once the Player has the En
     if (checkIfDead(enemyEle, playerEle, 1) > 0) { // If after being attacked the Player Elemental is still alive calculate it's counter attack
 
       sprite_playerAttack(false);
+
+      if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) < 1) {
+        sprite_enemyDead();
+      }
 
     } else {
       sprite_playerDead()
@@ -176,13 +185,19 @@ function combat() { // Perform all the internal logic once the Player has the En
       if (checkIfDead(playerEle, enemyEle, 2) > 0) { // Make sure the Enemy Elemental is still alive before performing it's second attack.
     
         sprite_enemyAttack(true);
+  
+        if (checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) < 1) {
+          sprite_playerDead();
+        }
 
       } else {
         sprite_enemyDead();
       }
-    } else if (playerEle.speed === enemyEle.speed && checkIfDead(playerEle, enemyEle, 1) && checkIfDead(enemyEle, playerEle, 1)) {
+    } else if (playerEle.speed === enemyEle.speed) {
+      if (checkIfDead(playerEle, enemyEle, 1) > 0 && checkIfDead(enemyEle, playerEle, 1) > 0) {
 
-     bothAttack();
+       bothAttack();
+      }
 
     } else if (checkIfDead(playerEle, enemyEle, 1) && checkIfDead(enemyEle, playerEle, 1)) { // Make sure the Enemy Elemental is still alive before performing it's second attack.
 
@@ -191,6 +206,10 @@ function combat() { // Perform all the internal logic once the Player has the En
       if (checkIfDead(enemyEle, playerEle, 2) > 0) { // Make sure that the Player Elemental is still alive before performing it's second attack.
 
       sprite_playerAttack(true);
+
+      if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) < 1) {
+        sprite_enemyDead();
+      }
 
       } else {
         sprite_playerDead()
@@ -409,8 +428,8 @@ function sprite_playerDead() {
 }
 
 function bothAttack() {
-  playerNumOfAttacks++;
-  enemyNumOfAttack++;
+  window.playerNumOfAttacks++;
+  window.enemyNumOfAttack++;
 
   sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength, true);
   timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength, true);
@@ -427,6 +446,14 @@ function bothAttack() {
 
       printLog();
     }, timeout);
+
+  if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks)) {
+    sprite_enemyDead();
+  }
+
+  if (checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks)) {
+    sprite_playerDead();
+  }
 }
 
 function checkIfDead(attacker, defender, num) {
