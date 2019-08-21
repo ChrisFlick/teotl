@@ -11,8 +11,8 @@ var enemy = initPlayer(enemy, 'teotlEnemy');
 
 /* Start of debug code */
 
-var playerPick = 4;
-var enemyPick = 4;
+var playerPick = 0;
+var enemyPick = 1;
 
 var player = new Player([
   new AtomicC1,
@@ -30,9 +30,8 @@ var enemy = new Player([
   new WindC1
 ], [1,1,1,1,1]);
 
-enemy.elemental[enemyPick].health = 1;
-player.elemental[playerPick].health = 1;
-
+//enemy.elemental[enemyPick].health = 200;
+//player.elemental[playerPick].health = 200;
 
 /* End of debug code */
 
@@ -110,9 +109,17 @@ function combat() { // Perform all the internal logic once the Player has the En
   localStorage.setItem('playerPick', -1);
   localStorage.setItem('enemyPick', -1);
 
+  // Create <div>s for healthbars
+  document.getElementById("player").innerHTML = "<div id='p_maxHealth'><div id='p_health'></div></div>"
+  document.getElementById("enemy").innerHTML = "<div id='e_maxHealth'><div id='e_health'></div></div>"
+
+  // Store Healthbars
+  window.playerHealth = document.getElementById("p_health");
+  window.enemyHealth = document.getElementById("e_health");
+
   // Create <img> locations in arena.html
-  document.getElementById("player").innerHTML = "<img id='playerEle' alt='playerEle' src=''></img>";
-  document.getElementById("enemy").innerHTML = "<img id='enemyEle' alt='enemyEle' src=''r></img>";
+  document.getElementById("player").innerHTML += "<img id='playerEle' alt='playerEle' src=''></img>";
+  document.getElementById("enemy").innerHTML += "<img id='enemyEle' alt='enemyEle' src=''></img>";
 
   // Store images into a variables
   window.playerSprite = document.getElementById("playerEle");
@@ -121,22 +128,46 @@ function combat() { // Perform all the internal logic once the Player has the En
   sprite_idle(playerSprite, playerEle.spriteLoc);
   sprite_idle(enemySprite, enemyEle.spriteLoc);
 
-  /*** Stylize sprites ***/
-  // Variables
+  /*** CSS ***/
+  // Variables for positioning
   var Y_POSITION = 190;
   var x_playerPos = 200;
   var x_enemyPos = x_playerPos + 200; // Place the Enemy sprite 200px away from the Player sprite
 
-  // Stylize Player sprite
+  // Position Player Elemental
   playerSprite.style.position = "absolute";
   playerSprite.style.top = Y_POSITION + "px";
   playerSprite.style.left = x_playerPos + "px";
  
-  // Stylize Enemy sprite
+  // Position Enemy Elemental
   enemySprite.style.position = "absolute";
   enemySprite.style.top = Y_POSITION + "px";
   enemySprite.style.left = x_enemyPos + "px";
   enemySprite.style.transform = "scaleX(-1)"; // Flip the Enemy's Elemental so that it faces the Player's elemental
+
+  // Variables for Healthbars
+  let X_POSITION_HEALTH_PLAYER = "8px";
+  let X_POSITION_HEALTH_ENEMY = "508px";
+
+  // Stylize Player Healthbar
+  style_healthbar("p_maxHealth", "p_health");
+  document.getElementById("p_maxHealth").style.left = X_POSITION_HEALTH_PLAYER;
+  healthbar("p_health", playerEle);
+
+  // Stylize Enemy Healthbar
+  style_healthbar("e_maxHealth", "e_health");
+  document.getElementById("e_maxHealth").style.left = X_POSITION_HEALTH_ENEMY;
+  healthbar("e_health", enemyEle);
+
+  // Display and stylize VS on screen
+  document.getElementById("vs").innerHTML = "VS";
+  document.getElementById("vs").style.position = "absolute";
+
+  document.getElementById("vs").style.top = "10px"
+  document.getElementById("vs").style.left = "375px"
+
+  document.getElementById("vs").style.fontSize = "50px"
+  document.getElementById("vs").style.color = "white";
 
 
   log += "You have chosen: " + eleName(playerEle) + "</br>";
@@ -385,6 +416,8 @@ function sprite_playerAttack(doubleStrike) { // Animates the Player's Elemental 
 
     logCombat('Your', playerEle, enemyEle);
     printLog();
+
+    healthbar("e_health", enemyEle);
   }, timeout);
 }
 
@@ -404,6 +437,8 @@ function sprite_enemyAttack(doubleStrike) {// Animates the Enemy's Elemental att
 
     logCombat("Enemy", enemyEle, playerEle);
     printLog();
+
+    healthbar("p_health", playerEle);
   }, timeout);
 }
 
@@ -445,19 +480,39 @@ function bothAttack() {
       logCombat("Enemy", enemyEle, playerEle);
 
       printLog();
+
+      healthbar("p_health", playerEle);
+      healthbar("e_health", enemyEle);
     }, timeout);
 
-  if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks)) {
+  if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) < 1) {
     sprite_enemyDead();
   }
 
-  if (checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks)) {
+  if (checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) < 1) {
     sprite_playerDead();
   }
 }
 
 function checkIfDead(attacker, defender, num) {
   return defender.health + defender.barrier - attacker.calculateDmg(defender) * num
+}
+
+function style_healthbar(outer, inner) { // Stylize the healthbars
+  let HEALTH_WIDTH = "300px";
+  let HEALTH_HEIGHT = "30px";
+  let Y_POSITION_HEALTH = "0px";
+
+  document.getElementById(outer).style.position = "absolute";
+  document.getElementById(outer).style.width = HEALTH_WIDTH;
+  document.getElementById(outer).style.height = HEALTH_HEIGHT;
+  document.getElementById(outer).style.backgroundColor = "lightgrey";
+  document.getElementById(outer).style.top = Y_POSITION_HEALTH; 
+
+  document.getElementById(inner).style.height = HEALTH_HEIGHT;
+  document.getElementById(inner).style.backgroundColor = "red";
+  document.getElementById(inner).style.textAlign = "center";
+  document.getElementById(inner).style.fontSize = "25px";
 }
 
 // For debugging

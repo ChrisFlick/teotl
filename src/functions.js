@@ -21,14 +21,8 @@ function initPlayer(player, storage) { // Creates player Object based on stringi
 
 function healthbar(id, obj) { // Calculates health of (obj) as a bar and displays it to Element ID (id)
 
-    let healthP =  document.getElementById(id); // Get element ID
-    healthP.innerHTML = obj.health + "/" + obj.maxHealth; // Display the players health as string.
-    healthP.style.width = 100 * (obj.health / obj.maxHealth) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
+    let health =  document.getElementById(id); // Get element ID
+    health.innerHTML = obj.health + "/" + obj.maxHealth; // Display the players health as string.
+    health.style.width = 100 * (obj.health / obj.maxHealth) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
+    console.log('health')
 }
-
-function sleep(miliseconds) {
-    var currentTime = new Date().getTime();
- 
-    while (currentTime + miliseconds >= new Date().getTime()) {
-    }
- }
