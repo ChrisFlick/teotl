@@ -9,23 +9,23 @@ var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
 
-/*For debugging
+/**  For debugging **
 
-var player = new Player([ 
-    elementals[0,0],
-    elementals[1,0],
-    elementals[2,0],
-    elementals[3,0],
-    elementals[4,0],
-],[0,0,0,0,0]);
-
-var enemy = new Player([ 
-    elementals[0,1],
-    elementals[1,1],
-    elementals[2,1],
-    elementals[3,1],
-    elementals[4,1],
-],[1,1,1,1,1]);
+var player = new Player([
+    new AtomicC1,
+    new FireC1,
+    new WaterC1,
+    new EarthC1,
+    new WindC1
+  ], [1,1,1,1,1]);
+  
+  var enemy = new Player([
+    new AtomicC1,
+    new FireC1,
+    new WaterC1,
+    new EarthC1,
+    new WindC1
+  ], [1,1,1,1,1]);
 
 player.health = 100;
 player.maxHealth = 100;
@@ -61,7 +61,9 @@ enemy.elemental[type.earth].maxHealth = 100;
 enemy.elemental[type.earth].health = 50;
 
 enemy.elemental[type.wind].maxHealth = 100;
-enemy.elemental[type.wind].health = 50;*/
+enemy.elemental[type.wind].health = 50;
+
+/** End debug code **/
 
 // Initiating misc variables
 var pick = -1; // Stores the player's pick
@@ -131,6 +133,7 @@ function elementClick(type) {
     
     // Show the stats of selected Elemental on screen.
     let ele = player.elemental[type];
+    document.getElementById("sprite").innerHTML = "<img src='" + ele.spriteLoc + "/idle/idle.png'></img>"
     document.getElementById("Stats").innerHTML = ele.getStats();
     document.getElementById("Desc").innerHTML = ele.description;
 }

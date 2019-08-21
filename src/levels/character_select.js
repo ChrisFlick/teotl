@@ -44,6 +44,7 @@ function select(prefix, button, num, type) {
 
             // List Stats and description of Elemental's Abillity
             let ele = playerElementals[type]
+            document.getElementById(ele.getType() + "Sprite").innerHTML = "<img src='" + ele.spriteLoc + "/idle/idle.png' />";
             document.getElementById(ele.getType() + "Stats").innerHTML = ele.getStats();
             document.getElementById(ele.getType() + "Desc").innerHTML = ele.description;
         }
