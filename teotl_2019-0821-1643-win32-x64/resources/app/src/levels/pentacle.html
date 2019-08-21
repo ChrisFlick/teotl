@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<header>
+        
+        <script src="https://unpkg.com/peerjs@1.0.0/dist/peerjs.min.js"></script>
+        <script type="text/javascript" src="../enum.js"></script>
+        <script type="text/javascript" src="../objects/elemental.js"></script>
+        <script type="text/javascript" src="../objects/player.js"></script>
+        <script type="text/javascript" src="../variables.js"></script>
+        <script type="text/javascript" src ="../functions.js"></script>
+</header>
+<body>
+
+    <ul id="health"> <!--Displays health of Player and Enemy-->
+        <li>Player: <div  id="p_maxHealth" >
+            <div id="p_health"></div>
+        </div></li>
+        <li>Enemy: <div  id="e_maxHealth" >
+            <div id="e_health"></div>
+        </div></li>
+    </ul>
+
+    <div class = "pentacle">
+        <img src = "../../sprites/pentacle.jpg" />
+
+        <div class="atom">
+            <!--Button to select Atomic-->
+            <button 
+                class = "button_atom"
+                >
+                <img src="../../sprites/buttons/element_0.png" 
+                id = "0" 
+                onclick = "elementClick(id)"
+                />
+            </button>
+
+            <!--Display health of player's Atomic-->
+            <div id="p_atomMaxHealth" class="playerMaxHealth">
+                <div id="p_atomHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's Atomic-->
+            <div id="e_atomMaxHealth" class="enemyMaxHealth">
+                <div id="e_atomHealth" class="eleHealth"></div>
+            </div>
+        </div>
+
+        <div class="fire">
+            <!--Button to select fire-->
+            <button 
+                class = "button_fire">
+                <img src = "../../sprites/buttons/element_1.png" 
+                id = "1"
+                onclick = "elementClick(id)"
+                />
+            </button>
+
+            <!--Display health of player's fire-->
+            <div id="p_fireMaxHealth" class="playerMaxHealth">
+                <div id="p_fireHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's fire-->
+            <div id="e_fireMaxHealth" class="enemyMaxHealth">
+                <div id="e_fireHealth" class="eleHealth"></div>
+            </div>
+        </div>
+
+        <div class="water">
+            <!--Button to select water-->
+            <button 
+                class = "button_water">
+                <img src = "../../sprites/buttons/element_2.png" 
+                id = "2"
+                onclick = "elementClick(id)"
+                />
+            </button>
+
+            <!--Display health of player's water-->
+            <div id="p_waterMaxHealth" class="playerMaxHealth">
+                <div id="p_waterHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's water-->
+            <div id="e_waterMaxHealth" class="enemyMaxHealth">
+                <div id="e_waterHealth" class="eleHealth"></div>
+            </div>
+        </div>
+
+        <div class="earth">
+            <!--Button to select earth-->
+            <button 
+                class = "button_earth">
+                <img src = "../../sprites/buttons/element_3.png" 
+                id = "3"
+                onclick = "elementClick(id)"
+                />
+            </button>
+
+            <!--Display health of player's earth-->
+            <div id="p_earthMaxHealth" class="playerMaxHealth">
+                <div id="p_earthHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's earth-->
+            <div id="e_earthMaxHealth" class="enemyMaxHealth">
+                <div id="e_earthHealth" class="eleHealth"></div>
+            </div>
+        </div>
+
+        <div class="wind">
+            <!--Button to select wind-->
+            <button 
+                class = "button_wind">
+                <img src = "../../sprites/buttons/element_4.png" 
+                id = "4"
+                onclick = "elementClick(id)"
+                />
+            </button>
+
+            <!--Display health of player's wind-->
+            <div id="p_windMaxHealth" class="playerMaxHealth">
+                <div id="p_windHealth" class="eleHealth"></div>
+            </div>
+
+            <!--Display health of enemy's wind-->
+            <div id="e_windMaxHealth" class="enemyMaxHealth">
+                <div id="e_windHealth" class="eleHealth"></div>
+        </div>
+        </div>
+
+    </div>
+
+    <table id="elemental">
+        <tr>
+            <td id="sprite"></td>
+            <td id="Stats"></td>
+            <td id="Desc"></td>
+        </tr>
+    </table>
+
+    <button id = "select" onClick = "select()">Select</button>
+
+    <p id = "player">Player stats not loaded</p>
+    <p id = "enemy">Enemy stats not loaded</p>
+</body>
+<footer> 
+        <link rel="stylesheet" type="text/css" href="pentacle.css" media="screen" />
+        <script type="text/javascript" src="./pentacle.js"></script>
+</footer>
