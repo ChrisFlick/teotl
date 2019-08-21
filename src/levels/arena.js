@@ -417,6 +417,7 @@ function sprite_playerAttack(doubleStrike) { // Animates the Player's Elemental 
     logCombat('Your', playerEle, enemyEle);
     printLog();
 
+    healthbar("p_health", playerEle);
     healthbar("e_health", enemyEle);
   }, timeout);
 }
@@ -439,6 +440,7 @@ function sprite_enemyAttack(doubleStrike) {// Animates the Enemy's Elemental att
     printLog();
 
     healthbar("p_health", playerEle);
+    healthbar("e_health", enemyEle);;
   }, timeout);
 }
 
