@@ -9,9 +9,9 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code */
+/* Start of debug code *
 
-var playerPick = 0;
+var playerPick = 4;
 var enemyPick = 4;
 
 var player = new Player([
@@ -30,8 +30,8 @@ var enemy = new Player([
   new WindC1
 ], [1,1,1,1,1]);
 
-//enemy.elemental[enemyPick].health = 200;
-//player.elemental[playerPick].health = 200;
+enemy.elemental[enemyPick].health = 1;
+//player.elemental[playerPick].health = 1;
 
 /* End of debug code */
 
@@ -177,9 +177,13 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   if (playerEle.speed > enemyEle.speed) { // Find out who is faster and calculates damage dealth.
 
-    sprite_playerAttack(false);  
-    
-    if (checkIfDead(playerEle, enemyEle, 1) > 0) { // If after being attacked the Enemy Elemental is still alive calculate it's counter attack.
+    sprite_playerAttack(false); 
+
+    if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) < 1) {
+      sprite_enemyDead();
+    }
+
+    if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) > 0) { // If after being attacked the Enemy Elemental is still alive calculate it's counter attack.
 
       sprite_enemyAttack(false);
 
@@ -263,7 +267,6 @@ function combat() { // Perform all the internal logic once the Player has the En
     }
 }
 
-
   if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
 
     setTimeout(function(){
@@ -281,6 +284,10 @@ function combat() { // Perform all the internal logic once the Player has the En
   }, timeout);
 
   } // If it is a tie, ie the multiplier is equal to one, neither ability goes off
+
+  // Ensure healthbars are up to date.
+  healthbar("p_health", playerEle);
+  healthbar("e_health", enemyEle);
 
   // Check for deaths.
   setTimeout(function(){
@@ -310,7 +317,6 @@ function combat() { // Perform all the internal logic once the Player has the En
     // Store variables
     localStorage.setItem('teotlPlayer', JSON.stringify(player));
     localStorage.setItem('teotlEnemy', JSON.stringify(enemy));
-
 
     ready = true; // The player can now return back to pentacle by pressing continue
   }, timeout);
@@ -422,7 +428,7 @@ function sprite_playerAttack(doubleStrike) { // Animates the Player's Elemental 
 
 function sprite_enemyAttack(doubleStrike) {// Animates the Enemy's Elemental attacking and the Playar Elemental's hurt animation then logs the attack.
 
-  window.enemyNumOfAttack++;
+  window.enemyNumOfAttacks++;
 
   timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength, true);
   timeout += sprite_animate(playerSprite, playerEle.spriteLoc, "hurt", playerEle.hurtLength, true);
@@ -438,7 +444,7 @@ function sprite_enemyAttack(doubleStrike) {// Animates the Enemy's Elemental att
     printLog();
 
     healthbar("p_health", playerEle);
-    healthbar("e_health", enemyEle);;
+    healthbar("e_health", enemyEle);
   }, timeout);
 }
 
@@ -464,7 +470,7 @@ function sprite_playerDead() {
 
 function bothAttack() {
   window.playerNumOfAttacks++;
-  window.enemyNumOfAttack++;
+  window.enemyNumOfAttacks++;
 
   sprite_animate(playerSprite, playerEle.spriteLoc, "attack", playerEle.attackLength, true);
   timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "attack", enemyEle.attackLength, true);
