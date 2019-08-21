@@ -1,0 +1,9 @@
+img {
+    height: 50%;
+    width: 50%;
+
+    left: 400px;
+    top: 50px;
+
+    position: relative;
+}
