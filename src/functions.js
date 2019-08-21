@@ -24,5 +24,4 @@ function healthbar(id, obj) { // Calculates health of (obj) as a bar and display
     let health =  document.getElementById(id); // Get element ID
     health.innerHTML = obj.health + "/" + obj.maxHealth; // Display the players health as string.
     health.style.width = 100 * (obj.health / obj.maxHealth) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
-    console.log('health')
 }
