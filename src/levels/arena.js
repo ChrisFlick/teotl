@@ -9,9 +9,9 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code */
+/* Start of debug code *
 
-var playerPick = 4;
+var playerPick = 0;
 var enemyPick = 3;
 
 var player = new Player([

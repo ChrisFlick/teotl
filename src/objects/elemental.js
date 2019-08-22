@@ -540,8 +540,8 @@ class AtomicC1 extends Atomic {
 		}
 
 		log += "debuffing all Enemy Elementals Strength by " + strDeBuff + "!</br>";
-		log += "debuffing all Enemy Elementals Intelligemce by " + intDeBuff + "!</br>";
-		log += "debuffing all Enemy Elementals Agility by " + agilDeBuff + "!</br>";
+		log += "All Enemy Elementals Intelligence by " + intDeBuff + "!</br>";
+		log += "And all Enemy Elementals Agility by " + agilDeBuff + "!</br>";
 	}
 
 	

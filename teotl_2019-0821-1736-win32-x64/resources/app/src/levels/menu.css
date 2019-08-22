@@ -1,0 +1,27 @@
+img.background {
+    position: relative;
+    
+    height: 770px;
+    width: 1500px;
+    
+    z-index: 1;
+}
+
+.connection {
+    position: relative;
+
+    top: -200px;
+    left: 50px;
+
+    z-index: 2;
+
+    
+}
+
+form {
+    color: white;
+}
+
+button {
+    padding: 12px 32px;
+}
