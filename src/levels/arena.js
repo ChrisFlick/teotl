@@ -9,17 +9,17 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code *
+/* Start of debug code */
 
 var playerPick = 4;
-var enemyPick = 4;
+var enemyPick = 3;
 
 var player = new Player([
   new AtomicC1,
   new FireC1,
   new WaterC1,
   new EarthC1,
-  new WindC1
+  new WindC2
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
@@ -30,7 +30,7 @@ var enemy = new Player([
   new WindC1
 ], [1,1,1,1,1]);
 
-enemy.elemental[enemyPick].health = 1;
+//enemy.elemental[enemyPick].health = 1;
 //player.elemental[playerPick].health = 1;
 
 /* End of debug code */

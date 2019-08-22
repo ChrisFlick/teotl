@@ -499,6 +499,8 @@ class AtomicC1 extends Atomic {
 
 		// Secondary Stats
 		this.health = this.maxHealth;
+
+		this._description = "<b>Radiation Sickness:</b> Upon victory decreases <i>ALL Stats</i> of all Enemy Elementals based on <i>All Stats</i>"
 	}
 
 	/*********************
@@ -512,6 +514,35 @@ class AtomicC1 extends Atomic {
 	/*********************
 	****** Methods *******
 	*********************/
+
+	ability(player, enemy) { // Radiation Sickness
+		let DURATION = 3;
+
+		let strDeBuff = Math.round((this.strength * 0.1) * this.abilityMod);
+		let intDeBuff = Math.round((this.intelligence * 0.1) * this.abilityMod);
+		let agilDeBuff = Math.round((this.agility * 0.1) * this.abilityMod);
+
+		console.log(`
+			Debuffing all enemy Elementals Strength by ${strDeBuff}.
+			Debuffing all enemy Elementals Strength by ${intDeBuff}.
+			Debuffing all enemy Elementals Strength by ${agilDeBuff}.
+		`);
+
+		for (let i = 0; i < enemy.elemental.length; i++) {
+			enemy.elemental[i].strength = -strDeBuff;
+			player.elemental[i].buffTime[stat.strength] = DURATION;
+
+			enemy.elemental[i].intelligence = -intDeBuff;
+			player.elemental[i].buffTime[stat.intelligence] = DURATION;
+
+			enemy.elemental[i].agility = -agilDeBuff;
+			player.elemental[i].buffTime[stat.agility] = DURATION;
+		}
+
+		log += "debuffing all Enemy Elementals Strength by " + strDeBuff + "!</br>";
+		log += "debuffing all Enemy Elementals Intelligemce by " + intDeBuff + "!</br>";
+		log += "debuffing all Enemy Elementals Agility by " + agilDeBuff + "!</br>";
+	}
 
 	
 }
@@ -576,7 +607,7 @@ class AtomicC3 extends Atomic {
 		// Main Stats
 		this._baseStrength = 23;
 		this._baseConstitution = 27;
-		this._baseIntelligence = 14;
+		this._baseIntelligence = 20;
 		this._baseAgility = 21;	
 
 		// Secondary Stats
@@ -654,7 +685,7 @@ class AtomicC4 extends Atomic {
 		console.log(`Debuffing all enemy Elementals Defense by ${deBuff}.`);
 		for (let i = 0; i < enemy.elemental.length; i++) {
 			enemy.elemental[i].defense = -deBuff;
-			player.elemental[i].buffTime[stat.defense] = 1;
+			player.elemental[i].buffTime[stat.defense] = 5;
 		}
 
 		log += "debuffing all Enemy Elementals Defence by " + deBuff + "!</br>";
@@ -791,7 +822,7 @@ class FireC3 extends Fire {
 		// Main Stats
 		this._baseStrength = 32;
 		this._baseConstitution = 25;
-		this._baseIntelligence = 10;
+		this._baseIntelligence = 20;
 		this._baseAgility = 5;
 
 		// Secondary Stats
@@ -866,7 +897,7 @@ class FireC4 extends Fire {
 		let buff = Math.round((this.strength * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
-			player.elemental[i].buffTime[stat.strength] = 1;
+			player.elemental[i].buffTime[stat.strength] = 5;
 		}
 
 		log += "increasing the Strength of all it's allies by " + buff + "!</br>";
@@ -1220,7 +1251,7 @@ class EarthC3 extends Earth {
 		// Main Stats
 		this._baseStrength = 25;
 		this._baseConstitution = 33;
-		this._baseIntelligence = 10;
+		this._baseIntelligence = 15;
 		this._baseAgility = 9;
 
 		// Secondary Stats
@@ -1297,7 +1328,7 @@ class EarthC4 extends Earth {
 
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].defense = buff;
-			player.elemental[i].buffTime[stat.defense] = 1;
+			player.elemental[i].buffTime[stat.defense] = 5;
 		}
 
 		log += "increasing it's Allies Defense by " + buff + "!</br>";
@@ -1387,12 +1418,12 @@ class WindC2 extends Wind {
 		this._baseStrength = 20;
 		this._baseConstitution = 20;
 		this._baseIntelligence = 5;
-		this._baseAgility = 15;
+		this._baseAgility = 22;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
 
-		this._description = "<b>Life Leech:</b> Heals itself based on <i>Damage</i> and <i>Intelligence</i>";
+		this._description = "<b>Life Leech:</b> Increases health based on <i>Damage</i> and <i>Intelligence</i>";
 	}
 
 	/*********************
@@ -1411,7 +1442,7 @@ class WindC2 extends Wind {
 		// In place of Ability; attacks from Elemental Heal itself.
 		enemy.attack.call(this, enemy);
 
-		let heal = (this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2);
+		let heal = Math.round((this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2));
 
 		extra = eleName(this) + " leeches off it's Enemies life force, healing itself for " + Math.abs(heal) + "!</br>";
 
@@ -1432,8 +1463,8 @@ class WindC3 extends Wind {
 		// Main Stats
 		this._baseStrength = 20;
 		this._baseConstitution = 20;
-		this._baseIntelligence = 12;
-		this._baseAgility = 18;
+		this._baseIntelligence = 15;
+		this._baseAgility = 20;
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -1480,7 +1511,7 @@ class WindC4 extends Wind {
 		this._baseStrength = 25;
 		this._baseConstitution = 22;
 		this._baseIntelligence = 15;
-		this._baseAgility = 18;	
+		this._baseAgility = 23;	
 
 		// Secondary Stats
 		this.health = this.maxHealth;
@@ -1503,7 +1534,7 @@ class WindC4 extends Wind {
 		let buff = Math.round((this.agility * 0.1) * this.abilityMod);
 		for (let i = 0; i < player.elemental.length; i++) {
 			player.elemental[i].strength = buff;
-			player.elemental[i].buffTime[stat.agility] = 1;
+			player.elemental[i].buffTime[stat.agility] = 5;
 		}
 
 		log += "increasing it's Allies Agility by " + buff + "!</br>"

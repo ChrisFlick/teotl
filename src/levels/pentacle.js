@@ -168,5 +168,11 @@ function playerStats(player, type) {
 
 function eleHealthBar(id, obj) { 
     let healthP =  document.getElementById(id); // Get element ID
-    healthP.style.height = 100 - (100 * (obj.health / obj.maxHealth)) + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
+
+    let percent = 100 - (100 * (obj.health / obj.maxHealth));
+    if (percent < 0) { // Ensure that healthbar displays 100% red even if Health is over Max Health.
+        percent = 0;
+    }
+
+    healthP.style.height = percent + "%" ; // Fill bar depending on what percent of health the player has out of 100%.
 }
