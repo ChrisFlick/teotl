@@ -663,7 +663,7 @@ class AtomicC4 extends Atomic {
 		this.health = this.maxHealth;
 
 		// Ability Description (HTML5 String)
-		this._description = "<b>Radiation(Defense):</b> Upon victory lowers the <i>Defense</i> of every Enemy Elemental based on <i>Strength</i> and <i>Intelligence</i>"
+		this._description = "<b>2 Minutes to Midnight:</b> Upon victory the doomsday clock lowers; When the clock strikes midnight the game ends and whoever won that round wins the game"
 	}
 
 	/*********************
@@ -678,17 +678,12 @@ class AtomicC4 extends Atomic {
 	****** Methods *******
 	*********************/
 
-	ability(player, enemy) { // Radiation (Defense)
-		// Lowers the Defense of every Enemy Elemental.
-		let deBuff = Math.round((this.strength * 0.1) * this.abilityMod);
+	ability(player, enemy) { // 2 Minutes to Midnight: lowers the doomsday number when it reaches 0 whoever lowered it to 0 wins the game.
+		let doomsday = localStorage.getItem("doomsday");
+		doomsday--;
+		localStorage.setItem("doomsday", doomsday);
 
-		console.log(`Debuffing all enemy Elementals Defense by ${deBuff}.`);
-		for (let i = 0; i < enemy.elemental.length; i++) {
-			enemy.elemental[i].defense = -deBuff;
-			player.elemental[i].buffTime[stat.defense] = 5;
-		}
-
-		log += "debuffing all Enemy Elementals Defence by " + deBuff + "!</br>";
+		log += "increases the Doomsday Clock; the clock now strikes " + doomsday + " Minutes to Midnight!";
 	}
 }
 

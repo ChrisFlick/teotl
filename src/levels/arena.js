@@ -9,13 +9,13 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code *
+/* Start of debug code */
 
-var playerPick = 0;
-var enemyPick = 3;
+var playerPick = 3;
+var enemyPick = 0;
 
 var player = new Player([
-  new AtomicC1,
+  new AtomicC4,
   new FireC1,
   new WaterC1,
   new EarthC1,
@@ -23,7 +23,7 @@ var player = new Player([
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
-  new AtomicC1,
+  new AtomicC4,
   new FireC1,
   new WaterC1,
   new EarthC1,
@@ -32,6 +32,7 @@ var enemy = new Player([
 
 //enemy.elemental[enemyPick].health = 1;
 //player.elemental[playerPick].health = 1;
+localStorage.setItem("doomsday", 1);
 
 /* End of debug code */
 
@@ -273,6 +274,11 @@ function combat() { // Perform all the internal logic once the Player has the En
       log += "Your " + logAbility(playerEle);
       playerEle.ability(player, enemy);
       log += "</br>";
+
+      doomsday = parseInt(localStorage.getItem("doomsday"));
+      if (doomsday < 1) {
+        enemy.health = 0;
+      }
     }, timeout);
 
   } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
@@ -281,6 +287,11 @@ function combat() { // Perform all the internal logic once the Player has the En
       log += "Enemy " + logAbility(enemyEle);
       enemyEle.ability(enemy, player);
       log += "</br>"
+
+      doomsday = parseInt(localStorage.getItem("doomsday"));
+      if (doomsday < 1) {
+        player.health = 0;
+      }
   }, timeout);
 
   } // If it is a tie, ie the multiplier is equal to one, neither ability goes off
