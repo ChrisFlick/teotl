@@ -9,29 +9,30 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/* Start of debug code */
+/** Start of debug code **
 
-var playerPick = 3;
-var enemyPick = 0;
+var playerPick = 4;
+var enemyPick = 3;
 
 var player = new Player([
   new AtomicC4,
   new FireC1,
   new WaterC1,
-  new EarthC1,
-  new WindC2
+  new EarthC2,
+  new WindC1
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
   new AtomicC4,
   new FireC1,
   new WaterC1,
-  new EarthC1,
+  new EarthC2,
   new WindC1
 ], [1,1,1,1,1]);
 
-//enemy.elemental[enemyPick].health = 1;
-//player.elemental[playerPick].health = 1;
+//enemy.elemental[enemyPick].health = 20;
+player.elemental[playerPick].health = 20;
+
 localStorage.setItem("doomsday", 1);
 
 /* End of debug code */
@@ -180,11 +181,7 @@ function combat() { // Perform all the internal logic once the Player has the En
 
     sprite_playerAttack(false); 
 
-    if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) < 1) {
-      sprite_enemyDead();
-    }
-
-    if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) > 0) { // If after being attacked the Enemy Elemental is still alive calculate it's counter attack.
+    if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) > 0 && playerEle.health - playerEle.damageShieldDmg(enemyEle) > 1) { // If after being attacked the Enemy Elemental is still alive calculate it's counter attack.
 
       sprite_enemyAttack(false);
 
@@ -192,23 +189,18 @@ function combat() { // Perform all the internal logic once the Player has the En
         sprite_playerDead();
       }
 
-    } else {
+    } else if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) < 1) {
       sprite_enemyDead();
     }
   } else if (playerEle.speed === enemyEle.speed)  {
     bothAttack();
   } else {
     sprite_enemyAttack(false);
-  
-    if (checkIfDead(enemyEle, playerEle, 1) > 0) { // If after being attacked the Player Elemental is still alive calculate it's counter attack
+    if (checkIfDead(enemyEle, playerEle, 1) > 0 && enemyEle.health - enemyEle.damageShieldDmg(playerEle) > 0) { // If after being attacked the Player Elemental is still alive calculate it's counter attack
 
       sprite_playerAttack(false);
 
-      if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) < 1) {
-        sprite_enemyDead();
-      }
-
-    } else {
+    } else if (checkIfDead(enemyEle, playerEle) < 1) {
       sprite_playerDead()
     }
   }
@@ -251,7 +243,13 @@ function combat() { // Perform all the internal logic once the Player has the En
         sprite_playerDead()
       }
     } 
-  } else if (playerEle.doubleStrike && checkIfDead(playerEle, enemyEle, 1) > 0 && checkIfDead(enemyEle, playerEle, 1) > 0) { // If the Player's Elemental has Double Strike and it's still alive perform a second attack. 
+  } else if (playerEle.doubleStrike 
+    && checkIfDead(playerEle, enemyEle, 1) > 0 
+    && checkIfDead(enemyEle, playerEle, 1) > 0 
+    && enemyEle.health - enemyEle.damageShieldDmg(playerEle) > 0
+    && playerEle.health - playerEle.damageShieldDmg(enemyEle) > 0
+    && checkIfDead(playerEle, enemyEle, 1) - enemyEle.damageShieldDmg(playerEle) > 0 
+    && checkIfDead(enemyEle, playerEle, 1) - playerEle.damageShieldDmg(enemyEle) > 0) { // If the Player's Elemental has Double Strike and it's still alive perform a second attack. 
 
     sprite_playerAttack(true);
 
@@ -259,13 +257,20 @@ function combat() { // Perform all the internal logic once the Player has the En
       sprite_enemyDead();
     }
 
-  } else if (enemyEle.doubleStrike && checkIfDead(playerEle, enemyEle, 1) > 0 && checkIfDead(enemyEle, playerEle, 1) > 0) { // If the Enemy Elemental has Double Strike and it's still alive perform a second attack.
+  } else if (
+    enemyEle.doubleStrike
+    && checkIfDead(playerEle, enemyEle, 1) > 0 
+    && checkIfDead(enemyEle, playerEle, 1) > 0 
+    && enemyEle.health - enemyEle.damageShieldDmg(playerEle) > 0
+    && playerEle.health - playerEle.damageShieldDmg(enemyEle) > 0
+    && checkIfDead(playerEle, enemyEle, 1) - enemyEle.damageShieldDmg(playerEle) > 0 
+    && checkIfDead(enemyEle, playerEle, 1) - playerEle.damageShieldDmg(enemyEle) > 0) { // If the Enemy Elemental has Double Strike and it's still alive perform a second attack.
 
-    sprite_enemyAttack(true);
+      sprite_enemyAttack(true);
 
-    if (checkIfDead(enemyEle, playerEle, 2) < 1) {
-      sprite_playerDead();
-    }
+      if (checkIfDead(enemyEle, playerEle, 2) < 1) {
+        sprite_playerDead();
+      }
 }
 
   if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
@@ -348,7 +353,7 @@ function logWeakness() {
 };
 
 function logCombat(player, attackingEle, defendingEle) { // Creates log for combat.
-  log += player + " " + eleName(attackingEle) + " is attacking its opponents " + eleName(defendingEle) + " for " + damage + " damage </br>" + extra;
+  log += player + " " + eleName(attackingEle) + " is attacking its opponents " + eleName(defendingEle) + " for <font color='red'>" + damage + "</font> damage </br>" + extra;
     log += logWeakness();
     log += shieldLog;
     log += "</br>"
@@ -435,6 +440,20 @@ function sprite_playerAttack(doubleStrike) { // Animates the Player's Elemental 
     healthbar("p_health", playerEle);
     healthbar("e_health", enemyEle);
   }, timeout);
+
+  if (checkIfDead(playerEle, enemyEle, playerNumOfAttacks) < 1 || checkIfDead(playerEle, enemyEle, enemyNumOfAttacks) - enemyEle.damageShieldDmg(playerEle) < 1) {
+    sprite_enemyDead();
+  }
+
+  if (playerEle.health - playerEle.damageShieldDmg(enemyEle) < 1) { // Check to see if damage shield kills the player
+    sprite_playerDead(); 
+  }
+
+  if (playerNumOfAttacks > 1 && checkIfDead(enemyEle, playerEle, enemyNumOfAttacks) - playerEle.damageShieldDmg(enemyEle) * playerNumOfAttacks < 1) { // Check to see if damage shield kills the player
+    sprite_playerDead(); 
+  }
+
+
 }
 
 function sprite_enemyAttack(doubleStrike) {// Animates the Enemy's Elemental attacking and the Playar Elemental's hurt animation then logs the attack.
@@ -457,6 +476,18 @@ function sprite_enemyAttack(doubleStrike) {// Animates the Enemy's Elemental att
     healthbar("p_health", playerEle);
     healthbar("e_health", enemyEle);
   }, timeout);
+
+  if (checkIfDead(enemyEle, playerEle, playerNumOfAttacks) < 1 || checkIfDead(enemyEle, playerEle, enemyNumOfAttacks) - playerEle.damageShieldDmg(enemyEle) < 1) {
+    sprite_playerDead();
+  }
+
+  if (enemyEle.health - enemyEle.damageShieldDmg(playerEle) < 1) { // Check to see if the enemy has killed itself from Damage Shield damage
+    sprite_enemyDead(); 
+  }
+
+  if (enemyNumOfAttacks > 1 && checkIfDead(playerEle, enemyEle, playerNumOfAttacks) - enemyEle.damageShieldDmg(playerEle) * enemyNumOfAttacks < 1) { // Check to see if enemy has killed itself after a double attack
+    sprite_enemyDead()
+  }
 }
 
 function sprite_idle(sprite, loc) { // Returns sprite to idle animation
@@ -502,13 +533,14 @@ function bothAttack() {
       healthbar("e_health", enemyEle);
     }, timeout);
 
-  if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) < 1) {
+  if (checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) < 1 || enemyEle.health - enemyEle.damageShieldDmg(playerEle) < 1) {
     sprite_enemyDead();
   }
 
-  if (checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) < 1) {
+  if (checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) < 1 || playerEle.health - playerEle.damageShieldDmg(enemyEle) < 1) {
     sprite_playerDead();
   }
+
 }
 
 function checkIfDead(attacker, defender, num) {

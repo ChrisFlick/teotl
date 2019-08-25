@@ -257,14 +257,44 @@ class Elemental {
                     enemyType = enemy.shieldType;
                 }
 
-                dmg = Math.round(enemy.damageShield * enemy.multiplier(enemyType, this.eleType));
+                dmg = this.damageShieldDmg(enemy);
                 console.log(`Taking ${dmg} Damage from Damage Shield`);
 				this.health -= dmg; // Take damage if enemy has a Damage Shield
 				
-				shieldLog = "</br>Your Elemental has taken " + dmg + " " + enemy.getType() + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
+				let shieldType;
+				switch (enemyType) { // Convert the number enemy type to a String the player's can understand
+					case type.atomic:
+						shieldType = "Atomic";
+						break;
+					case type.fire:
+						shieldType = "<font color='crimson'>Fire</font>";
+						break;
+					case type.water:
+						shieldType = "<font color='blue'>Water</font>";
+						break;
+					case type.earth:
+						shieldType = "<font color='dark brown'>Earth</font>";
+						break;
+					case type.wind:
+						shieldType = "<font color='dark grey'>Wind</font>";
+						break;
+					default:
+						shieldType = "ERROR";
+						break
+				}
+
+				shieldLog = "</br>Your Elemental has taken <font color='red'>" + dmg + "</font> " + shieldType + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
 				shieldLog += logWeakness();
             }     
-    }
+	}
+	
+	damageShieldDmg(enemy) {
+		let enemyType = enemy.eleType;
+		if (enemy.buff[stat.damageShield] > 0) {
+			enemyType = enemy.shieldType;
+		}
+		return Math.round(enemy.damageShield * enemy.multiplier(enemyType, this.eleType));
+	}
 
     calculateDmg(enemy) { // Calculates damage.
         let dmg = Math.round((this.damage * this.multiplier(this.eleType, enemy.eleType)) - enemy.defense);
@@ -383,7 +413,7 @@ class Elemental {
         }
 
         if (weak != null) {
-            console.log(`${this.getType()}'s attack is ${weak}`);
+            //console.log(`${this.getType()}'s attack is ${weak}`);
         }
 
 		weaknessLog = weak; 
