@@ -18,7 +18,6 @@ var peer = new Peer(
 
 var conn = peer.connect(enemyID);
 
-let MINUTES_TO_MIDNIGHT = 5;
 localStorage.setItem("doomsday", MINUTES_TO_MIDNIGHT);
 
 if (localStorage.getItem('enemyPick') != -1) { // If the Player has already recieved the opponents Elemental selection grab 'enemyPick' from local storage and parse it.

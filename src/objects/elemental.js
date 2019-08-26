@@ -723,6 +723,8 @@ class AtomicC4 extends Atomic {
 		}
 
 		this.health = 50;
+
+		localStorage.setItem("doomsday", MINUTES_TO_MIDNIGHT);
 	}
 }
 

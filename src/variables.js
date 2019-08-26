@@ -1,4 +1,6 @@
-let elementals;
+var elementals;
+
+var MINUTES_TO_MIDNIGHT = 5;
 
 initElementals();
 
