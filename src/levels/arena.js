@@ -9,10 +9,10 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/** Start of debug code **
+/** Start of debug code **/
 
-var playerPick = 4;
-var enemyPick = 3;
+var playerPick = 0;
+var enemyPick = 1;
 
 var player = new Player([
   new AtomicC4,
@@ -31,7 +31,7 @@ var enemy = new Player([
 ], [1,1,1,1,1]);
 
 //enemy.elemental[enemyPick].health = 20;
-player.elemental[playerPick].health = 20;
+//player.elemental[playerPick].health = 20;
 
 localStorage.setItem("doomsday", 1);
 
@@ -397,7 +397,7 @@ function checkForDeaths(prefix, player) { // // Check to see if Player Elemental
 
     if (ele.health === 0) { // Check if Elemental is dead
 
-      log += prefix + " Elemental has died! It's owner sacrifices " + ele.maxHealth + " Health to Reincarnate it.</br></br>";
+      log += prefix + " " + ele.getType() + "Elemental has died! It's owner sacrifices " + ele.maxHealth + " Health to Reincarnate it.</br></br>";
 
       player.health -= ele.maxHealth; // Reduce the Player health by the Elementals Max Health
       ele.resetEle(); // Reset the Player's Elemental.

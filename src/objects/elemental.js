@@ -238,8 +238,8 @@ class Elemental {
 
             enemy.barrier -= initialDmg; // Subtracts Damage done to Enemy Elementals Barrier.
 
-            if (dmg < 0) { // Ensures that intended Damage does not Heal.
-                dmg = 0;
+            if (dmg < 1) { // Ensures that intended Damage does not Heal.
+                dmg = 1;
             }
 
 
@@ -685,15 +685,15 @@ class AtomicC4 extends Atomic {
 
 		// Main Stats
 		this._baseStrength = 23;
-		this._baseConstitution = 32;
+		this._baseConstitution = 40;
 		this._baseIntelligence = 14;
 		this._baseAgility = 16;
 
 		// Secondary Stats
-		this.health = this.maxHealth;
+		this.health = 50;
 
 		// Ability Description (HTML5 String)
-		this._description = "<b>2 Minutes to Midnight:</b> Upon victory the doomsday clock lowers; When the clock strikes midnight the game ends and whoever won that round wins the game"
+		this._description = "<b>2 Minutes to Midnight:</b> Upon victory the doomsday clock lowers; When the clock strikes midnight the game ends and whoever won that round wins the game; Starts off with less than max health";
 	}
 
 	/*********************
@@ -714,6 +714,15 @@ class AtomicC4 extends Atomic {
 		localStorage.setItem("doomsday", doomsday);
 
 		log += "increases the Doomsday Clock; the clock now strikes " + doomsday + " Minutes to Midnight!";
+	}
+
+	resetEle() {
+		for (let i = 0; i < this.buff.length; i++) {
+			this.buff[i] = 0;
+			this.buffTime[i] = 0;
+		}
+
+		this.health = 50;
 	}
 }
 
