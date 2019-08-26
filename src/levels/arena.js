@@ -9,25 +9,25 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/** Start of debug code **/
+/** Start of debug code **
 
-var playerPick = 4;
-var enemyPick = 3;
+var playerPick = type.water;
+var enemyPick = type.atomic;
 
 var player = new Player([
   new AtomicC4,
   new FireC1,
-  new WaterC1,
+  new WaterC3,
   new EarthC2,
-  new WindC1
+  new WindC2
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
   new AtomicC4,
   new FireC1,
-  new WaterC1,
+  new WaterC3,
   new EarthC2,
-  new WindC1
+  new WindC2
 ], [1,1,1,1,1]);
 
 //enemy.elemental[enemyPick].health = 20;
@@ -290,7 +290,7 @@ function combat() { // Perform all the internal logic once the Player has the En
 
   } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
 
-    imeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "victory", enemyEle.victoryLength, true);
+    timeout += sprite_animate(enemySprite, enemyEle.spriteLoc, "victory", enemyEle.victoryLength, true);
 
     setTimeout(function(){
       log += "Enemy " + logAbility(enemyEle);
@@ -353,12 +353,13 @@ function eleName(ele) { // Returns Elemental type and name (for combat log).
 
 
 function logWeakness() {
-  return "The attack was " + weaknessLog + "</br>"
+  return "the attack was " + weaknessLog + "</br>"
 };
 
 function logCombat(player, attackingEle, defendingEle) { // Creates log for combat.
-  log += player + " " + eleName(attackingEle) + " is attacking its opponents " + eleName(defendingEle) + " for <font color='red'>" + damage + "</font> damage </br>" + extra;
+  log += player + " " + eleName(attackingEle) + " is attacking its opponents " + eleName(defendingEle) + " for <font color='red'>" + damage + "</font> damage;</br>";
     log += logWeakness();
+    log += extra;
     log += shieldLog;
     log += "</br>"
 

@@ -283,7 +283,7 @@ class Elemental {
 						break
 				}
 
-				shieldLog = "</br>Elemental has taken <font color='red'>" + dmg + "</font> " + shieldType + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
+				shieldLog = this.name + " has taken <font color='red'>" + dmg + "</font> " + shieldType + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
 				shieldLog += logWeakness();
             }     
 	}
@@ -1022,7 +1022,7 @@ class WaterC1 extends Water {
 			}
 		}
 
-		log += "Healing it's Allies by " + heal + "!</br>";
+		log += "Healing it's Allies by <font color='green'>" + heal + "</font>!</br>";
 	}
 }
 
@@ -1120,7 +1120,7 @@ class WaterC3 extends Water {
 			player.health = player.maxHealth;
 		}
 
-		log += "Healing it's Player for " + heal + "!</br>"
+		log += "Healing it's Player for <font color='green'>" + heal + "</font>!</br>"
 	}
 }
 
@@ -1479,11 +1479,12 @@ class WindC2 extends Wind {
 		enemy.attack.call(this, enemy);
 
 		let heal = Math.round((this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2));
+		this.health += heal;
+		heal = Math.abs(heal)
 
-		extra = eleName(this) + " leeches off it's Enemies life force, healing itself for " + Math.abs(heal) + "!</br>";
+		extra = eleName(this) + " leeches off it's Enemies life force, healing itself for <font color='green'>" + heal + "</font>!</br></br>	";
 
 		console.log(`Healing self with Life Leech for ${heal}`);
-		this.health += heal;
 	}
 }
 
