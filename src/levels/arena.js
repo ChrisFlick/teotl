@@ -9,17 +9,17 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/** Start of debug code **
+/** Start of debug code **/
 
-var playerPick = type.water;
-var enemyPick = type.atomic;
+var playerPick = type.wind;
+var enemyPick = type.water;
 
 var player = new Player([
   new AtomicC4,
   new FireC1,
   new WaterC3,
-  new EarthC2,
-  new WindC2
+  new EarthC1,
+  new WindC3
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
@@ -274,10 +274,11 @@ function combat() { // Perform all the internal logic once the Player has the En
 }
 
   if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off.
-
+    
     timeout += sprite_animate(playerSprite, playerEle.spriteLoc, "victory", playerEle.victoryLength, true);
+    
 
-    setTimeout(function(){
+    setTimeout(function() {
       log += "Your " + logAbility(playerEle);
       playerEle.ability(player, enemy);
       log += "</br>";

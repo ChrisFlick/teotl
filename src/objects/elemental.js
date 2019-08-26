@@ -1022,7 +1022,7 @@ class WaterC1 extends Water {
 			}
 		}
 
-		log += "Healing it's Allies by <font color='green'>" + heal + "</font>!</br>";
+		log += "heals it's Allies by <font color='green'>" + heal + "</font>!</br>";
 	}
 }
 
@@ -1120,7 +1120,7 @@ class WaterC3 extends Water {
 			player.health = player.maxHealth;
 		}
 
-		log += "Healing it's Player for <font color='green'>" + heal + "</font>!</br>"
+		log += "heals it's Player for <font color='green'>" + heal + "</font>!</br>"
 	}
 }
 
@@ -1389,6 +1389,7 @@ class Wind extends Elemental {
 		this.attackLength = 8;
 		this.hurtLength = 9;
 		this.dieLength = 10;
+		this.victoryLength = 11;
 	}
 
 	/*********************
