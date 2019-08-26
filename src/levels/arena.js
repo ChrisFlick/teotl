@@ -9,10 +9,10 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/** Start of debug code **/
+/** Start of debug code **
 
-var playerPick = 0;
-var enemyPick = 1;
+var playerPick = 4;
+var enemyPick = 3;
 
 var player = new Player([
   new AtomicC4,
@@ -273,7 +273,9 @@ function combat() { // Perform all the internal logic once the Player has the En
       }
 }
 
-  if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off
+  if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) > 1 && checkIfDead(enemyEle, playerEle, window.enemyNumOfAttacks) > 0) { // If the Player chose an Elemental with a stronger Type than the Enemy and their Elemental is still alive have their ability go off.
+
+    timeout = sprite_animate(playerSprite, playerEle.spriteLoc, "victory", playerEle.victoryLength, true);
 
     setTimeout(function(){
       log += "Your " + logAbility(playerEle);
@@ -287,6 +289,8 @@ function combat() { // Perform all the internal logic once the Player has the En
     }, timeout);
 
   } else if (playerEle.multiplier(playerEle.eleType, enemyEle.eleType) < 1 && checkIfDead(playerEle, enemyEle, window.playerNumOfAttacks) > 0) { // If the enemy chose an Elemental that is a stronger Type and the Enemy Elemental is still alive have their ability go off instead.
+
+    imeout = sprite_animate(enemySprite, enemyEle.spriteLoc, "victory", enemyEle.victoryLength, true);
 
     setTimeout(function(){
       log += "Enemy " + logAbility(enemyEle);
