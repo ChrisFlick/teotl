@@ -264,7 +264,7 @@ class Elemental {
 				let shieldType;
 				switch (enemyType) { // Convert the number enemy type to a String the player's can understand
 					case type.atomic:
-						shieldType = "Atomic";
+						shieldType = "<font color='purple'>Atomic</font>";
 						break;
 					case type.fire:
 						shieldType = "<font color='crimson'>Fire</font>";
@@ -283,7 +283,7 @@ class Elemental {
 						break
 				}
 
-				shieldLog = "</br>Your Elemental has taken <font color='red'>" + dmg + "</font> " + shieldType + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
+				shieldLog = "</br>Elemental has taken <font color='red'>" + dmg + "</font> " + shieldType + " Damage " + "from Enemy Elemental's Damage Shield" + "</br>"
 				shieldLog += logWeakness();
             }     
 	}
