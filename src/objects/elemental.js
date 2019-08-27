@@ -182,11 +182,7 @@ class Elemental {
     // Secondary Stats
     set health(h) { 
         if (typeof h === 'number') {
-            if (h > 0) {
-                this._health = h;
-            } else {
-                this._health = 0;
-            }
+			this._health = h;
         } else {
             throw new TypeError(`Invalid Input; Health must be a number.`);
         }
@@ -447,6 +443,9 @@ class Elemental {
 		log += "taunts the Enemy."
 	}
 	
+	heal(enemy) {
+		return 0;
+	}
 
     // For testing purposes:ss
 
@@ -1477,8 +1476,9 @@ class WindC2 extends Wind {
 
 	attack(enemy) { // Life Leech
 		// In place of Ability; attacks from Elemental Heal itself.
-		enemy.attack.call(this, enemy);
+		Elemental.prototype.attack.call(this, enemy);
 
+		
 		let heal = Math.round((this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2));
 		this.health += heal;
 		heal = Math.abs(heal)
@@ -1486,6 +1486,10 @@ class WindC2 extends Wind {
 		extra = eleName(this) + " leeches off it's Enemies life force, healing itself for <font color='green'>" + heal + "</font>!</br></br>	";
 
 		console.log(`Healing self with Life Leech for ${heal}`);
+	}
+
+	heal(enemy) {
+		return Math.round((this.calculateDmg(enemy)  - enemy.defense) * (this.abilityMod + 2));
 	}
 }
 

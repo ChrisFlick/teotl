@@ -9,7 +9,7 @@ var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
 
-/**  For debugging **
+/**  For debugging **/
 
 var player = new Player([
     new AtomicC1,
