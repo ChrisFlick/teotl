@@ -25,6 +25,8 @@ function healthbar(id, obj) { // Calculates health of (obj) as a bar and display
     let percent = 100 * (obj.health / obj.maxHealth);
     if (percent > 100) { // Ensure that the healthbar works properly when health is greater than Max Health
         percent = 100;
+    } else if (percent < 0) {
+        percent = 0;
     }
 
     health.innerHTML = obj.health + "/" + obj.maxHealth; // Display the players health as string.

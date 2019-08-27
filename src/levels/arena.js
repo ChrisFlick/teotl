@@ -19,7 +19,7 @@ var player = new Player([
   new FireC1,
   new WaterC3,
   new EarthC2,
-  new WindC2
+  new WindC1
 ], [1,1,1,1,1]);
 
 var enemy = new Player([
@@ -27,7 +27,7 @@ var enemy = new Player([
   new FireC1,
   new WaterC3,
   new EarthC2,
-  new WindC2
+  new WindC1
 ], [1,1,1,1,1]);
 
 enemy.elemental[enemyPick].health = 1;
