@@ -9,7 +9,7 @@ var playerPick = localStorage.getItem('playerPick');
 var player = initPlayer(player, 'teotlPlayer');
 var enemy = initPlayer(enemy, 'teotlEnemy');
 
-/** Start of debug code **/
+/** Start of debug code **
 
 var playerPick = type.wind;
 var enemyPick = type.wind;
@@ -403,7 +403,7 @@ function checkForDeaths(prefix, player) { // // Check to see if Player Elemental
   for (let i = 0; i < player.elemental.length; i++) { // Cycle through each Elemental and check if dead.
     let ele = player.elemental[i];
 
-    if (ele.health === 0) { // Check if Elemental is dead
+    if (ele.health < 1) { // Check if Elemental is dead
 
       log += prefix + " " + ele.getType() + "Elemental has died! It's owner sacrifices " + ele.maxHealth + " Health to Reincarnate it.</br></br>";
 
