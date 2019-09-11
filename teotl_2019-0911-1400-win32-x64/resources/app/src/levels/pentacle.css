@@ -1,0 +1,142 @@
+.pentacle {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+.pentacle button img {
+  height: 100%;
+  width: 100%;
+}
+
+
+.pentacle img {
+  top: 0;
+  left: 0;
+
+  z-index: 1;
+}
+
+.atom {
+  position: absolute;
+  top: 40px;
+  left: 230px;
+}
+
+.fire {
+  position: absolute;
+  top: 200px;
+  left: 24px;
+}
+
+.water {
+  position: absolute;
+  top: 195px;
+  left: 440px
+}
+
+.earth {
+  position: absolute;
+  top: 441px;
+  left: 100px;
+}
+
+.wind {
+  position: absolute;
+  top: 441px;
+  left: 369px;
+}
+
+
+#elemental {
+  position: absolute;
+  top: 500px;
+  left: 700px;
+}
+
+td {
+  width: 150px; 
+  height: 150px;
+  padding: 5px;
+}
+
+#select {
+  position: absolute;
+  font-size: 50px;
+  top: 700px;
+  left: 750px;
+}
+
+#player { 
+  position: absolute;
+  left: 710px;
+  top: -900px;
+}
+
+#enemy {
+  position: absolute;
+  left: 900px;
+  top: -1025px;
+}
+
+.pentacle button {
+  background-color: transparent;
+  border: none;
+  size:100%;
+  position: relative;
+
+  z-index: 100;
+}
+
+#health {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  display: inline;
+  font-size: 150%
+}
+
+#p_maxHealth, #e_maxHealth { /* Player and Enemy Healthbar */
+  width: 700px;
+  background-color: lightgrey;
+}
+
+#p_health, #e_health { /* Player and Enemy Healthbar */
+  width: 1%;
+  height: 30px;
+  background-color: red;
+
+  text-align: center;
+}
+
+.playerMaxHealth, .enemyMaxHealth { /* Elemental Healthbar */
+  position: relative;
+  top: -215px;
+  
+  z-index: 3;
+
+  width: 70px;
+  height: 100px;
+
+  background-color: red;
+}
+
+.eleHealth { /* Elemental Healthbar */
+  
+  width: 70px;
+  height: 90%;
+
+  background-color: lightgrey;
+}
+
+.playerMaxHealth { /* poisitioning the player health to the left of it's Elemental symbol */
+  left: 5px;
+}
+
+.enemyMaxHealth { /* Positioning Enemy Health bar to the right of Elemental symbbol */
+  top: -315px;
+  left: 155px;
+}
