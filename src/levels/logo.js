@@ -11,7 +11,7 @@ peer.on('open', function (id) {
 
 localStorage.setItem('enemyPick', -1);
 
-setTimeout(function () { window.location = "menu.html"; }, 1000)
+// setTimeout(function () { window.location = "menu.html"; }, 1000)
 
 // Internal functions 
 
