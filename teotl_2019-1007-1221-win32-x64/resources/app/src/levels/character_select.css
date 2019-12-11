@@ -1,0 +1,22 @@
+.title {
+    font-size: 24px;
+}
+
+.portrait {
+    height: 100px;
+    width: 100px;
+}
+
+td {
+    width: 100px; 
+    height: 150px;
+    padding: 5px;
+}
+
+.description {
+    width: 500px;
+}
+
+.stats {
+    width: 150px;
+}

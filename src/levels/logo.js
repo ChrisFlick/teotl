@@ -1,6 +1,6 @@
 var peer = new Peer(makeid(10), {
-  host: '74.207.252.238',
-  port: 9000,
+  // host: '74.207.252.238',
+  // port: 9000,
   debug: 3,
 });
 
@@ -25,5 +25,5 @@ function makeid(length) { // Makes a random ID for peerJS
 
   localStorage.setItem("teotlPlayerID", result);
 
-  return result;
+  return result; 
 }

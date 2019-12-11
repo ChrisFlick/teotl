@@ -10,8 +10,8 @@ let eleSelect; // Stores the opponents Elemental selection
 var peer = new Peer(
     playerID,
     {
-        host: '74.207.252.238', 
-        port: 9000, 
+        // host: '74.207.252.238', 
+        // port: 9000, 
         debug: 0,
       }
 );

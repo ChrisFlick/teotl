@@ -72,8 +72,8 @@ var pick = -1; // Stores the player's pick
 var peer = new Peer(
     playerID,
     {
-        host: '74.207.252.238', 
-        port: 9000, 
+        // host: '74.207.252.238', 
+        // port: 9000, 
         debug: 0,
       }
 );
