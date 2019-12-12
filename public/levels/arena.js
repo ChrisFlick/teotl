@@ -40,7 +40,7 @@ localStorage.setItem("doomsday", 1);
 // Chose a random background and display it in HTML
 let NUMBER_OF_BACKGROUNDS = 2; // Minus one
 let bg = Math.round(Math.random() * NUMBER_OF_BACKGROUNDS); // Chose between the backgrounds randomly
-document.getElementById("background").src = "../../sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.e
+document.getElementById("background").src = "../sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.e
 
 // Initiating log variables
 var log = ""; // Stores entire combat log.
