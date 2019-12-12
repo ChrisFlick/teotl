@@ -113,7 +113,7 @@ document.getElementById("enemy").innerHTML = playerStats(enemy, "Enemy");
 function elementClick(type) {
     // Declare variables.
     let image;
-    let source = "../sprites/buttons/";
+    let source = "sprites/buttons/";
     let extension = ".png"
 
     // Revert all other buttons to their non clicked image.
@@ -148,7 +148,7 @@ function select() {
 
             localStorage.setItem('playerPick', pick); // Storing pick so that it can be used in arena.
 
-            window.location = 'arena.html';
+            window.location = 'arena';
         });
     }
 }

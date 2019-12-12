@@ -60,5 +60,5 @@ function createEnemy() { // Take the opponents Elemental picks and create a new 
     localStorage.setItem("teotlEnemy", JSON.stringify(enemy));
 
     //Go to pentacle
-    window.location = "pentacle.html";
+    window.location = "pentacle";
 }

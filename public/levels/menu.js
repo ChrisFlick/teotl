@@ -27,5 +27,5 @@ function connect() {
     console.log(`Storing enemyID ${enemyID}`);
     localStorage.setItem("teotlEnemyID", enemyID);
 
-    window.location = "character_select.html";
+    window.location = "character_select";
 }

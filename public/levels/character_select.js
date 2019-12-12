@@ -72,7 +72,7 @@ function continueButton() { // Upon pressing the continue button checks to see t
         var conn = peer.connect(enemyID);
         conn.on('open', function() {
             conn.send(eleSelect);
-            window.location = "waiting.html"; 
+            window.location = "wait"; 
         });
     }
 }
