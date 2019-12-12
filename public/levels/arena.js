@@ -40,7 +40,7 @@ localStorage.setItem("doomsday", 1);
 // Chose a random background and display it in HTML
 let NUMBER_OF_BACKGROUNDS = 2; // Minus one
 let bg = Math.round(Math.random() * NUMBER_OF_BACKGROUNDS); // Chose between the backgrounds randomly
-document.getElementById("background").src = "../sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.e
+document.getElementById("background").src = "sprites/background/" + bg + ".gif"; // Display the the randomly selected background on screen.e
 
 // Initiating log variables
 var log = ""; // Stores entire combat log.
@@ -384,7 +384,7 @@ function logAbility(ele) {
 function done() { // Check to see if combat is done and decide on whether to go back to pentacle or menu depending on whether or not a player has died.
   if (ready) { // If combat is done allow player to exit arena.
     if (player.health > 0 && enemy.health > 0) { // As long as neither player is dead return to pentacle.
-      window.location = "pentacle.html";
+      window.location = "pentacle";
     } else { // If a player is dead reset localStorage and return to main menu.
       // Reset all localStorage to -1
       localStorage.setItem("teotlPlayer", -1);
@@ -392,7 +392,7 @@ function done() { // Check to see if combat is done and decide on whether to go 
       localStorage.setItem("enemyPick", -1);
       localStorage.setItem("playerPick", -1);
 
-      window.location = "menu.html" // Return to main menu
+      window.location = "menu" // Return to main menu
     }
     
   }
