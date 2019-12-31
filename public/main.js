@@ -27,5 +27,5 @@ function exitGame() { // On exit delete all stored variabls.
 
   window.localStorage.remoteItem("doomsday")
   window.localStorage.removeItem("enemyPick");
-  win = null;
+  win = null
 }
