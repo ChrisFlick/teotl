@@ -10,7 +10,7 @@ Every Elemental has a set of stats that decide what they do in combat:
 
 ![Elemental Stat sheet](./images/eleStatSheet.png)
 
-**Strength:** Decides how much *Damage* the elemental can do during combat.
-**Constitution:** Decides *Health* and *Defense*.
-**Inteligence:** Decides the *Ability Modifier* which decides how potent the elementals *ability* is.
-**Agility:** Decides the Elementals *Speed* which decides who goes first during combat.
+**Strength:** Decides how much *Damage* the elemental can do during combat.</br>
+**Constitution:** Decides *Health* and *Defense*.</br>
+**Inteligence:** Decides the *Ability Modifier* which decides how potent the elementals *ability* is.</br>
+**Agility:** Decides the Elementals *Speed* which decides who goes first during combat.</br>
