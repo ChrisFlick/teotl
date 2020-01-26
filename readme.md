@@ -14,3 +14,5 @@ Every Elemental has a set of stats that decide what they do in combat:
 **Constitution:** Decides *Health* and *Defense*.</br>
 **Inteligence:** Decides the *Ability Modifier* which decides how potent the elementals *ability* is.</br>
 **Agility:** Decides the Elementals *Speed* which decides who goes first during combat.</br>
+
+**Ability:** Every Elemental has a unique *ability* that triggers if the Elemental *wins* the round
