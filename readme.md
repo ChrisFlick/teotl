@@ -8,5 +8,5 @@ You can find the latest build [here](https://www.dropbox.com/sh/i1j0xwpzd2hs6oc/
 
 Every Elemental has a set of stats that decide what they do in combat:
 
-![Elemental Stat sheet](./images/eleStatSheet)
+![Elemental Stat sheet](./images/eleStatSheet.png)
 
