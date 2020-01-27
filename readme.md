@@ -18,6 +18,7 @@ Every Elemental has a set of stats that decide what they do in combat:
 
 ## Elementals
 ### Atomic
+![Atomic symbol](./images/atomic.png)
 ![Atomic C1](./images/atomicC1.png)
 ![Atomic C2](./images/atomicC2.png)
 ![Atomic C3](./images/atomicC3.png)
