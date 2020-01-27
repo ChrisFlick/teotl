@@ -23,3 +23,15 @@ Every Elemental has a set of stats that decide what they do in combat:
 ![Atomic C2](./images/atomicC2.png)
 ![Atomic C3](./images/atomicC3.png)
 ![Atomic C4](./images/atomicC4.png)
+
+### Fire
+![Fire symbol](./images/fire.png)
+
+### Water
+![Water symbol](./images/water.png)
+
+### Earth
+![Earth symbol](./images/earth.png)
+
+### Wind
+![Wind symbol](./images/wind.png)
