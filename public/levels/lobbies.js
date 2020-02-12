@@ -1,8 +1,13 @@
 $(document).ready(() => {
     searchLobbies()
+
+    $("#refresh").on("click", function() {
+        searchLobbies();
+    })
 })
 
 function searchLobbies() {
+    $("#lobbies").html("");
     $.ajax({
         method: "GET",
         url: "/api/lobbies"
@@ -16,7 +21,7 @@ function searchLobbies() {
             lobby.html("<b> " + res[i].lobby_name + "</b>&nbsp; &nbsp; &nbsp;")
             button.text('Join')
 
-            button.attr("class", 'button is-link')
+            button.attr("class", 'game button is-link')
             lobby.attr("class", "has-text-centered card")
             button.attr("name", res[i].lobby_name)
             button.attr("userID", res[i].id)
@@ -26,7 +31,7 @@ function searchLobbies() {
             $("#lobbies").append(lobby)
         }
 
-        $(".button").on("click", function() {
+        $(".game").on("click", function() {
             localStorage.setItem("PeerChatID", $(this).attr("userID"))
             localStorage.setItem("rm_name", $(this).attr("name"))
             document.location.href = "/b"
