@@ -20,6 +20,9 @@
 $(document).ready(() => {
   $('#create').on('click', function () {
     console.log($('#name').val())
+    localStorage.setItem('rm_name', $('#name').val())
+
+    document.location.href = "/host"
   })
 })
 
