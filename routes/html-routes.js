@@ -27,4 +27,7 @@ module.exports = function (app) {
     app.get("/wait", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/levels/waiting.html"))
     })
+    app.get("/lobbies", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/levels/lobbies.html"))
+    })
 }
