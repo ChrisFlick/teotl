@@ -32,7 +32,7 @@ function searchLobbies() {
         }
 
         $(".game").on("click", function() {
-            localStorage.setItem("PeerChatID", $(this).attr("userID"))
+            localStorage.setItem("teotlEnemyID", $(this).attr("userID"))
             localStorage.setItem("rm_name", $(this).attr("name"))
             document.location.href = "/b"
         })
