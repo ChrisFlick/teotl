@@ -58,14 +58,11 @@ var ready = false; // Used to see if player is ready to go back to pentacle.
 var timeout = 0; // Used to queue up actions with setTimeout.
 
 // Setting up connection with opponent
-var peer = new Peer(
-    playerID,
-    {
-        // host: '74.207.252.238', 
-        // port: 9000, 
-        debug: 0,
-      }
-);
+const peer = new Peer( playerID, {
+  host: "74.207.252.238",
+  port: 9000,
+  debug: 3,
+});
 
 
 if (enemyPick == -1) { // Listen for Enemy's pick if not already recieved.

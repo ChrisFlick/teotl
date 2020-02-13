@@ -69,14 +69,11 @@ enemy.elemental[type.wind].health = 50;
 var pick = -1; // Stores the player's pick
 
 // Setting up connection with opponent
-var peer = new Peer(
-    playerID,
-    {
-        // host: '74.207.252.238', 
-        // port: 9000, 
-        debug: 0,
-      }
-);
+const peer = new Peer( playerID, {
+    host: "74.207.252.238",
+    port: 9000,
+    debug: 3,
+  });
 
 var conn = peer.connect(enemyID);
 peer.on('connection', function(conn) { // Listens for the opponents pick

@@ -27,4 +27,13 @@ module.exports = function (app) {
     app.get("/wait", function (req, res) {
         res.sendFile(path.join(__dirname, "../public/levels/waiting.html"))
     })
+    app.get("/lobbies", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/levels/lobbies.html"))
+    })
+    app.get("/host", function (req, res) {
+        res.sendFile(path.join(__dirname, "../public/levels/host.html"))
+    })
+    app.get("/b", function (req, res ) {
+        res.sendFile(path.join(__dirname, "../public/levels/clientb.html"))
+    })
 }

@@ -7,14 +7,11 @@ let teotlPlayer = JSON.parse(localStorage.getItem("teotlPlayer"));
 let eleSelect; // Stores the opponents Elemental selection
 
 // Setting up connection with opponent
-var peer = new Peer(
-    playerID,
-    {
-        // host: '74.207.252.238', 
-        // port: 9000, 
-        debug: 0,
-      }
-);
+const peer = new Peer( playerID, {
+  host: "74.207.252.238",
+  port: 9000,
+  debug: 3,
+});
 
 var conn = peer.connect(enemyID);
 

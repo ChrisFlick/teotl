@@ -1,14 +1,11 @@
 let playerID = localStorage.getItem("teotlPlayerID");
 let enemyID = localStorage.getItem("teotlEnemyID");
 
-var peer = new Peer(
-    playerID,
-    {
-        // host: '74.207.252.238', 
-        // port: 9000, 
-        debug: 3,
-      }
-);
+const peer = new Peer( playerID, {
+    host: "74.207.252.238",
+    port: 9000,
+    debug: 3,
+  });
 
 peer.on('connection', function(conn) { // Listen for opponents Elemental Picks
     conn.on('data', function(data){
